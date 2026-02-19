@@ -1,35 +1,52 @@
 @import url('https://fonts.googleapis.com/css2?family=Rubik:wght@400;700&display=swap');
 
+/* Light theme — Notion-inspired */
 :root {
-	--accent: #2337ff;
-	--accent-dark: #000d8a;
-	--black: 15, 18, 25;
-	--gray: 96, 115, 159;
-	--gray-light: 229, 233, 240;
-	--gray-dark: 34, 41, 57;
-	--gray-gradient: rgba(var(--gray-light), 50%), #fff;
-	--box-shadow:
-		0 2px 6px rgba(var(--gray), 25%), 0 8px 24px rgba(var(--gray), 33%),
-		0 16px 32px rgba(var(--gray), 33%);
+	--accent: #2383e2;
+	--accent-dark: #1a6bbf;
+	--black: 26, 26, 26;
+	--gray: 120, 119, 116;
+	--gray-light: 233, 233, 231;
+	--gray-dark: 55, 53, 47;
+	--bg: 255, 255, 255;
+	--header-bg: 255, 255, 255;
+	--border: 233, 233, 231;
+	--box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06), 0 1px 2px rgba(0, 0, 0, 0.04);
+}
+
+/* Dark theme — Notion dark */
+[data-theme="dark"] {
+	--black: 230, 227, 222;
+	--gray: 155, 154, 151;
+	--gray-light: 47, 47, 47;
+	--gray-dark: 206, 205, 202;
+	--bg: 25, 25, 25;
+	--header-bg: 25, 25, 25;
+	--border: 47, 47, 47;
+}
+html {
+	overflow-x: hidden;
 }
 body {
 	font-family: 'Rubik', sans-serif;
 	margin: 0;
 	padding: 0;
 	text-align: left;
-	background: linear-gradient(var(--gray-gradient)) no-repeat;
-	background-size: 100% 600px;
+	background-color: rgb(var(--bg));
 	word-wrap: break-word;
 	overflow-wrap: break-word;
+	overflow-x: hidden;
 	color: rgb(var(--gray-dark));
 	font-size: 20px;
 	line-height: 1.7;
+	transition: background-color 0.2s, color 0.2s;
 }
 main {
-	width: 720px;
-	max-width: calc(100% - 2em);
+	width: 100%;
+	max-width: 720px;
+	box-sizing: border-box;
 	margin: auto;
-	padding: 3em 1em;
+	padding: 3em 1.5em;
 }
 h1,
 h2,
@@ -107,7 +124,7 @@ blockquote {
 }
 hr {
 	border: none;
-	border-top: 1px solid rgb(var(--gray-light));
+	border-top: 1px solid rgb(var(--border, var(--gray-light)));
 }
 @media (max-width: 720px) {
 	body {
@@ -115,6 +132,11 @@ hr {
 	}
 	main {
 		padding: 1em;
+	}
+}
+@media (max-width: 480px) {
+	body {
+		font-size: 16px;
 	}
 }
 
