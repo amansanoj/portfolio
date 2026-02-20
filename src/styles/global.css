@@ -79,9 +79,29 @@ b {
 }
 a {
 	color: var(--accent);
+	text-decoration: none;
 }
 a:hover {
 	color: var(--accent);
+}
+
+/* Bottom-to-top fill for content links */
+main a {
+	position: relative;
+	display: inline;
+	color: var(--accent);
+	text-decoration: none;
+	background-image: linear-gradient(to top, rgba(35, 131, 226, 0.18), rgba(35, 131, 226, 0.18));
+	background-size: 100% 0%;
+	background-position: bottom;
+	background-repeat: no-repeat;
+	border-bottom: 1px solid var(--accent);
+	padding: 1px 3px;
+	transition: background-size 0.22s ease, color 0.15s;
+}
+main a:hover {
+	background-size: 100% 100%;
+	color: var(--accent-dark);
 }
 p {
 	margin-bottom: 1em;
