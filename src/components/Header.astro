@@ -3,8 +3,9 @@ import HeaderLink from './HeaderLink.astro';
 import { SITE_TITLE, GITHUB_URL, LINKEDIN_URL, EMAIL } from '../consts';
 ---
 
+<a href="#main-content" class="skip-link">Skip to main content</a>
 <header>
-	<nav>
+	<nav aria-label="Main navigation">
 		<a href="/" class="wordmark">{SITE_TITLE}</a>
 
 		<!-- Desktop nav links -->
@@ -69,6 +70,24 @@ import { SITE_TITLE, GITHUB_URL, LINKEDIN_URL, EMAIL } from '../consts';
 </header>
 
 <style>
+	/* ── Skip link ──────────────────────────────────────── */
+	.skip-link {
+		position: absolute;
+		top: -100%;
+		left: 1em;
+		z-index: 9999;
+		padding: 0.5em 1em;
+		background: var(--accent);
+		color: #fff;
+		border-radius: 0 0 6px 6px;
+		font-weight: 600;
+		text-decoration: none;
+		transition: top 0.1s;
+	}
+	.skip-link:focus {
+		top: 0;
+	}
+
 	/* ── Base header ─────────────────────────────────────── */
 	header {
 		position: sticky;

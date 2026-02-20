@@ -160,6 +160,17 @@ hr {
 	}
 }
 
+/* Focus-visible outline for keyboard navigation */
+:focus-visible {
+	outline: 2px solid var(--accent);
+	outline-offset: 3px;
+	border-radius: 3px;
+}
+/* Remove outline for mouse users */
+:focus:not(:focus-visible) {
+	outline: none;
+}
+
 .sr-only {
 	border: 0;
 	padding: 0;

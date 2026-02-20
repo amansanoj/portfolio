@@ -3,7 +3,7 @@ import { GITHUB_URL, LINKEDIN_URL, EMAIL } from '../consts';
 const today = new Date();
 ---
 
-<footer>
+<footer role="contentinfo">
 	&copy; {today.getFullYear()} Aman Sanoj
 	<div class="social-links">
 		<a href={GITHUB_URL} target="_blank" rel="noopener" aria-label="GitHub">
@@ -14,6 +14,9 @@ const today = new Date();
 		</a>
 		<a href={`mailto:${EMAIL}`} aria-label="Email">
 			<i class="ph-fill ph-envelope-simple"></i>
+		</a>
+		<a href="/rss.xml" aria-label="RSS Feed">
+			<i class="ph-fill ph-rss"></i>
 		</a>
 	</div>
 </footer>

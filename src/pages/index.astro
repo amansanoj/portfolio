@@ -20,7 +20,7 @@ const posts = (await getCollection('blog'))
 	</head>
 	<body>
 		<Header />
-		<main>
+<main id="main-content">
 
 			<!-- ── Hero ───────────────────────────────────────────────── -->
 			<section class="hero">
@@ -63,7 +63,7 @@ const posts = (await getCollection('blog'))
 						</li>
 					))}
 				</ul>
-				<a href="/blog" class="view-all">All posts →</a>
+				<a href="/blog" class="view-all">All posts <i class="ph-fill ph-arrow-right"></i></a>
 			</section>
 
 		</main>
@@ -181,7 +181,7 @@ const posts = (await getCollection('blog'))
 		color: var(--accent);
 		text-decoration: none;
 	}
-	.view-all:hover { text-decoration: underline; }
+	.view-all:hover { text-decoration: none; }
 
 	@media (max-width: 600px) {
 		main { padding: 1.5em 1em 3em; }
