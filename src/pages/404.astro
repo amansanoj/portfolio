@@ -95,13 +95,50 @@ import Footer from '../components/Footer.astro';
 			}
 
 			#runner-canvas,
-			#snake-canvas {
+			#snake-canvas,
+			#breakout-canvas {
 				display: block;
 				width: 100%;
 				cursor: pointer;
 				touch-action: none;
 				-webkit-user-select: none;
 				user-select: none;
+			}
+
+			/* overlay start button */
+			.canvas-wrap {
+				position: relative;
+			}
+			.game-focus-btn {
+				position: absolute;
+				inset: 0;
+				width: 100%;
+				height: 100%;
+				border: none;
+				background: rgba(var(--bg), 0.88);
+				cursor: pointer;
+				display: flex;
+				flex-direction: column;
+				align-items: center;
+				justify-content: center;
+				gap: 0.35em;
+				font-family: monospace;
+				padding: 0;
+			}
+			.game-focus-btn .btn-title {
+				font-size: 0.8rem;
+				font-weight: 700;
+				letter-spacing: 0.08em;
+				color: rgb(var(--gray-dark));
+			}
+			.game-focus-btn .btn-sub {
+				font-size: 0.65rem;
+				color: rgb(var(--gray));
+				letter-spacing: 0.04em;
+			}
+			.game-focus-btn:focus-visible {
+				outline: 2px solid var(--accent);
+				outline-offset: -3px;
 			}
 
 			/* show keyboard hints on desktop, touch hints on mobile */
@@ -141,7 +178,14 @@ import Footer from '../components/Footer.astro';
 							<span class="ctrl-touch">TAP — jump</span>
 						</span>
 						</div>
+						<div class="canvas-wrap">
 						<canvas id="runner-canvas"></canvas>
+						<button class="game-focus-btn" id="runner-focus-btn" aria-label="Play DASH">
+							<span class="btn-title">PRESS TO PLAY</span>
+							<span class="btn-sub ctrl-kbd">SPACE — jump</span>
+							<span class="btn-sub ctrl-touch">TAP — jump</span>
+						</button>
+					</div>
 						<div class="card-hud">
 							<span id="runner-score">SCORE 00000</span>
 							<span id="runner-best">BEST 00000</span>
@@ -156,18 +200,49 @@ import Footer from '../components/Footer.astro';
 							<span class="ctrl-touch">TAP — start &nbsp;|&nbsp; SWIPE — move</span>
 						</span>
 						</div>
+						<div class="canvas-wrap">
 						<canvas id="snake-canvas"></canvas>
+						<button class="game-focus-btn" id="snake-focus-btn" aria-label="Play SNAKE">
+							<span class="btn-title">PRESS TO PLAY</span>
+							<span class="btn-sub ctrl-kbd">ARROWS / WASD — move</span>
+							<span class="btn-sub ctrl-touch">SWIPE — move</span>
+						</button>
+					</div>
 						<div class="card-hud">
 							<span id="snake-score">SCORE 000</span>
 							<span id="snake-best">BEST 000</span>
 						</div>
 					</div>
+
+				<div class="arcade-card card-breakout">
+					<div class="card-marquee">
+						<span class="card-title">BREAKOUT</span>
+						<span class="card-controls">
+							<span class="ctrl-kbd">MOUSE / ARROWS — paddle</span>
+							<span class="ctrl-touch">DRAG — paddle &nbsp;|&nbsp; TAP — start</span>
+						</span>
+					</div>
+					<div class="canvas-wrap">
+					<canvas id="breakout-canvas"></canvas>
+					<button class="game-focus-btn" id="breakout-focus-btn" aria-label="Play BREAKOUT">
+						<span class="btn-title">PRESS TO PLAY</span>
+						<span class="btn-sub ctrl-kbd">MOUSE / ARROWS — paddle</span>
+						<span class="btn-sub ctrl-touch">DRAG — paddle</span>
+					</button>
+				</div>
+					<div class="card-hud">
+						<span id="breakout-score">SCORE 00000</span>
+						<span id="breakout-best">BEST 00000</span>
+					</div>
+				</div>
+
 				</div>
 			</div>
 		</main>
 		<Footer />
 
 		<script>
+		let _gameFocus: string | null = null; // null until player explicitly activates a game
 		// ════════════════════════════════════════════════════════
 		//  GAME 1 — DASH (endless runner)
 		// ════════════════════════════════════════════════════════
@@ -231,10 +306,15 @@ import Footer from '../components/Footer.astro';
 				if (onGround)          { vy = JUMP_V; onGround = false; }
 			}
 
+			const btn = document.getElementById('runner-focus-btn') as HTMLButtonElement;
+			const startRunner = () => { _gameFocus = 'runner'; btn.style.display = 'none'; jump(); };
+			btn.addEventListener('click', startRunner);
+			btn.addEventListener('touchend', e => { e.preventDefault(); startRunner(); });
+
 			document.addEventListener('keydown', e => {
-				if (e.code === 'Space') { e.preventDefault(); jump(); }
+				if (e.code === 'Space' && _gameFocus === 'runner') { e.preventDefault(); jump(); }
 			});
-			canvas.addEventListener('pointerdown', e => { e.preventDefault(); jump(); });
+			canvas.addEventListener('pointerdown', e => { if (_gameFocus !== 'runner') return; e.preventDefault(); jump(); });
 
 			function maybeSpawn() {
 				const minGap = Math.max(180, 320 - score * 0.3);
@@ -300,16 +380,12 @@ import Footer from '../components/Footer.astro';
 
 				// Overlay
 				ctx.textAlign = 'center';
-				if (state === 'idle') {
-					ctx.font = `600 ${Math.round(13*scale)}px monospace`; ctx.fillStyle = C.text;
-					ctx.fillText('PRESS SPACE OR TAP', (W/2)*scale, (H/2)*scale);
-				}
 				if (state === 'dead') {
 					ctx.fillStyle = C.over; ctx.fillRect(0, 0, W*scale, H*scale);
 					ctx.font = `700 ${Math.round(15*scale)}px monospace`; ctx.fillStyle = C.text;
 					ctx.fillText('GAME OVER', (W/2)*scale, (H/2-10)*scale);
 					ctx.font = `500 ${Math.round(11*scale)}px monospace`; ctx.fillStyle = C.sub;
-					ctx.fillText('SPACE / TAP TO RESTART', (W/2)*scale, (H/2+12)*scale);
+					ctx.fillText('CLICK / TAP TO RESTART', (W/2)*scale, (H/2+12)*scale);
 				}
 				requestAnimationFrame(tick);
 			}
@@ -427,16 +503,25 @@ import Footer from '../components/Footer.astro';
 				const d = KEY[e.code];
 				if (!d) return;
 				e.preventDefault();
-				if (state !== 'running') { restart(); return; }
+				if (state !== 'running') { if (_gameFocus === 'snake') restart(); return; }
 				if (d !== OPP[dir]) nextDir = d;
 			});
 			// Mouse click to start (desktop only — touch uses swipe handler below)
-			canvas.addEventListener('pointerdown', e => { if (e.pointerType === 'touch') return; if (state !== 'running') restart(); });
+				canvas.addEventListener('pointerdown', e => { if (e.pointerType === 'touch') return; if (_gameFocus !== 'snake') return; if (state !== 'running') restart(); });
 
-			// Touch swipe: tap = start/restart, swipe = change direction
-			let tx = 0, ty = 0;
-			canvas.addEventListener('touchstart', e => { tx = e.touches[0].clientX; ty = e.touches[0].clientY; }, { passive:true });
+				// Touch swipe: tap = start/restart, swipe = change direction
+				let tx = 0, ty = 0;
+				canvas.addEventListener('touchstart', e => { if (_gameFocus === 'snake') { tx = e.touches[0].clientX; ty = e.touches[0].clientY; } }, { passive:true });
+
+				const snakeBtn = document.getElementById('snake-focus-btn') as HTMLButtonElement;
+				snakeBtn.addEventListener('click', () => {
+					_gameFocus = 'snake';
+					snakeBtn.style.display = 'none';
+					restart();
+				});
+				snakeBtn.addEventListener('touchend', e => { e.preventDefault(); _gameFocus = 'snake'; snakeBtn.style.display = 'none'; restart(); });
 			canvas.addEventListener('touchend', e => {
+				if (_gameFocus !== 'snake') return;
 				const dx = e.changedTouches[0].clientX - tx;
 				const dy = e.changedTouches[0].clientY - ty;
 				if (Math.abs(dx) < 20 && Math.abs(dy) < 20) { if (state !== 'running') restart(); return; }
@@ -455,10 +540,7 @@ import Footer from '../components/Footer.astro';
 
 				if (state === 'idle') {
 					ctx.textAlign = 'center';
-					ctx.font = `600 ${Math.round(13*snakeScale)}px monospace`; ctx.fillStyle = C.text;
-					ctx.fillText('PRESS ARROWS OR TAP', W/2, H/2 - CELL*0.4);
-					ctx.font = `500 ${Math.round(11*snakeScale)}px monospace`; ctx.fillStyle = C.sub;
-					ctx.fillText('WASD works too', W/2, H/2 + CELL*0.8);
+					ctx.fillStyle = C.over; ctx.fillRect(0,0,W,H);
 					return;
 				}
 
@@ -488,11 +570,228 @@ import Footer from '../components/Footer.astro';
 					ctx.font = `700 ${Math.round(15*snakeScale)}px monospace`; ctx.fillStyle = C.text;
 					ctx.fillText('GAME OVER', W/2, H/2 - CELL*0.8);
 					ctx.font = `500 ${Math.round(11*snakeScale)}px monospace`; ctx.fillStyle = C.sub;
-					ctx.fillText('ANY ARROW / TAP TO RETRY', W/2, H/2 + CELL*0.4);
+					ctx.fillText('CLICK / TAP TO RETRY', W/2, H/2 + CELL*0.4);
 				}
 			}
 
 			draw(); // initial render
+		})();
+
+		// ════════════════════════════════════════════════════════
+		//  GAME 3 — BREAKOUT
+		// ════════════════════════════════════════════════════════
+		(() => {
+			const canvas = document.getElementById('breakout-canvas') as HTMLCanvasElement;
+			const ctx = canvas.getContext('2d')!;
+			const elScore = document.getElementById('breakout-score')!;
+			const elBest  = document.getElementById('breakout-best')!;
+
+			const LOGICAL_W = 600, LOGICAL_H = 280;
+			const PADDLE_W = 80, PADDLE_H = 10;
+			const PADDLE_Y = LOGICAL_H - 22;
+			const BALL_R = 7;
+			const BK_COLS = 10, BK_ROWS = 5;
+			const BK_GAP = 4, BK_MARGIN = 4, BK_TOP = 24, BK_H = 14;
+			const BK_W = (LOGICAL_W - BK_MARGIN * 2 - BK_GAP * (BK_COLS - 1)) / BK_COLS;
+			const ROW_COLORS = ['#e05b5b', '#e09b5a', '#d4bc55', '#5ab87a', '#2383e2'];
+			const INIT_SPEED = 4.5;
+			const PADDLE_SPEED = 6;
+
+			let dpr = 1, scale = 1;
+
+			function resize() {
+				const rect = canvas.parentElement!.getBoundingClientRect();
+				const displayW = Math.min(rect.width, LOGICAL_W);
+				scale = displayW / LOGICAL_W;
+				const displayH = LOGICAL_H * scale;
+				dpr = window.devicePixelRatio || 1;
+				canvas.width  = displayW * dpr;
+				canvas.height = displayH * dpr;
+				canvas.style.height = displayH + 'px';
+				ctx.setTransform(1, 0, 0, 1, 0, 0);
+				ctx.scale(dpr, dpr);
+			}
+			window.addEventListener('resize', resize);
+			resize();
+
+			const C = (() => {
+				const s = getComputedStyle(document.documentElement);
+				return {
+					bg:   `rgb(${s.getPropertyValue('--bg').trim()})`,
+					text: `rgb(${s.getPropertyValue('--gray-dark').trim()})`,
+					sub:  `rgb(${s.getPropertyValue('--gray').trim()})`,
+					over: `rgba(${s.getPropertyValue('--bg').trim()},0.85)`,
+				};
+			})();
+
+			let highScore = Number(localStorage.getItem('breakout_best') ?? 0);
+
+			type Brick = { x: number; y: number; alive: boolean; color: string };
+			let bricks: Brick[];
+			let pdx: number;
+			let bx: number, by: number, vx: number, vy: number;
+			let score: number, spd: number;
+			let state: 'idle' | 'running' | 'dead' | 'won' = 'idle';
+
+			function makeBricks() {
+				bricks = [];
+				for (let r = 0; r < BK_ROWS; r++)
+					for (let c = 0; c < BK_COLS; c++)
+						bricks.push({ x: BK_MARGIN + c*(BK_W+BK_GAP), y: BK_TOP + r*(BK_H+BK_GAP), alive: true, color: ROW_COLORS[r] });
+			}
+
+			function reset() {
+				pdx = LOGICAL_W / 2;
+				bx = LOGICAL_W / 2; by = PADDLE_Y - BALL_R - 2;
+				const a = -Math.PI / 2 + (Math.random() - 0.5) * 0.9;
+				spd = INIT_SPEED;
+				vx = spd * Math.cos(a); vy = spd * Math.sin(a);
+				score = 0;
+				makeBricks();
+			}
+			reset();
+
+			function start() { reset(); state = 'running'; }
+
+			// ── Input ───────────────────────────────────────────
+			let keyLeft = false, keyRight = false;
+
+			canvas.addEventListener('mousemove', e => {
+				if (state !== 'running') return;
+				const rect = canvas.getBoundingClientRect();
+				pdx = (e.clientX - rect.left) / scale;
+			});
+			canvas.addEventListener('touchmove', e => {
+				e.preventDefault();
+				const rect = canvas.getBoundingClientRect();
+				pdx = (e.touches[0].clientX - rect.left) / scale;
+			}, { passive: false });
+
+			canvas.addEventListener('pointerdown', e => {
+				if (_gameFocus !== 'breakout') return;
+				if (e.pointerType === 'touch') return;
+				if (state !== 'running') start();
+			});
+			canvas.addEventListener('touchstart', () => { }, { passive: true });
+			canvas.addEventListener('touchend', () => { if (_gameFocus === 'breakout' && state !== 'running') start(); }, { passive: true });
+
+			const breakoutBtn = document.getElementById('breakout-focus-btn') as HTMLButtonElement;
+			breakoutBtn.addEventListener('click', () => {
+				_gameFocus = 'breakout';
+				breakoutBtn.style.display = 'none';
+				start();
+			});
+			breakoutBtn.addEventListener('touchend', e => { e.preventDefault(); _gameFocus = 'breakout'; breakoutBtn.style.display = 'none'; start(); });
+
+			document.addEventListener('keydown', e => {
+				if (_gameFocus !== 'breakout') return;
+				if (e.code === 'ArrowLeft')  { e.preventDefault(); keyLeft  = true; }
+				if (e.code === 'ArrowRight') { e.preventDefault(); keyRight = true; }
+				if ((e.code === 'Space' || e.code === 'Enter') && state !== 'running') { e.preventDefault(); start(); }
+			});
+			document.addEventListener('keyup', e => {
+				if (e.code === 'ArrowLeft')  keyLeft  = false;
+				if (e.code === 'ArrowRight') keyRight = false;
+			});
+
+			// ── Game loop ────────────────────────────────────────
+			function tick() {
+				const W = LOGICAL_W, H = LOGICAL_H;
+
+				if (state === 'running') {
+					if (keyLeft)  pdx -= PADDLE_SPEED;
+					if (keyRight) pdx += PADDLE_SPEED;
+					pdx = Math.max(PADDLE_W/2, Math.min(W - PADDLE_W/2, pdx));
+
+					bx += vx; by += vy;
+
+					// Wall bounces
+					if (bx - BALL_R < 0)  { bx = BALL_R;     vx =  Math.abs(vx); }
+					if (bx + BALL_R > W)  { bx = W - BALL_R; vx = -Math.abs(vx); }
+					if (by - BALL_R < 0)  { by = BALL_R;      vy =  Math.abs(vy); }
+
+					// Paddle bounce — spin based on contact point
+					const pdL = pdx - PADDLE_W/2, pdR = pdx + PADDLE_W/2;
+					if (vy > 0 && by + BALL_R >= PADDLE_Y && by - BALL_R <= PADDLE_Y + PADDLE_H && bx >= pdL && bx <= pdR) {
+						const hit = (bx - pdx) / (PADDLE_W/2);
+						const angle = hit * (Math.PI / 3);
+						const s = Math.hypot(vx, vy);
+						vx = s * Math.sin(angle);
+						vy = -Math.abs(s * Math.cos(angle));
+					}
+
+					// Ball lost
+					if (by - BALL_R > H) {
+						state = 'dead';
+						if (score > highScore) { highScore = score; localStorage.setItem('breakout_best', String(highScore)); }
+					}
+
+					// Brick collisions
+					for (const b of bricks) {
+						if (!b.alive) continue;
+						if (bx+BALL_R > b.x && bx-BALL_R < b.x+BK_W && by+BALL_R > b.y && by-BALL_R < b.y+BK_H) {
+							b.alive = false; score++;
+							if (score > highScore) { highScore = score; localStorage.setItem('breakout_best', String(highScore)); }
+							const ol = (bx+BALL_R) - b.x, or_ = (b.x+BK_W) - (bx-BALL_R);
+							const ot = (by+BALL_R) - b.y, ob  = (b.y+BK_H) - (by-BALL_R);
+							if (Math.min(ol,or_) < Math.min(ot,ob)) vx = -vx; else vy = -vy;
+							spd = Math.min(INIT_SPEED + score * 0.07, 9);
+							const s = Math.hypot(vx, vy);
+							vx = vx/s*spd; vy = vy/s*spd;
+							break;
+						}
+					}
+					if (bricks.every(b => !b.alive)) state = 'won';
+				}
+
+				// ── Draw ─────────────────────────────────────────────
+				ctx.fillStyle = C.bg; ctx.fillRect(0, 0, W*scale, H*scale);
+
+				for (const b of bricks) {
+					if (!b.alive) continue;
+					ctx.fillStyle = b.color;
+					ctx.beginPath();
+					ctx.roundRect(b.x*scale, b.y*scale, BK_W*scale, BK_H*scale, 2*scale);
+					ctx.fill();
+				}
+
+				ctx.fillStyle = '#2383e2';
+				ctx.beginPath();
+				ctx.roundRect((pdx-PADDLE_W/2)*scale, PADDLE_Y*scale, PADDLE_W*scale, PADDLE_H*scale, 4*scale);
+				ctx.fill();
+
+				ctx.fillStyle = '#2383e2';
+				ctx.beginPath();
+				ctx.arc(bx*scale, by*scale, BALL_R*scale, 0, Math.PI*2);
+				ctx.fill();
+				ctx.fillStyle = 'rgba(255,255,255,0.35)';
+				ctx.beginPath();
+				ctx.arc((bx-2)*scale, (by-2.5)*scale, BALL_R*0.38*scale, 0, Math.PI*2);
+				ctx.fill();
+
+				elScore.textContent = `SCORE ${String(score).padStart(5,'0')}`;
+				elBest.textContent  = `BEST  ${String(highScore).padStart(5,'0')}`;
+
+				ctx.textAlign = 'center';
+				if (state === 'dead') {
+					ctx.fillStyle = C.over; ctx.fillRect(0, 0, W*scale, H*scale);
+					ctx.font = `700 ${Math.round(15*scale)}px monospace`; ctx.fillStyle = C.text;
+					ctx.fillText('GAME OVER', (W/2)*scale, (H/2-10)*scale);
+					ctx.font = `500 ${Math.round(11*scale)}px monospace`; ctx.fillStyle = C.sub;
+					ctx.fillText('CLICK / TAP TO RETRY', (W/2)*scale, (H/2+12)*scale);
+				}
+				if (state === 'won') {
+					ctx.fillStyle = C.over; ctx.fillRect(0, 0, W*scale, H*scale);
+					ctx.font = `700 ${Math.round(15*scale)}px monospace`; ctx.fillStyle = C.text;
+					ctx.fillText('CLEARED!', (W/2)*scale, (H/2-10)*scale);
+					ctx.font = `500 ${Math.round(11*scale)}px monospace`; ctx.fillStyle = C.sub;
+					ctx.fillText('CLICK / TAP FOR NEXT ROUND', (W/2)*scale, (H/2+12)*scale);
+				}
+
+				requestAnimationFrame(tick);
+			}
+
+			requestAnimationFrame(tick);
 		})();
 		</script>
 	</body>
