@@ -373,13 +373,6 @@ import Footer from '../components/Footer.astro';
 
 				// Overlay
 				ctx.textAlign = 'center';
-				if (state === 'dead') {
-					ctx.fillStyle = C.over; ctx.fillRect(0, 0, W*scale, H*scale);
-					ctx.font = `700 ${Math.round(15*scale)}px monospace`; ctx.fillStyle = C.text;
-					ctx.fillText('GAME OVER', (W/2)*scale, (H/2-10)*scale);
-					ctx.font = `500 ${Math.round(11*scale)}px monospace`; ctx.fillStyle = C.sub;
-					ctx.fillText('CLICK / TAP TO RESTART', (W/2)*scale, (H/2+12)*scale);
-				}
 				requestAnimationFrame(tick);
 			}
 
@@ -559,15 +552,7 @@ import Footer from '../components/Footer.astro';
 				elScore.textContent = `SCORE ${String(score).padStart(5,'0')}`;
 				elBest.textContent  = `BEST  ${String(highScore).padStart(5,'0')}`;
 
-				// Game over overlay — same pattern as runner
-				ctx.textAlign = 'center';
-				if (state === 'dead') {
-					ctx.fillStyle = C.over; ctx.fillRect(0,0,W,H);
-					ctx.font = `700 ${Math.round(15*snakeScale)}px monospace`; ctx.fillStyle = C.text;
-					ctx.fillText('GAME OVER', W/2, H/2 - CELL*0.8);
-					ctx.font = `500 ${Math.round(11*snakeScale)}px monospace`; ctx.fillStyle = C.sub;
-					ctx.fillText('CLICK / TAP TO RETRY', W/2, H/2 + CELL*0.4);
-				}
+				// Game over overlay — handled by button
 			}
 
 			draw(); // initial render
@@ -771,20 +756,7 @@ import Footer from '../components/Footer.astro';
 				elBest.textContent  = `BEST  ${String(highScore).padStart(5,'0')}`;
 
 				ctx.textAlign = 'center';
-				if (state === 'dead') {
-					ctx.fillStyle = C.over; ctx.fillRect(0, 0, W*scale, H*scale);
-					ctx.font = `700 ${Math.round(15*scale)}px monospace`; ctx.fillStyle = C.text;
-					ctx.fillText('GAME OVER', (W/2)*scale, (H/2-10)*scale);
-					ctx.font = `500 ${Math.round(11*scale)}px monospace`; ctx.fillStyle = C.sub;
-					ctx.fillText('CLICK / TAP TO RETRY', (W/2)*scale, (H/2+12)*scale);
-				}
-				if (state === 'won') {
-					ctx.fillStyle = C.over; ctx.fillRect(0, 0, W*scale, H*scale);
-					ctx.font = `700 ${Math.round(15*scale)}px monospace`; ctx.fillStyle = C.text;
-					ctx.fillText('CLEARED!', (W/2)*scale, (H/2-10)*scale);
-					ctx.font = `500 ${Math.round(11*scale)}px monospace`; ctx.fillStyle = C.sub;
-					ctx.fillText('CLICK / TAP FOR NEXT ROUND', (W/2)*scale, (H/2+12)*scale);
-				}
+				// dead/won states handled by button
 
 				requestAnimationFrame(tick);
 			}
