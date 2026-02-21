@@ -615,20 +615,17 @@ import Footer from '../components/Footer.astro';
 				ctx.arc(food.x*CELL+CELL/2, food.y*CELL+CELL/2, CELL/2-1.5, 0, Math.PI*2);
 				ctx.fill();
 
-				// Snake body (tail→neck first, head last so it renders on top)
-				for (let i=snake.length-1;i>0;i--) {
+				// Snake — gradient over first 5 segments (head→4 behind), rest stays darkest
+				const sn = snake.length;
+				for (let i=sn-1;i>=0;i--) {
 					const s = snake[i];
-					ctx.fillStyle = C.player;
+					const t = Math.min(i, 4) / 4; // 0 = head, 1 = 4th body segment onwards
+					const r = Math.round(147 - 121 * t);
+					const g = Math.round(197 -  90 * t);
+					const b = Math.round(253 -  62 * t);
+					ctx.fillStyle = `rgb(${r},${g},${b})`;
 					ctx.beginPath();
-					ctx.roundRect(s.x*CELL+1, s.y*CELL+1, CELL-2, CELL-2, 2);
-					ctx.fill();
-				}
-				// Head on top
-				{
-					const h = snake[0];
-					ctx.fillStyle = C.head;
-					ctx.beginPath();
-					ctx.roundRect(h.x*CELL+1, h.y*CELL+1, CELL-2, CELL-2, 4);
+					ctx.roundRect(s.x*CELL+1, s.y*CELL+1, CELL-2, CELL-2, i===0?4:2);
 					ctx.fill();
 				}
 
