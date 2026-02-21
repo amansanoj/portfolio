@@ -239,7 +239,8 @@ import Footer from '../components/Footer.astro';
 
 			type Obs = { x: number; w: number; h: number };
 			let px: number, py: number, vy: number, onGround: boolean;
-			let obstacles: Obs[], score: number, highScore = 0, speed: number;
+			let obstacles: Obs[], score: number, speed: number;
+			let highScore = Number(localStorage.getItem('dash_best') ?? 0);
 			let state: 'idle' | 'running' | 'dead', frame: number, lastObs: number, groundOffset: number;
 
 			function reset() {
@@ -300,7 +301,7 @@ import Footer from '../components/Footer.astro';
 					for (const o of obstacles) o.x -= speed;
 					obstacles = obstacles.filter(o => o.x + o.w > -10);
 					for (const o of obstacles) {
-						if (collides(o)) { state = 'dead'; if (score > highScore) highScore = score; }
+						if (collides(o)) { state = 'dead'; if (score > highScore) { highScore = score; localStorage.setItem('dash_best', String(highScore)); } }
 					}
 				}
 
@@ -379,7 +380,8 @@ import Footer from '../components/Footer.astro';
 
 			let snake: {x:number,y:number}[], dir: 'U'|'D'|'L'|'R', nextDir: 'U'|'D'|'L'|'R';
 			let food: {x:number,y:number};
-			let score: number, highScore = 0, speed: number;
+			let score: number, speed: number;
+			let highScore = Number(localStorage.getItem('snake_best') ?? 0);
 			let state: 'idle'|'running'|'dead' = 'idle';
 			let tid: ReturnType<typeof setTimeout> | null = null;
 
@@ -432,11 +434,11 @@ import Footer from '../components/Footer.astro';
 				if (dir==='U') h.y--; if (dir==='D') h.y++;
 				if (dir==='L') h.x--; if (dir==='R') h.x++;
 				if (h.x<0||h.x>=COLS||h.y<0||h.y>=ROWS||snake.some(s=>s.x===h.x&&s.y===h.y)) {
-					state = 'dead'; if (score > highScore) highScore = score; draw(); return;
+					state = 'dead'; if (score > highScore) { highScore = score; localStorage.setItem('snake_best', String(highScore)); } draw(); return;
 				}
 				snake.unshift(h);
 				if (h.x===food.x && h.y===food.y) {
-					score++; if (score > highScore) highScore = score;
+					score++; if (score > highScore) { highScore = score; localStorage.setItem('snake_best', String(highScore)); }
 					speed = Math.max(65, 150 - score*4);
 					placeFood();
 				} else { snake.pop(); }
