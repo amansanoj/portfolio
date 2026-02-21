@@ -68,22 +68,27 @@ import { SITE_TITLE, GITHUB_URL, LINKEDIN_URL } from '../consts';
 <EasterEgg />
 
 <style>
-	/* ── Skip link ──────────────────────────────────────── */
+	/* ── Skip link ───────────────────────────────────── */
 	.skip-link {
-		position: absolute;
-		top: -100%;
-		left: 1em;
+		position: fixed;
+		top: 1em;
+		left: 50%;
+		transform: translateX(-50%) translateY(calc(-100% - 2em));
 		z-index: 9999;
-		padding: 0.5em 1em;
+		padding: 0.6em 1.4em;
 		background: var(--accent);
 		color: #fff;
-		border-radius: 0 0 6px 6px;
+		border-radius: 6px;
 		font-weight: 600;
+		font-size: 0.9rem;
 		text-decoration: none;
-		transition: top 0.1s;
+		box-shadow: 0 4px 16px rgba(0,0,0,0.18);
+		transition: transform 0.15s ease;
 	}
 	.skip-link:focus {
-		top: 0;
+		transform: translateX(-50%) translateY(0);
+		outline: 2px solid #fff;
+		outline-offset: 2px;
 	}
 
 	/* ── Base header ─────────────────────────────────────── */
