@@ -405,6 +405,9 @@ import Footer from '../components/Footer.astro';
 					}
 				}
 
+				// Obstacles (drawn before player so sprite is always on top)
+				for (const o of obstacles) rr(o.x, GROUND_Y-o.h, o.w, o.h, 3, C.obs);
+
 				// Player
 				const squish = (state === 'running' && !onGround) ? Math.max(0.8, 1 - Math.abs(vy)*0.025) : 1;
 				const drawH = P_H * squish, drawY = py + (P_H - drawH);
@@ -413,9 +416,6 @@ import Footer from '../components/Footer.astro';
 				ctx.beginPath(); ctx.arc((px+P_W-6)*scale, (drawY+8)*scale, 3*scale, 0, Math.PI*2); ctx.fill();
 				ctx.fillStyle = C.eye;
 				ctx.beginPath(); ctx.arc((px+P_W-5)*scale, (drawY+8)*scale, 1.5*scale, 0, Math.PI*2); ctx.fill();
-
-				// Obstacles
-				for (const o of obstacles) rr(o.x, GROUND_Y-o.h, o.w, o.h, 3, C.obs);
 
 				// DOM HUD
 				elScore.textContent = `SCORE ${String(score).padStart(5,'0')}`;
@@ -594,12 +594,20 @@ import Footer from '../components/Footer.astro';
 				ctx.arc(food.x*CELL+CELL/2, food.y*CELL+CELL/2, CELL/2-1.5, 0, Math.PI*2);
 				ctx.fill();
 
-				// Snake body — use C.player (same blue as runner)
-				for (let i=0;i<snake.length;i++) {
+				// Snake body (tail→neck first, head last so it renders on top)
+				for (let i=snake.length-1;i>0;i--) {
 					const s = snake[i];
-					ctx.fillStyle = i===0 ? C.head : C.player;
+					ctx.fillStyle = C.player;
 					ctx.beginPath();
-					ctx.roundRect(s.x*CELL+1, s.y*CELL+1, CELL-2, CELL-2, i===0?4:2);
+					ctx.roundRect(s.x*CELL+1, s.y*CELL+1, CELL-2, CELL-2, 2);
+					ctx.fill();
+				}
+				// Head on top
+				{
+					const h = snake[0];
+					ctx.fillStyle = C.head;
+					ctx.beginPath();
+					ctx.roundRect(h.x*CELL+1, h.y*CELL+1, CELL-2, CELL-2, 4);
 					ctx.fill();
 				}
 
