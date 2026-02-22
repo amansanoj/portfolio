@@ -262,7 +262,7 @@ import Footer from '../components/Footer.astro';
 		</main>
 		<Footer />
 
-		<div id="god-toast">★ GOD MODE</div>
+		<div id="god-toast"><i class="ph-fill ph-star"></i> GOD MODE</div>
 
 		<script>
 		let _gameFocus: string | null = null;
@@ -278,7 +278,7 @@ import Footer from '../components/Footer.astro';
 					_konamiIdx = 0;
 					_godMode = !_godMode;
 					const toast = document.getElementById('god-toast')!;
-					toast.textContent = _godMode ? '★ GOD MODE ON' : '★ GOD MODE OFF';
+					toast.innerHTML = _godMode ? '<i class="ph-fill ph-star"></i> GOD MODE ON' : '<i class="ph-fill ph-star"></i> GOD MODE OFF';
 					toast.classList.add('show');
 					setTimeout(() => toast.classList.remove('show'), 2200);
 				}
