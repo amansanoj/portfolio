@@ -38,8 +38,8 @@ const { title, description, pubDate, updatedDate, heroImage } = Astro.props;
 				color: rgb(var(--gray-dark));
 			}
 			.title {
-				margin-bottom: 1em;
-				padding: 1em 0;
+				margin-bottom: 0.5em;
+				padding: 0.5em 0;
 				text-align: center;
 				line-height: 1;
 			}
@@ -52,6 +52,17 @@ const { title, description, pubDate, updatedDate, heroImage } = Astro.props;
 			}
 			.last-updated-on {
 				font-style: italic;
+			}
+			.back-wrap {
+				max-width: 1020px;
+				margin: 0 auto;
+				padding: 0 1.5em 1.5em 0.75em;
+				box-sizing: border-box;
+			}
+			.back-link {
+				gap: 0.35em;
+				font-size: 0.88em;
+				font-weight: 600;
 			}
 			@media (max-width: 600px) {
 				.prose { padding: 1em; }
@@ -67,6 +78,11 @@ const { title, description, pubDate, updatedDate, heroImage } = Astro.props;
 		<Header />
 		<main id="main-content" tabindex="-1">
 			<article>
+				<div class="back-wrap">
+					<a href="/blog" class="back-link">
+						<i class="ph-fill ph-arrow-left"></i> All Posts
+					</a>
+				</div>
 				<div class="hero-image">
 					{heroImage && <img width={1020} height={510} src={heroImage} alt="" />}
 				</div>
