@@ -104,6 +104,10 @@ a:hover {
 	padding: 1px 3px;
 	transition: background-size 0.22s ease, color 0.15s;
 }
+.back-link {
+	font-size: 0.88em;
+	font-weight: 600;
+}
 .prose a:hover,
 .exp-company a:hover,
 .project-links a:hover,
@@ -119,6 +123,39 @@ p {
 .prose p {
 	margin-bottom: 2em;
 }
+
+/* ── Shared post / article layout ───────────────── */
+.hero-image { width: 100%; }
+.hero-image img {
+	display: block;
+	margin: 0 auto;
+	border-radius: 12px;
+	box-shadow: var(--box-shadow);
+}
+.back-wrap {
+	max-width: 1020px;
+	margin: 0 auto;
+	padding: 0 1.5em 1.5em 0.75em;
+	box-sizing: border-box;
+}
+.prose {
+	width: 100%;
+	max-width: 720px;
+	box-sizing: border-box;
+	margin: auto;
+	padding: 1em 1.5em 4em;
+	color: rgb(var(--gray-dark));
+}
+.post-title {
+	text-align: center;
+	line-height: 1;
+}
+.post-title h1 { margin: 0 0 0.5em; }
+.post-date {
+	margin-bottom: 0.5em;
+	color: rgb(var(--gray));
+}
+.post-last-updated { font-style: italic; }
 textarea {
 	width: 100%;
 	font-size: 16px;
@@ -163,11 +200,14 @@ hr {
 	main {
 		padding: 1em;
 	}
+	.prose { padding: 1em 1em 3em; }
+	.post-title h1 { font-size: 2em; }
 }
 @media (max-width: 480px) {
 	body {
 		font-size: 16px;
 	}
+	.post-title h1 { font-size: 1.7em; }
 }
 
 /* Focus-visible outline for keyboard navigation */

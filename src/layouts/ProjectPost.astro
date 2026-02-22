@@ -6,7 +6,7 @@ import Footer from '../components/Footer.astro';
 
 type Props = CollectionEntry<'projects'>['data'];
 
-const { title, description, tagline, period, location, tags, heroImage, live, github } = Astro.props;
+const { title, description, period, tags, heroImage, live, github } = Astro.props;
 ---
 
 <html lang="en">
@@ -19,56 +19,18 @@ const { title, description, tagline, period, location, tags, heroImage, live, gi
 				box-sizing: border-box;
 				margin: 0;
 			}
-			.hero-image {
-				width: 100%;
-			}
-			.hero-image img {
-				display: block;
-				margin: 0 auto;
-				border-radius: 12px;
-				box-shadow: var(--box-shadow);
-			}
-			.prose {
-				width: 100%;
-				max-width: 720px;
-				box-sizing: border-box;
-				margin: auto;
-				padding: 1em 1.5em 4em;
-				color: rgb(var(--gray-dark));
-			}
-			.title {
+			.post-title {
 				margin-bottom: 1em;
 				padding: 1em 0;
-				text-align: center;
-				line-height: 1;
 			}
-			.back-wrap {
-				max-width: 1020px;
-				margin: 0 auto;
-				padding: 0 1.5em 1.5em 0.75em;
-				box-sizing: border-box;
-			}
-			.back-link {
-				gap: 0.35em;
-				font-size: 0.88em;
-				font-weight: 600;
-				margin-bottom: 1em;
-			}
-			.title h1 { margin: 0 0 0.35em; }
-			.tagline {
-				font-size: 1.05em;
-				color: rgb(var(--gray));
-				margin: 0 0 1em;
-			}
-			.date {
-				margin-bottom: 0.5em;
-				color: rgb(var(--gray));
-			}
+			.post-title h1 { margin: 0 0 0.35em; }
+			.back-link { margin-bottom: 1em; }
 			.tags {
 				display: flex;
 				flex-wrap: wrap;
 				justify-content: center;
 				gap: 0.6em;
+				margin-bottom: 0.5em;
 			}
 			.tag {
 				background: rgb(var(--gray-light));
@@ -97,21 +59,10 @@ const { title, description, tagline, period, location, tags, heroImage, live, gi
 				text-decoration: none;
 				transition: background 0.15s, color 0.15s;
 			}
-			.hero-link.primary {
-				background: var(--accent);
-				color: #fff;
-			}
+			.hero-link.primary { background: var(--accent); color: #fff; }
 			.hero-link.primary:hover { background: var(--accent-dark); }
-			.hero-link.secondary {
-				border: 1.5px solid rgb(var(--border));
-				color: rgb(var(--gray-dark));
-			}
-			.hero-link.secondary:hover {
-				border-color: var(--accent);
-				color: var(--accent);
-			}
-
-			/* ── Prose content ──────────────────────────────────── */
+			.hero-link.secondary { border: 1.5px solid rgb(var(--border)); color: rgb(var(--gray-dark)); }
+			.hero-link.secondary:hover { border-color: var(--accent); color: var(--accent); }
 			.prose :global(h2) {
 				font-size: 1.15em;
 				font-weight: 700;
@@ -121,15 +72,7 @@ const { title, description, tagline, period, location, tags, heroImage, live, gi
 				padding-top: 2em;
 				border-top: 1px solid rgb(var(--gray-light));
 			}
-			.prose :global(h2:first-child) {
-				margin-top: 1.5em;
-				padding-top: 1.5em;
-			}
-			.prose :global(p),
-			.prose :global(li) {
-				color: rgb(var(--gray-dark));
-				line-height: 1.7;
-			}
+			.prose :global(h2:first-child) { margin-top: 1.5em; padding-top: 1.5em; }
 			.prose :global(ul) {
 				padding-left: 1.25em;
 				margin: 0 0 1em;
@@ -137,14 +80,7 @@ const { title, description, tagline, period, location, tags, heroImage, live, gi
 				flex-direction: column;
 				gap: 0.5em;
 			}
-
-			/* ── Stats (usable via raw HTML in MDX) ─────────────── */
-			.prose :global(.stats-row) {
-				display: flex;
-				flex-wrap: wrap;
-				gap: 1.5em;
-				margin: 0.5em 0 1em;
-			}
+			.prose :global(.stats-row) { display: flex; flex-wrap: wrap; gap: 1.5em; margin: 0.5em 0 1em; }
 			.prose :global(.stat) {
 				display: flex;
 				flex-direction: column;
@@ -154,24 +90,15 @@ const { title, description, tagline, period, location, tags, heroImage, live, gi
 				padding: 1em 1.5em;
 				min-width: 140px;
 			}
-			.prose :global(.stat-value) {
-				font-size: 1.4em;
-				font-weight: 700;
-				color: rgb(var(--black));
-			}
-			.prose :global(.stat-label) {
-				font-size: 0.82em;
-				color: rgb(var(--gray));
-			}
-
+			.prose :global(.stat-value) { font-size: 1.4em; font-weight: 700; color: rgb(var(--black)); }
+			.prose :global(.stat-label) { font-size: 0.82em; color: rgb(var(--gray)); }
 			@media (max-width: 600px) {
-				.prose { padding: 1em 1em 3em; }
-				.title h1 { font-size: 2em; }
+				.post-title h1 { font-size: 2em; }
 				.prose :global(.stats-row) { flex-direction: column; }
 				.prose :global(.stat) { min-width: unset; }
 			}
 			@media (max-width: 400px) {
-				.title h1 { font-size: 1.7em; }
+				.post-title h1 { font-size: 1.7em; }
 			}
 		</style>
 	</head>
@@ -188,8 +115,8 @@ const { title, description, tagline, period, location, tags, heroImage, live, gi
 					{heroImage && <img width={1020} height={510} src={heroImage} alt="" />}
 				</div>
 				<div class="prose">
-					<div class="title">
-						<div class="date">{period}</div>
+					<div class="post-title">
+						<div class="post-date">{period}</div>
 						<h1>{title}</h1>
 						<div class="tags">
 							{tags.map(t => <span class="tag">{t}</span>)}

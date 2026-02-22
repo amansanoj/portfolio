@@ -20,56 +20,9 @@ const { title, description, pubDate, updatedDate, heroImage } = Astro.props;
 				box-sizing: border-box;
 				margin: 0;
 			}
-			.hero-image {
-				width: 100%;
-			}
-			.hero-image img {
-				display: block;
-				margin: 0 auto;
-				border-radius: 12px;
-				box-shadow: var(--box-shadow);
-			}
-			.prose {
-				width: 100%;
-				max-width: 720px;
-				box-sizing: border-box;
-				margin: auto;
-				padding: 1em 1.5em;
-				color: rgb(var(--gray-dark));
-			}
-			.title {
+			.post-title {
 				margin-bottom: 0.5em;
 				padding: 0.5em 0;
-				text-align: center;
-				line-height: 1;
-			}
-			.title h1 {
-				margin: 0 0 0.5em 0;
-			}
-			.date {
-				margin-bottom: 0.5em;
-				color: rgb(var(--gray));
-			}
-			.last-updated-on {
-				font-style: italic;
-			}
-			.back-wrap {
-				max-width: 1020px;
-				margin: 0 auto;
-				padding: 0 1.5em 1.5em 0.75em;
-				box-sizing: border-box;
-			}
-			.back-link {
-				gap: 0.35em;
-				font-size: 0.88em;
-				font-weight: 600;
-			}
-			@media (max-width: 600px) {
-				.prose { padding: 1em; }
-				.title h1 { font-size: 2em; }
-			}
-			@media (max-width: 400px) {
-				.title h1 { font-size: 1.7em; }
 			}
 		</style>
 	</head>
@@ -87,12 +40,12 @@ const { title, description, pubDate, updatedDate, heroImage } = Astro.props;
 					{heroImage && <img width={1020} height={510} src={heroImage} alt="" />}
 				</div>
 				<div class="prose">
-					<div class="title">
-						<div class="date">
+					<div class="post-title">
+						<div class="post-date">
 							<FormattedDate date={pubDate} />
 							{
 								updatedDate && (
-									<div class="last-updated-on">
+									<div class="post-last-updated">
 										Last updated on <FormattedDate date={updatedDate} />
 									</div>
 								)
