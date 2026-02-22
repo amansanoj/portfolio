@@ -45,7 +45,7 @@ const { title, description, tagline, period, location, tags, heroImage, live, gi
 			.back-wrap {
 				max-width: 1020px;
 				margin: 0 auto;
-				padding: 1.5em 1.5em 0.75em;
+				padding: 0 1.5em 1.5em 0.75em;
 				box-sizing: border-box;
 			}
 			.back-link {
@@ -68,16 +68,16 @@ const { title, description, tagline, period, location, tags, heroImage, live, gi
 				display: flex;
 				flex-wrap: wrap;
 				justify-content: center;
-				gap: 0.5em;
-				margin-bottom: 1em;
+				gap: 0.6em;
 			}
 			.tag {
 				background: rgb(var(--gray-light));
 				color: rgb(var(--gray-dark));
-				padding: 0.25em 0.75em;
+				padding: 0.35em 0.85em;
 				border-radius: 999px;
-				font-size: 0.82em;
+				font-size: 0.88em;
 				font-weight: 500;
+				line-height: 1.7;
 			}
 			.hero-links {
 				display: flex;
@@ -118,7 +118,6 @@ const { title, description, tagline, period, location, tags, heroImage, live, gi
 				text-transform: uppercase;
 				letter-spacing: 0.06em;
 				color: rgb(var(--gray));
-				margin: 2em 0 1em;
 				padding-top: 2em;
 				border-top: 1px solid rgb(var(--gray-light));
 			}
@@ -201,7 +200,6 @@ const { title, description, tagline, period, location, tags, heroImage, live, gi
 								{github && <a href={github} target="_blank" rel="noopener" class="hero-link secondary"><i class="ph-fill ph-github-logo"></i> GitHub</a>}
 							</div>
 						)}
-						<hr />
 					</div>
 					<slot />
 				</div>
