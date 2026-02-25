@@ -9,10 +9,6 @@ import cloudflare from "@astrojs/cloudflare";
 // https://astro.build/config
 export default defineConfig({
 	site: "https://chaya.qzz.io",
-	prefetch: {
-		prefetchAll: true,
-		defaultStrategy: "viewport",
-	},
 	markdown: {
 		rehypePlugins: [
 			[rehypeExternalLinks, { target: "_blank", rel: ["noopener", "noreferrer"] }],
