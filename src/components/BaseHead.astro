@@ -26,6 +26,15 @@ const shortDesc = description.length > 100 ? description.slice(0, 97) + '...' : 
 <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 <link rel="alternate" type="application/rss+xml" title="RSS Feed" href="/rss.xml" />
 <link rel="sitemap" href="/sitemap-index.xml" />
+
+<!-- Preconnect to external origins -->
+<link rel="preconnect" href="https://fonts.googleapis.com" crossorigin />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin />
+
+<!-- Optimized font loading with font-display swap -->
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;700&display=swap" media="print" onload="this.media='all'" />
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;700&display=swap" /></noscript>
 <!-- Prevent flash of wrong theme -->
 <script is:inline>
 	const stored = localStorage.getItem('theme');
@@ -36,20 +45,36 @@ const shortDesc = description.length > 100 ? description.slice(0, 97) + '...' : 
 
 
 
-<!-- Phosphor Icons -->
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.1/src/regular/style.css" />
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.1/src/fill/style.css" />
+<!-- Phosphor Icons - deferred loading -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.1/src/regular/style.css" media="print" onload="this.media='all'" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.1/src/fill/style.css" media="print" onload="this.media='all'" />
+<noscript>
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.1/src/regular/style.css" />
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.1/src/fill/style.css" />
+</noscript>
 
-<!-- UserWay Accessibility Widget -->
+<!-- UserWay Accessibility Widget - deferred loading -->
 <script is:inline>
-	(function(d) {
-		var s = d.createElement("script");
-		s.setAttribute("data-account", "dOFJQYuFFu");
-		s.setAttribute("data-widget_layout", "full");
-		s.setAttribute("data-trigger", "accessibility-btn");
-		s.setAttribute("src", "https://cdn.userway.org/widget.js");
-		(d.body || d.head).appendChild(s);
-	})(document);
+	// Defer UserWay loading until page is interactive
+	if ('requestIdleCallback' in window) {
+		requestIdleCallback(function() {
+			var s = document.createElement("script");
+			s.setAttribute("data-account", "dOFJQYuFFu");
+			s.setAttribute("data-widget_layout", "full");
+			s.setAttribute("data-trigger", "accessibility-btn");
+			s.setAttribute("src", "https://cdn.userway.org/widget.js");
+			document.body.appendChild(s);
+		});
+	} else {
+		setTimeout(function() {
+			var s = document.createElement("script");
+			s.setAttribute("data-account", "dOFJQYuFFu");
+			s.setAttribute("data-widget_layout", "full");
+			s.setAttribute("data-trigger", "accessibility-btn");
+			s.setAttribute("src", "https://cdn.userway.org/widget.js");
+			document.body.appendChild(s);
+		}, 1000);
+	}
 </script>
 
 <!-- Canonical URL -->
