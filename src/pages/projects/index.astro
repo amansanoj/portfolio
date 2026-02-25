@@ -97,11 +97,19 @@ const projects = (await getCollection('projects')).sort(
 		<Header />
 		<main id="main-content" tabindex="-1">
 			<ul>
-				{projects.map(p => (
+				{projects.map((p, index) => (
 					<li>
 						<a href={`/projects/${p.id}/`}>
 							{p.data.heroImage
-								? <img width={720} height={360} src={p.data.heroImage} alt="" />
+								? <img 
+									width={720} 
+									height={360} 
+									src={p.data.heroImage} 
+									alt="" 
+									loading={index === 0 ? "eager" : "lazy"}
+									fetchpriority={index === 0 ? "high" : "auto"}
+									decoding="async"
+								/>
 								: <div class="placeholder"><i class="ph-fill ph-code"></i></div>
 							}
 							<h4 class="title">{p.data.title}</h4>
