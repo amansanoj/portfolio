@@ -2,10 +2,10 @@
 
 /* Light theme — Notion-inspired */
 :root {
-	--accent: #2383e2;
-	--accent-dark: #1a6bbf;
+	--accent: #156bb3;
+	--accent-dark: #0f5ba8;
 	--black: 26, 26, 26;
-	--gray: 120, 119, 116;
+	--gray: 75, 74, 71;
 	--gray-light: 233, 233, 231;
 	--gray-dark: 55, 53, 47;
 	--bg: 255, 255, 255;
