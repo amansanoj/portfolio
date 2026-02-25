@@ -32,20 +32,30 @@ const shortDesc = description.length > 100 ? description.slice(0, 97) + '...' : 
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin />
 
+<!-- Prevent flash of wrong theme - critical, must run before render -->
+<script is:inline>
+	(function(){var s=localStorage.getItem('theme');document.documentElement.setAttribute('data-theme',s||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light'))})();
+</script>
+
 <!-- Optimized font loading with font-display swap -->
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;700&display=swap" media="print" onload="this.media='all'" />
 <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;700&display=swap" /></noscript>
-<!-- Prevent flash of wrong theme -->
-<script is:inline>
-	const stored = localStorage.getItem('theme');
-	const preferred = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
-	document.documentElement.setAttribute('data-theme', stored || preferred);
-</script>
 <meta name="generator" content={Astro.generator} />
 
 
 
-<!-- Phosphor Icons - deferred loading -->
+<!-- Phosphor Icons - deferred loading with font-display override -->
+<style is:inline>
+	/* Ensure icon fonts use font-display: swap for better performance */
+	@font-face {
+		font-family: 'Phosphor';
+		font-display: swap;
+	}
+	@font-face {
+		font-family: 'Phosphor-Fill';
+		font-display: swap;
+	}
+</style>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.1/src/regular/style.css" media="print" onload="this.media='all'" />
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.1/src/fill/style.css" media="print" onload="this.media='all'" />
 <noscript>
