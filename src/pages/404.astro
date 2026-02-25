@@ -323,7 +323,7 @@ import Footer from '../components/Footer.astro';
 				return {
 					bg:     `rgb(${s.getPropertyValue('--bg').trim()})`,
 					ground: `rgba(${s.getPropertyValue('--gray').trim()},0.2)`,
-					player: '#2383e2',
+					player: '#156bb3',
 					eye:    '#93c5fd',
 					obs:    `rgb(${s.getPropertyValue('--gray-dark').trim()})`,
 					text:   `rgb(${s.getPropertyValue('--gray-dark').trim()})`,
@@ -466,7 +466,7 @@ import Footer from '../components/Footer.astro';
 					bg:     `rgb(${s.getPropertyValue('--bg').trim()})`,
 					grid:   `rgba(${s.getPropertyValue('--gray').trim()},0.1)`,
 					border: `rgb(${s.getPropertyValue('--border').trim()})`,
-					player: '#2383e2',
+					player: '#156bb3',
 					head:   '#93c5fd',
 					food:   '#f97316',
 					text:   `rgb(${s.getPropertyValue('--gray-dark').trim()})`,
@@ -655,7 +655,7 @@ import Footer from '../components/Footer.astro';
 			const BK_COLS = 10, BK_ROWS = 5;
 			const BK_GAP = 4, BK_MARGIN = 4, BK_TOP = 24, BK_H = 14;
 			const BK_W = (LOGICAL_W - BK_MARGIN * 2 - BK_GAP * (BK_COLS - 1)) / BK_COLS;
-			const ROW_COLORS = ['#93c5fd', '#60a5fa', '#3b82f6', '#2383e2', '#1a6bbf'];
+			const ROW_COLORS = ['#93c5fd', '#60a5fa', '#3b82f6', '#156bb3', '#1a6bbf'];
 			const INIT_SPEED = 4.5;
 			const PADDLE_SPEED = 6;
 
@@ -833,12 +833,12 @@ import Footer from '../components/Footer.astro';
 					ctx.fill();
 				}
 
-				ctx.fillStyle = '#2383e2';
+				ctx.fillStyle = '#156bb3';
 				ctx.beginPath();
 				ctx.roundRect((pdx-PADDLE_W/2)*scale, PADDLE_Y*scale, PADDLE_W*scale, PADDLE_H*scale, 4*scale);
 				ctx.fill();
 
-				ctx.fillStyle = '#2383e2';
+				ctx.fillStyle = '#156bb3';
 				ctx.beginPath();
 				ctx.arc(bx*scale, by*scale, BALL_R*scale, 0, Math.PI*2);
 				ctx.fill();
