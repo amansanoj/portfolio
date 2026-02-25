@@ -1,22 +1,22 @@
 ---
-const data = {
-  labels: ['2016–17', '2017–18', '2018–19', '2019–20', '2020–21', '2021–22', '2022–23', '2023–24'],
-  values: [2500, 4200, 6000, 10600, 15000, 20000, 50000, 100000]
-};
+
+const { data } = Astro.props;
 ---
 
 <div class="bar-chart-wrapper">
-  <canvas id="BarChart"></canvas>
+  <canvas id="BarChart" data-chart={JSON.stringify(data)}></canvas>
 </div>
 
 <script>
+
   import { Chart, BarController, BarElement, CategoryScale, LinearScale, Tooltip } from 'chart.js';
-  
   Chart.register(BarController, BarElement, CategoryScale, LinearScale, Tooltip);
 
-  const canvas = document.getElementById('BarChart') as HTMLCanvasElement;
-  if (!canvas) throw new Error('Canvas not found');
-
+  const canvas = document.getElementById('BarChart');
+  if (!(canvas instanceof HTMLCanvasElement)) throw new Error('Canvas not found or not a canvas element');
+  const dataAttr = canvas.getAttribute('data-chart');
+  if (!dataAttr) throw new Error('No data-chart attribute found');
+  const data = JSON.parse(dataAttr);
   const ctx = canvas.getContext('2d');
   if (!ctx) throw new Error('Canvas context not found');
 
@@ -31,10 +31,10 @@ const data = {
   const chart = new Chart(ctx, {
     type: 'bar',
     data: {
-      labels: ['2016–17', '2017–18', '2018–19', '2019–20', '2020–21', '2021–22', '2022–23', '2023–24'],
+      labels: data.labels,
       datasets: [{
         label: 'Annual Produce (kg)',
-        data: [2500, 4200, 6000, 10600, 15000, 20000, 50000, 100000],
+        data: data.values,
         backgroundColor: accentColor,
         hoverBackgroundColor: accentDark,
         borderRadius: 4,
@@ -67,7 +67,7 @@ const data = {
           },
           ticks: {
             color: isDark ? 'rgba(255,255,255,0.6)' : 'rgba(0,0,0,0.6)',
-            callback: (value) => `${(value as number / 1000).toFixed(0)}k`
+            callback: (value) => `${(Number(value) / 1000).toFixed(0)}k`
           }
         },
         x: {
