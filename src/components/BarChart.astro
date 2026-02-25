@@ -1,13 +1,12 @@
 ---
-// Harvest data for the chart
 const data = {
   labels: ['2016–17', '2017–18', '2018–19', '2019–20', '2020–21', '2021–22', '2022–23', '2023–24'],
   values: [2500, 4200, 6000, 10600, 15000, 20000, 50000, 100000]
 };
 ---
 
-<div class="harvest-chart-wrapper">
-  <canvas id="harvestChart"></canvas>
+<div class="bar-chart-wrapper">
+  <canvas id="BarChart"></canvas>
 </div>
 
 <script>
@@ -15,7 +14,7 @@ const data = {
   
   Chart.register(BarController, BarElement, CategoryScale, LinearScale, Tooltip);
 
-  const canvas = document.getElementById('harvestChart') as HTMLCanvasElement;
+  const canvas = document.getElementById('BarChart') as HTMLCanvasElement;
   if (!canvas) throw new Error('Canvas not found');
 
   const ctx = canvas.getContext('2d');
@@ -111,7 +110,7 @@ const data = {
 </script>
 
 <style>
-  .harvest-chart-wrapper {
+  .bar-chart-wrapper {
     margin: 2em 0;
     padding: 1.5em;
     background: rgb(var(--gray-light));
@@ -120,7 +119,7 @@ const data = {
   }
 
   @media (max-width: 520px) {
-    .harvest-chart-wrapper {
+    .bar-chart-wrapper {
       height: 250px;
       padding: 1em;
     }
