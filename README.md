@@ -1,5 +1,7 @@
 # Portfolio
 
+A clean Astro-powered portfolio site with projects, posts and a brief personal background.
+
 ![Portfolio OpenGraph preview showing site title and background pattern](/public/og-home.png)
 
 This repository contains the source code for my personal portfolio, built with [Astro](https://astro.build) and deployed to Cloudflare Workers.
