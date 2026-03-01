@@ -13,23 +13,11 @@ const { title, description, pubDate, updatedDate, heroImage } = Astro.props;
 <html lang="en">
 	<head>
 		<BaseHead title={`${title} — Aman Sanoj`} description={description} image={heroImage} type="article" author="Aman Sanoj" />
-		<style>
-			main {
-				width: 100%;
-				max-width: 100%;
-				box-sizing: border-box;
-				margin: 0;
-			}
-			.post-title {
-				margin-bottom: 0.5em;
-				padding: 0.5em 0;
-			}
-		</style>
 	</head>
 
 	<body>
 		<Header />
-		<main id="main-content" tabindex="-1">
+		<main id="main-content" tabindex="-1" class="w-full max-w-full box-border m-0">
 			<article>
 				<div class="back-wrap">
 					<a href="/blog" class="back-link">
@@ -40,7 +28,7 @@ const { title, description, pubDate, updatedDate, heroImage } = Astro.props;
 					{heroImage && <img width={1020} height={510} src={heroImage} alt="" loading="eager" fetchpriority="high" decoding="async" />}
 				</div>
 				<div class="prose">
-					<div class="post-title">
+					<div class="mb-[0.5em] py-[0.5em]">
 						<div class="post-date">
 							<FormattedDate date={pubDate} />
 							{

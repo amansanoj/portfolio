@@ -3,48 +3,20 @@ import { GITHUB_URL, LINKEDIN_URL, EMAIL } from '../consts';
 const today = new Date();
 ---
 
-<footer role="contentinfo">
+<footer role="contentinfo" class="pt-[2em] px-[1em] pb-[4em] bg-[var(--c-bg)] border-t border-[var(--c-border)] text-[var(--c-text-muted)] text-center transition-colors duration-200">
 	&copy; {today.getFullYear()} Aman Sanoj
-	<div class="social-links">
-		<a href={GITHUB_URL} target="_blank" rel="noopener" aria-label="GitHub">
-			<i class="ph-fill ph-github-logo"></i>
+	<div class="flex justify-center gap-4 mt-4">
+		<a href={GITHUB_URL} target="_blank" rel="noopener" aria-label="GitHub" class="no-underline text-[var(--c-text-muted)] flex items-center hover:text-[var(--c-text)] transition-colors duration-150">
+			<i class="ph-fill ph-github-logo text-[1.4rem]"></i>
 		</a>
-		<a href={LINKEDIN_URL} target="_blank" rel="noopener" aria-label="LinkedIn">
-			<i class="ph-fill ph-linkedin-logo"></i>
+		<a href={LINKEDIN_URL} target="_blank" rel="noopener" aria-label="LinkedIn" class="no-underline text-[var(--c-text-muted)] flex items-center hover:text-[var(--c-text)] transition-colors duration-150">
+			<i class="ph-fill ph-linkedin-logo text-[1.4rem]"></i>
 		</a>
-		<a href={`mailto:${EMAIL}`} aria-label="Email">
-			<i class="ph-fill ph-envelope-simple"></i>
+		<a href={`mailto:${EMAIL}`} aria-label="Email" class="no-underline text-[var(--c-text-muted)] flex items-center hover:text-[var(--c-text)] transition-colors duration-150">
+			<i class="ph-fill ph-envelope-simple text-[1.4rem]"></i>
 		</a>
-		<a href="/rss.xml" aria-label="RSS Feed">
-			<i class="ph-fill ph-rss"></i>
+		<a href="/rss.xml" aria-label="RSS Feed" class="no-underline text-[var(--c-text-muted)] flex items-center hover:text-[var(--c-text)] transition-colors duration-150">
+			<i class="ph-fill ph-rss text-[1.4rem]"></i>
 		</a>
 	</div>
 </footer>
-<style>
-	footer {
-		padding: 2em 1em 4em 1em;
-	background-color: var(--c-bg);
-	border-top: 1px solid var(--c-border);
-	color: var(--c-text-muted);
-		text-align: center;
-		transition: background-color 0.2s;
-	}
-	.social-links {
-		display: flex;
-		justify-content: center;
-		gap: 1em;
-		margin-top: 1em;
-	}
-	.social-links a {
-		text-decoration: none;
-		color: var(--c-text-muted);
-		display: flex;
-		align-items: center;
-	}
-	.social-links a i {
-		font-size: 1.4rem;
-	}
-	.social-links a:hover {
-		color: var(--c-text);
-	}
-</style>

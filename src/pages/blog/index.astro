@@ -15,35 +15,11 @@ const posts = (await getCollection('blog')).sort(
 <html lang="en">
 	<head>
 		<BaseHead title="Blog — Aman Sanoj" description={SITE_DESCRIPTION} image="/og-home.png" />
-		<style>
-			main {
-				width: 100%;
-				max-width: 900px;
-				box-sizing: border-box;
-				margin: 0 auto;
-				padding: 2em 1.5em 4em;
-			}
-			@media (max-width: 480px) {
-				main { padding: 1.5em 1em 3em; }
-			}
-			.rss-hint {
-				margin: 0 0 1.5em;
-				font-size: 0.85em;
-			}
-			.rss-hint a {
-				display: inline-flex;
-				align-items: center;
-				gap: 0.3em;
-				color: var(--c-text-muted);
-				text-decoration: none;
-			}
-			.rss-hint a:hover { color: var(--c-warm); }
-		</style>
 	</head>
 	<body>
 		<Header />
-		<main id="main-content" tabindex="-1">
-			<p class="rss-hint"><a href="/rss.xml"><i class="ph-fill ph-rss"></i> RSS feed</a></p>
+		<main id="main-content" tabindex="-1" class="w-full max-w-[900px] box-border mx-auto px-[1.5em] pt-[2em] pb-[4em]">
+			<p class="mb-[1.5em] text-[0.85em]"><a href="/rss.xml" class="inline-flex items-center gap-[0.3em] text-[var(--c-text-muted)] no-underline hover:text-[var(--c-warm)]"><i class="ph-fill ph-rss"></i> RSS feed</a></p>
 			<section>
 				<ul class="post-grid">
 					{
@@ -59,7 +35,7 @@ const posts = (await getCollection('blog')).sort(
 										fetchpriority={index === 0 ? "high" : "auto"}
 										decoding="async"
 									/>
-									<h4 class="title">{post.data.title}</h4>
+									<h4 class="title text-xl">{post.data.title}</h4>
 									<p class="date">
 										<FormattedDate date={post.data.pubDate} />
 									</p>
@@ -73,3 +49,9 @@ const posts = (await getCollection('blog')).sort(
 		<Footer />
 	</body>
 </html>
+
+<style>
+	@media (max-width: 480px) {
+		main { padding: 1.5em 1em 3em; }
+	}
+</style>

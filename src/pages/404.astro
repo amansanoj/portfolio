@@ -8,89 +8,7 @@ import Footer from '../components/Footer.astro';
 	<head>
 		<BaseHead title="404 — Aman Sanoj" description="This page doesn't exist." noindex image="/og-home.png" />
 		<style>
-			main {
-				display: flex;
-				flex-direction: column;
-				align-items: center;
-				justify-content: flex-start;
-				min-height: 60vh;
-				text-align: center;
-				padding: 4em 1rem 3em;
-			}
-
-			/* ── Hero ───────────────────────────── */
-			.code {
-				font-size: 6rem;
-				line-height: 1;
-				color: var(--c-warm);
-				margin: 0;
-			}
-			.message {
-				font-size: 1.1rem;
-				color: var(--c-text-muted);
-				margin: 0.4em 0 1em;
-			}
-			.home-link {
-				display: inline-block;
-				padding: 0.5em 1.4em;
-				background: var(--c-accent);
-				color: #ffffff;
-				text-decoration: none;
-				border-radius: 6px;
-				font-size: 0.95rem;
-				transition: background 0.15s;
-				margin-bottom: 2.4em;
-			}
-			.home-link:hover { background: var(--c-accent-dark); }
-
-			/* ── Arcade section ─────────────────── */
-			.arcade-section {
-				width: 100%;
-				max-width: 980px;
-			}
-
-			/* ── Cards ──────────────────────────── */
-			.arcade-grid {
-				display: flex;
-				flex-direction: column;
-				gap: 1em;
-				align-items: center;
-				width: 100%;
-			}
-			.arcade-card {
-				background: var(--c-bg);
-				border-radius: 10px;
-				border: 1.5px solid var(--c-border);
-				overflow: hidden;
-				box-shadow: 0 1px 3px rgba(0,0,0,0.08);
-				width: 100%;
-				max-width: 600px;
-			}
-			.card-runner {}
-			.card-snake  {}
-
-			.card-marquee {
-				display: flex;
-				justify-content: space-between;
-				align-items: center;
-				padding: 0.45em 1em;
-				border-bottom: 1px solid var(--c-border);
-			}
-			.card-title {
-				font-family: 'JetBrains Mono', monospace;
-				font-size: clamp(0.75rem, 3vw, 0.82rem);
-				letter-spacing: 0.12em;
-				color: var(--c-text-muted);
-				text-transform: uppercase;
-			}
-			.card-controls {
-				font-family: 'JetBrains Mono', monospace;
-				font-size: clamp(0.65rem, 2.5vw, 0.72rem);
-				color: var(--c-text-muted);
-				letter-spacing: 0.03em;
-				opacity: 0.7;
-			}
-
+			/* canvas — touch-action / user-select can't be Tailwind utilities */
 			#runner-canvas,
 			#snake-canvas,
 			#breakout-canvas {
@@ -102,10 +20,8 @@ import Footer from '../components/Footer.astro';
 				user-select: none;
 			}
 
-			/* overlay start button */
-			.canvas-wrap {
-				position: relative;
-			}
+			/* canvas overlay start button */
+			.canvas-wrap { position: relative; }
 			.game-focus-btn {
 				position: absolute;
 				inset: 0;
@@ -129,41 +45,29 @@ import Footer from '../components/Footer.astro';
 			}
 			.game-focus-btn .btn-sub {
 				font-size: clamp(0.7rem, 3vw, 0.78rem);
-					color: var(--c-text-muted);
+				color: var(--c-text-muted);
 				letter-spacing: 0.04em;
 			}
 			.game-focus-btn:focus-visible {
-					outline: 2px solid var(--c-accent);
+				outline: 2px solid var(--c-accent);
 				outline-offset: -3px;
 			}
 
-			/* show keyboard hints on desktop, touch hints on mobile */
+			/* keyboard vs touch hints — pointer media query */
 			.ctrl-kbd  { display: inline; }
 			.ctrl-touch { display: none; }
 			@media (pointer: coarse) {
 				.ctrl-kbd  { display: none; }
 				.ctrl-touch { display: inline; }
 			}
-			.card-hud {
-				display: flex;
-				justify-content: space-between;
-				padding: 0.45em 1em;
-				border-top: 1px solid var(--c-border);
-				font-family: 'JetBrains Mono', monospace;
-				font-size: clamp(0.76rem, 3vw, 0.84rem);
-				color: var(--c-text-muted);
-				letter-spacing: 0.05em;
-			}
 
-			/* ── Mobile overrides ─────────────────────── */
+			/* responsive max-width overrides */
 			@media (max-width: 480px) {
-				.arcade-section { padding: 0 0.25rem; }
-				.arcade-card { border-radius: 8px; }
 				.card-marquee { padding: 0.5em 0.75em; }
 				.card-hud { padding: 0.5em 0.75em; }
 			}
 
-			/* ── God mode toast ───────────────────────────── */
+			/* god mode toast — JS-toggled .show state must stay in CSS */
 			#god-toast {
 				position: fixed;
 				bottom: 1.5em;
@@ -190,17 +94,17 @@ import Footer from '../components/Footer.astro';
 	</head>
 	<body data-page="404">
 		<Header />
-		<main id="main-content" tabindex="-1">
-			<p class="code">404</p>
-			<p class="message">oops, you found my secret arcade.</p>
-			<a class="home-link" href="/">Go home</a>
+		<main id="main-content" tabindex="-1" class="flex flex-col items-center justify-start min-h-[60vh] text-center px-4 pt-[4em] pb-[3em]">
+			<p class="text-[6rem] leading-[1] text-[var(--c-warm)] m-0">404</p>
+			<p class="text-[1.1rem] text-[var(--c-text-muted)] mt-[0.4em] mb-[1em]">oops, you found my secret arcade.</p>
+			<a href="/" class="inline-block px-[1.4em] py-[0.5em] bg-[var(--c-accent)] text-white no-underline rounded-[6px] text-[0.95rem] transition-colors duration-150 hover:bg-[var(--c-accent-dark)] mb-[2.4em]">Go home</a>
 
-			<div class="arcade-section">
+			<div class="w-full max-w-[980px]">
 
-				<div class="arcade-grid">
-					<div class="arcade-card card-runner">
-						<div class="card-marquee">
-							<span class="card-title">DASH</span>
+				<div class="flex flex-col gap-4 items-center w-full">
+					<div class="bg-[var(--c-bg)] rounded-[10px] border-[1.5px] border-[var(--c-border)] overflow-hidden shadow-[0_1px_3px_rgba(0,0,0,0.08)] w-full max-w-[600px]">
+						<div class="card-marquee flex justify-between items-center px-4 py-[0.45em] border-b border-[var(--c-border)]">
+							<span class="font-mono text-[clamp(0.75rem,3vw,0.82rem)] tracking-[0.12em] text-[var(--c-text-muted)] uppercase">DASH</span>
 						</div>
 						<div class="canvas-wrap">
 						<canvas id="runner-canvas"></canvas>
@@ -210,15 +114,15 @@ import Footer from '../components/Footer.astro';
 							<span class="btn-sub ctrl-touch">TAP — jump</span>
 						</button>
 					</div>
-						<div class="card-hud">
+						<div class="card-hud flex justify-between px-4 py-[0.45em] border-t border-[var(--c-border)] font-mono text-[clamp(0.76rem,3vw,0.84rem)] text-[var(--c-text-muted)] tracking-[0.05em]">
 							<span id="runner-score">SCORE 00000</span>
 							<span id="runner-best">BEST 00000</span>
 						</div>
 					</div>
 
-					<div class="arcade-card card-snake">
-						<div class="card-marquee">
-							<span class="card-title">SNAKE</span>
+					<div class="bg-[var(--c-bg)] rounded-[10px] border-[1.5px] border-[var(--c-border)] overflow-hidden shadow-[0_1px_3px_rgba(0,0,0,0.08)] w-full max-w-[600px]">
+						<div class="card-marquee flex justify-between items-center px-4 py-[0.45em] border-b border-[var(--c-border)]">
+							<span class="font-mono text-[clamp(0.75rem,3vw,0.82rem)] tracking-[0.12em] text-[var(--c-text-muted)] uppercase">SNAKE</span>
 						</div>
 						<div class="canvas-wrap">
 						<canvas id="snake-canvas"></canvas>
@@ -228,15 +132,15 @@ import Footer from '../components/Footer.astro';
 							<span class="btn-sub ctrl-touch">SWIPE — move</span>
 						</button>
 					</div>
-						<div class="card-hud">
+						<div class="card-hud flex justify-between px-4 py-[0.45em] border-t border-[var(--c-border)] font-mono text-[clamp(0.76rem,3vw,0.84rem)] text-[var(--c-text-muted)] tracking-[0.05em]">
 							<span id="snake-score">SCORE 000</span>
 							<span id="snake-best">BEST 000</span>
 						</div>
 					</div>
 
-				<div class="arcade-card card-breakout">
-					<div class="card-marquee">
-						<span class="card-title">BREAKOUT</span>
+				<div class="bg-[var(--c-bg)] rounded-[10px] border-[1.5px] border-[var(--c-border)] overflow-hidden shadow-[0_1px_3px_rgba(0,0,0,0.08)] w-full max-w-[600px]">
+					<div class="card-marquee flex justify-between items-center px-4 py-[0.45em] border-b border-[var(--c-border)]">
+						<span class="font-mono text-[clamp(0.75rem,3vw,0.82rem)] tracking-[0.12em] text-[var(--c-text-muted)] uppercase">BREAKOUT</span>
 					</div>
 					<div class="canvas-wrap">
 					<canvas id="breakout-canvas"></canvas>
@@ -246,7 +150,7 @@ import Footer from '../components/Footer.astro';
 						<span class="btn-sub ctrl-touch">DRAG — paddle</span>
 					</button>
 				</div>
-					<div class="card-hud">
+					<div class="card-hud flex justify-between px-4 py-[0.45em] border-t border-[var(--c-border)] font-mono text-[clamp(0.76rem,3vw,0.84rem)] text-[var(--c-text-muted)] tracking-[0.05em]">
 						<span id="breakout-score">SCORE 00000</span>
 						<span id="breakout-best">BEST 00000</span>
 					</div>

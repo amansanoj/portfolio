@@ -20,31 +20,31 @@ const posts = (await getCollection('blog'))
 	</head>
 	<body>
 		<Header />
-<main id="main-content" tabindex="-1">
+		<main id="main-content" tabindex="-1" class="w-full max-w-[760px] box-border mx-auto px-[1.5em] pt-[2em] pb-[4em]">
 
 			<!-- ── Hero ───────────────────────────────────────────────── -->
-			<section class="hero">
-				<div class="hero-text">
-					<h1>Aman Sanoj</h1>
-					<p class="role">Developer &amp; Student</p>
-					<p class="bio">
+			<section class="hero pt-[4em] pb-[3em] border-b border-[var(--c-border)]">
+				<div>
+					<h1 class="text-5xl">Aman Sanoj</h1>
+					<p class="text-[1.1em] text-[var(--c-warm)] mt-0 mb-[1em]">Developer &amp; Student</p>
+					<p class="text-[var(--c-text-muted)] max-w-[520px] leading-[1.7] mt-0 mb-[1.5em]">
 						I build things for the web. Passionate about clean code, open source,
 						and learning something new every day.
 					</p>
-					<div class="hero-actions">
+					<div class="flex gap-[0.75em] mb-[1.5em] flex-wrap">
 						<a href="/about" class="btn primary">About Me</a>
 						<a href={RESUME_URL} class="btn secondary" download>Resume</a>
 						<a href={`mailto:${EMAIL}`} class="btn secondary">Get in Touch</a>
 					</div>
-					<div class="social-row">
-						<a href={GITHUB_URL} target="_blank" rel="noopener" aria-label="GitHub">
-							<i class="ph-fill ph-github-logo"></i>
+					<div class="flex gap-4">
+						<a href={GITHUB_URL} target="_blank" rel="noopener" aria-label="GitHub" class="text-[var(--c-text-muted)] transition-colors duration-150 flex items-center hover:text-[var(--c-warm)]">
+							<i class="ph-fill ph-github-logo text-[1.4rem]"></i>
 						</a>
-						<a href={LINKEDIN_URL} target="_blank" rel="noopener" aria-label="LinkedIn">
-							<i class="ph-fill ph-linkedin-logo"></i>
+						<a href={LINKEDIN_URL} target="_blank" rel="noopener" aria-label="LinkedIn" class="text-[var(--c-text-muted)] transition-colors duration-150 flex items-center hover:text-[var(--c-warm)]">
+							<i class="ph-fill ph-linkedin-logo text-[1.4rem]"></i>
 						</a>
-						<a href={`mailto:${EMAIL}`} aria-label="Email">
-							<i class="ph-fill ph-envelope-simple"></i>
+						<a href={`mailto:${EMAIL}`} aria-label="Email" class="text-[var(--c-text-muted)] transition-colors duration-150 flex items-center hover:text-[var(--c-warm)]">
+							<i class="ph-fill ph-envelope-simple text-[1.4rem]"></i>
 						</a>
 					</div>
 				</div>
@@ -53,12 +53,12 @@ const posts = (await getCollection('blog'))
 			<!-- ── Latest Posts ───────────────────────────────────────── -->
 			<section class="section" id="blog">
 				<h2>Latest Posts</h2>
-				<ul class="post-list">
+				<ul class="post-list list-none p-0 mb-4 flex flex-col gap-2">
 					{posts.map(post => (
 						<li>
-							<a href={`/blog/${post.id}/`}>
+							<a href={`/blog/${post.id}/`} class="post-entry flex justify-between items-baseline gap-4 no-underline py-[0.6em] border-b border-[var(--c-border)] text-inherit">
 								<span class="post-title">{post.data.title}</span>
-								<span class="post-date"><FormattedDate date={post.data.pubDate} /></span>
+								<span class="text-[0.85em] text-[var(--c-text-muted)] whitespace-nowrap"><FormattedDate date={post.data.pubDate} /></span>
 							</a>
 						</li>
 					))}
@@ -72,82 +72,17 @@ const posts = (await getCollection('blog'))
 </html>
 
 <style>
-	main {
-		max-width: 760px;
-		width: 100%;
-		box-sizing: border-box;
-		margin: 0 auto;
-		padding: 2em 1.5em 4em;
-	}
+	/* descendant hover — can't express as Tailwind utility */
+	.post-entry:hover .post-title { color: var(--c-warm); }
 
-	/* ── Hero ───────────────────────────────────────────── */
-	.hero {
-		padding: 4em 0 3em;
-		border-bottom: 1px solid var(--c-border);
-	}
-	.role {
-		font-size: 1.1em;
-		color: var(--c-warm);
-		margin: 0 0 1em;
-	}
-	.bio {
-		font-size: 1em;
-		color: var(--c-text-muted);
-		max-width: 520px;
-		line-height: 1.7;
-		margin: 0 0 1.5em;
-	}
-	.hero-actions {
-		display: flex;
-		gap: 0.75em;
-		margin-bottom: 1.5em;
-		flex-wrap: wrap;
-	}
-	.social-row {
-		display: flex;
-		gap: 1em;
-	}
-	.social-row a {
-		color: var(--c-text-muted);
-		transition: color 0.15s;
-		display: flex;
-		align-items: center;
-	}
-	.social-row a i { font-size: 1.4rem; }
-	.social-row a:hover { color: var(--c-warm); }
-
-	/* ── Blog posts ─────────────────────────────────────── */
-	.post-list {
-		list-style: none;
-		padding: 0;
-		margin: 0 0 1em;
-		display: flex;
-		flex-direction: column;
-		gap: 0.5em;
-	}
-	.post-list li a {
-		display: flex;
-		justify-content: space-between;
-		align-items: baseline;
-		gap: 1em;
-		text-decoration: none;
-		padding: 0.6em 0;
-		border-bottom: 1px solid var(--c-border);
-		color: inherit;
-	}
-	.post-list li a:hover .post-title { color: var(--c-warm); }
-	.post-title { }
-	.post-date { font-size: 0.85em; color: var(--c-text-muted); white-space: nowrap; }
-
+	/* max-width responsive — Tailwind is mobile-first so these must stay in CSS */
 	@media (max-width: 600px) {
 		main { padding: 1.5em 1em 3em; }
-		.hero { padding: 2.5em 0 2em; }
+		.hero { padding-top: 2.5em; padding-bottom: 2em; }
 		.hero h1 { font-size: 2.2em; }
-		.hero-actions { gap: 0.5em; }
-		.post-list li a { flex-direction: column; gap: 0.15em; }
+		.post-entry { flex-direction: column; gap: 0.15em; }
 	}
 	@media (max-width: 400px) {
 		.hero h1 { font-size: 1.9em; }
-		.btn { padding: 0.5em 1em; font-size: 0.85em; }
 	}
 </style>

@@ -13,46 +13,7 @@ const { title, description, period, tags, heroImage, live, github } = Astro.prop
 	<head>
 		<BaseHead title={`${title} — Aman Sanoj`} description={description} image={heroImage} type="article" author="Aman Sanoj" />
 		<style>
-			main {
-				width: 100%;
-				max-width: 100%;
-				box-sizing: border-box;
-				margin: 0;
-			}
-			.post-title {
-				margin-bottom: 1em;
-				padding: 1em 0;
-			}
-			.post-title h1 { margin: 0 0 0.35em; }
-			.back-link { margin-bottom: 1em; }
-			.tags {
-				display: flex;
-				flex-wrap: wrap;
-				justify-content: center;
-				gap: 0.6em;
-				margin-bottom: 0.5em;
-			}
-			.hero-links {
-				display: flex;
-				justify-content: center;
-				gap: 0.75em;
-				flex-wrap: wrap;
-				margin-bottom: 0.5em;
-			}
-			.hero-link {
-				display: inline-flex;
-				align-items: center;
-				gap: 0.35em;
-				font-size: 0.88em;
-				padding: 0.4em 1em;
-				border-radius: 6px;
-				text-decoration: none;
-				transition: background 0.15s, color 0.15s;
-			}
-			.hero-link.primary { background: var(--c-accent); color: #ffffff; }
-			.hero-link.primary:hover { background: var(--c-accent-dark); }
-			.hero-link.secondary { border: 1.5px solid var(--c-border); color: var(--c-text); }
-			.hero-link.secondary:hover { border-color: var(--c-warm); color: var(--c-warm); }
+			/* :global() selectors can't be expressed as markup Tailwind classes */
 			.prose :global(h2) {
 				font-size: 1.15em;
 				text-transform: uppercase;
@@ -79,9 +40,9 @@ const { title, description, period, tags, heroImage, live, github } = Astro.prop
 	</head>
 	<body>
 		<Header />
-		<main id="main-content" tabindex="-1">
+		<main id="main-content" tabindex="-1" class="w-full max-w-full box-border m-0">
 			<article>
-				<div class="back-wrap">
+				<div class="back-wrap mb-4">
 					<a href="/projects" class="back-link">
 						<i class="ph-fill ph-arrow-left"></i> All Projects
 					</a>
@@ -90,16 +51,16 @@ const { title, description, period, tags, heroImage, live, github } = Astro.prop
 					{heroImage && <img width={1020} height={510} src={heroImage} alt="" loading="eager" fetchpriority="high" decoding="async" />}
 				</div>
 				<div class="prose">
-					<div class="post-title">
+					<div class="post-title mb-[1em] py-[1em]">
 						<div class="post-date">{period}</div>
-						<h1>{title}</h1>
-						<div class="tags">
+						<h1 class="m-0 mb-[0.35em]">{title}</h1>
+						<div class="flex flex-wrap justify-center gap-[0.6em] mb-2">
 							{tags.map(t => <span class="tag">{t}</span>)}
 						</div>
 						{(live || github) && (
-							<div class="hero-links">
-								{live && <a href={live} target="_blank" rel="noopener" class="hero-link primary"><i class="ph-fill ph-arrow-up-right"></i> Live</a>}
-								{github && <a href={github} target="_blank" rel="noopener" class="hero-link secondary"><i class="ph-fill ph-github-logo"></i> GitHub</a>}
+							<div class="flex justify-center gap-[0.75em] flex-wrap mb-2">
+								{live && <a href={live} target="_blank" rel="noopener" class="inline-flex items-center gap-[0.35em] text-[0.88em] px-4 py-[0.4em] rounded-[6px] no-underline transition-colors duration-150 bg-[var(--c-accent)] text-white hover:bg-[var(--c-accent-dark)]"><i class="ph-fill ph-arrow-up-right"></i> Live</a>}
+								{github && <a href={github} target="_blank" rel="noopener" class="inline-flex items-center gap-[0.35em] text-[0.88em] px-4 py-[0.4em] rounded-[6px] no-underline transition-colors duration-150 border-[1.5px] border-[var(--c-border)] text-[var(--c-text)] hover:border-[var(--c-warm)] hover:text-[var(--c-warm)]"><i class="ph-fill ph-github-logo"></i> GitHub</a>}
 							</div>
 						)}
 					</div>
