@@ -22,9 +22,9 @@ const { data } = Astro.props;
 
   // Get accent color from CSS
   const accentColor = getComputedStyle(document.documentElement)
-    .getPropertyValue('--accent').trim() || '#156bb3';
+    .getPropertyValue('--c-accent').trim() || '#156bb3';
   const accentDark = getComputedStyle(document.documentElement)
-    .getPropertyValue('--accent-dark').trim() || '#0f5ba8';
+    .getPropertyValue('--c-accent-dark').trim() || '#0e4f87';
 
   const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
 

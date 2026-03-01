@@ -31,19 +31,19 @@ const isActive = href === pathname || href === '/' + (subpath?.[0] || '');
 		left: 0.9em;
 		right: 0.9em;
 		height: 2px;
-		background: var(--c-text-strong);
+		background: var(--c-accent);
 		transform: scaleX(0);
 		transform-origin: left;
 		transition: transform 0.22s ease;
 	}
 	a:hover {
-		color: var(--c-text-strong);
+		color: var(--c-accent);
 	}
 	a:hover::after {
 		transform: scaleX(1);
 	}
 	a.active {
-		color: var(--c-text-strong);
+		color: var(--c-accent);
 	}
 	a.active::after {
 		transform: scaleX(1);

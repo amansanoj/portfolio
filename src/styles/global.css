@@ -9,6 +9,8 @@
 :root {
 	--c-accent:       theme(colors.primary.DEFAULT);
 	--c-accent-dark:  theme(colors.primary.dark);
+	--c-warm:         theme(colors.accent.DEFAULT);
+	--c-warm-dark:    theme(colors.accent.dark);
 	--c-text:         theme(colors.neutral.900);
 	--c-text-muted:   theme(colors.neutral.600);
 	--c-text-strong:  theme(colors.neutral.900);
@@ -187,7 +189,7 @@ pre > code {
 	all: unset;
 }
 blockquote {
-	border-left: 4px solid var(--c-accent);
+	border-left: 4px solid var(--c-warm);
 	padding: 0 0 0 20px;
 	margin: 0px;
 	font-size: 1.333em;
