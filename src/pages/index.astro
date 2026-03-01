@@ -83,18 +83,18 @@ const posts = (await getCollection('blog'))
 	/* ── Hero ───────────────────────────────────────────── */
 	.hero {
 		padding: 4em 0 3em;
-		border-bottom: 1px solid rgb(var(--gray-light));
+		border-bottom: 1px solid var(--c-border);
 	}
 
 	.role {
 		font-size: 1.1em;
-		color: var(--accent);
+		color: var(--c-accent);
 		font-weight: 600;
 		margin: 0 0 1em;
 	}
 	.bio {
 		font-size: 1em;
-		color: rgb(var(--gray));
+		color: var(--c-text-muted);
 		max-width: 520px;
 		line-height: 1.7;
 		margin: 0 0 1.5em;
@@ -116,19 +116,19 @@ const posts = (await getCollection('blog'))
 	}
 	.btn:hover { opacity: 0.8; }
 	.btn.primary {
-		background: var(--accent);
-		color: #fff;
+		background: var(--c-accent);
+		color: #ffffff;
 	}
 	.btn.secondary {
-		border: 2px solid var(--accent);
-		color: var(--accent);
+		border: 2px solid var(--c-accent);
+		color: var(--c-accent);
 	}
 	.social-row {
 		display: flex;
 		gap: 1em;
 	}
 	.social-row a {
-		color: rgb(var(--gray));
+		color: var(--c-text-muted);
 		transition: color 0.15s;
 		display: flex;
 		align-items: center;
@@ -136,12 +136,12 @@ const posts = (await getCollection('blog'))
 	.social-row a i {
 		font-size: 1.4rem;
 	}
-	.social-row a:hover { color: var(--accent); }
+	.social-row a:hover { color: var(--c-accent); }
 
 	/* ── Sections ───────────────────────────────────────── */
 	.section {
 		padding: 2.5em 0;
-		border-bottom: 1px solid rgb(var(--gray-light));
+		border-bottom: 1px solid var(--c-border);
 	}
 	.section:last-child { border-bottom: none; }
 	.section h2 {
@@ -149,7 +149,7 @@ const posts = (await getCollection('blog'))
 		font-weight: 700;
 		text-transform: uppercase;
 		letter-spacing: 0.06em;
-		color: rgb(var(--gray));
+		color: var(--c-text-muted);
 		margin: 0 0 1.2em;
 	}
 
@@ -169,16 +169,16 @@ const posts = (await getCollection('blog'))
 		gap: 1em;
 		text-decoration: none;
 		padding: 0.6em 0;
-		border-bottom: 1px solid rgb(var(--gray-light));
+		border-bottom: 1px solid var(--c-border);
 		color: inherit;
 	}
-	.post-list li a:hover .post-title { color: var(--accent); }
+	.post-list li a:hover .post-title { color: var(--c-accent); }
 	.post-title { font-weight: 500; }
-	.post-date { font-size: 0.85em; color: rgb(var(--gray)); white-space: nowrap; }
+	.post-date { font-size: 0.85em; color: var(--c-text-muted); white-space: nowrap; }
 	.view-all {
 		font-size: 0.9em;
 		font-weight: 600;
-		color: var(--accent);
+		color: var(--c-accent);
 		text-decoration: none;
 	}
 	.view-all:hover { text-decoration: none; }

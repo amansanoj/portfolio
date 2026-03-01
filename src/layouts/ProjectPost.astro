@@ -33,8 +33,8 @@ const { title, description, period, tags, heroImage, live, github } = Astro.prop
 				margin-bottom: 0.5em;
 			}
 			.tag {
-				background: rgb(var(--gray-light));
-				color: rgb(var(--gray-dark));
+				background: var(--c-surface);
+				color: var(--c-text);
 				padding: 0.35em 0.85em;
 				border-radius: 999px;
 				font-size: 0.88em;
@@ -59,18 +59,18 @@ const { title, description, period, tags, heroImage, live, github } = Astro.prop
 				text-decoration: none;
 				transition: background 0.15s, color 0.15s;
 			}
-			.hero-link.primary { background: var(--accent); color: #fff; }
-			.hero-link.primary:hover { background: var(--accent-dark); }
-			.hero-link.secondary { border: 1.5px solid rgb(var(--border)); color: rgb(var(--gray-dark)); }
-			.hero-link.secondary:hover { border-color: var(--accent); color: var(--accent); }
+			.hero-link.primary { background: var(--c-accent); color: #ffffff; }
+			.hero-link.primary:hover { background: var(--c-accent-dark); }
+			.hero-link.secondary { border: 1.5px solid var(--c-border); color: var(--c-text); }
+			.hero-link.secondary:hover { border-color: var(--c-accent); color: var(--c-accent); }
 			.prose :global(h2) {
 				font-size: 1.15em;
 				font-weight: 700;
 				text-transform: uppercase;
 				letter-spacing: 0.06em;
-				color: rgb(var(--gray));
+				color: var(--c-text-muted);
 				padding-top: 2em;
-				border-top: 1px solid rgb(var(--gray-light));
+				border-top: 1px solid var(--c-border);
 			}
 			.prose :global(h2:first-child) { margin-top: 1.5em; padding-top: 1.5em; }
 			.prose :global(ul) {

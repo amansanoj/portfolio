@@ -58,19 +58,19 @@ const posts = (await getCollection('blog')).sort(
 			}
 			.title {
 				margin: 0;
-				color: rgb(var(--black));
+				color: var(--c-text-strong);
 				line-height: 1;
 			}
 			.date {
 				margin: 0;
-				color: rgb(var(--gray));
+				color: var(--c-text-muted);
 			}
 			ul li a:hover h4,
 			ul li a:hover .date {
-				color: rgb(var(--accent));
+				color: var(--c-accent);
 			}
 			ul a:hover img {
-				box-shadow: var(--box-shadow);
+				box-shadow: 0 1px 3px rgba(0,0,0,0.08);
 			}
 			@media (max-width: 720px) {
 				ul {
@@ -98,11 +98,11 @@ const posts = (await getCollection('blog')).sort(
 				display: inline-flex;
 				align-items: center;
 				gap: 0.3em;
-				color: rgb(var(--gray));
+				color: var(--c-text-muted);
 				text-decoration: none;
 			}
 			.rss-hint a:hover {
-				color: var(--accent);
+				color: var(--c-accent);
 			}
 		</style>
 	</head>

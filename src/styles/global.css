@@ -1,42 +1,44 @@
-/* Fonts loaded via <link> in BaseHead for better performance */
+/*
+ * Design tokens via @amansanoj/brand — imported through tailwind.config.ts.
+ * All colors, fonts, spacing, shadows reference theme() — no hardcoded values.
+ */
+@import "tailwindcss";
+@config "../../tailwind.config.ts";
 
-/* Light theme — Notion-inspired */
+/* ── Semantic CSS vars (light / dark) ─────────────────────── */
 :root {
-	--accent: #156bb3;
-	--accent-dark: #0f5ba8;
-	--black: 26, 26, 26;
-	--gray: 75, 74, 71;
-	--gray-light: 233, 233, 231;
-	--gray-dark: 55, 53, 47;
-	--bg: 255, 255, 255;
-	--header-bg: 255, 255, 255;
-	--border: 233, 233, 231;
-	--box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06), 0 1px 2px rgba(0, 0, 0, 0.04);
+	--c-accent:       theme(colors.primary.DEFAULT);
+	--c-accent-dark:  theme(colors.primary.dark);
+	--c-text:         theme(colors.neutral.900);
+	--c-text-muted:   theme(colors.neutral.600);
+	--c-text-strong:  theme(colors.neutral.900);
+	--c-bg:           theme(colors.bg.light);
+	--c-surface:      theme(colors.neutral.100);
+	--c-border:       theme(colors.neutral.100);
 }
 
-/* Dark theme — Notion dark */
 [data-theme="dark"] {
-	--black: 230, 227, 222;
-	--gray: 155, 154, 151;
-	--gray-light: 47, 47, 47;
-	--gray-dark: 206, 205, 202;
-	--bg: 25, 25, 25;
-	--header-bg: 25, 25, 25;
-	--border: 47, 47, 47;
+	--c-text:         theme(colors.neutral.50);
+	--c-text-muted:   theme(colors.neutral.400);
+	--c-text-strong:  theme(colors.neutral.50);
+	--c-bg:           theme(colors.bg.dark);
+	--c-surface:      theme(colors.neutral.800);
+	--c-border:       theme(colors.neutral.800);
 }
+
 html {
 	overflow-x: hidden;
 }
 body {
-	font-family: 'Rubik', sans-serif;
+	font-family: theme(fontFamily.body);
 	margin: 0;
 	padding: 0;
 	text-align: left;
-	background-color: rgb(var(--bg));
+	background-color: var(--c-bg);
 	word-wrap: break-word;
 	overflow-wrap: break-word;
 	overflow-x: hidden;
-	color: rgb(var(--gray-dark));
+	color: var(--c-text);
 	font-size: 20px;
 	line-height: 1.7;
 	transition: background-color 0.2s, color 0.2s;
@@ -55,7 +57,7 @@ h4,
 h5,
 h6 {
 	margin: 0 0 0.5rem 0;
-	color: rgb(var(--black));
+	color: var(--c-text-strong);
 	line-height: 1.2;
 }
 h1 {
@@ -78,11 +80,11 @@ b {
 	font-weight: 700;
 }
 a {
-	color: var(--accent);
+	color: var(--c-accent);
 	text-decoration: none;
 }
 a:hover {
-	color: var(--accent);
+	color: var(--c-accent);
 }
 
 /* Bottom-to-top fill for prose/body content links only */
@@ -94,13 +96,13 @@ a:hover {
 .back-link {
 	position: relative;
 	display: inline;
-	color: var(--accent);
+	color: var(--c-accent);
 	text-decoration: none;
-	background-image: linear-gradient(to top, rgba(35, 131, 226, 0.18), rgba(35, 131, 226, 0.18));
+	background-image: linear-gradient(to top, color-mix(in srgb, var(--c-accent) 18%, transparent), color-mix(in srgb, var(--c-accent) 18%, transparent));
 	background-size: 100% 0%;
 	background-position: bottom;
 	background-repeat: no-repeat;
-	border-bottom: 1px solid var(--accent);
+	border-bottom: 1px solid var(--c-accent);
 	padding: 1px 3px;
 	transition: background-size 0.22s ease, color 0.15s;
 }
@@ -115,7 +117,7 @@ a:hover {
 .view-all:hover,
 .back-link:hover {
 	background-size: 100% 100%;
-	color: var(--accent-dark);
+	color: var(--c-accent-dark);
 }
 p {
 	margin-bottom: 1em;
@@ -129,8 +131,8 @@ p {
 .hero-image img {
 	display: block;
 	margin: 0 auto;
-	border-radius: 12px;
-	box-shadow: var(--box-shadow);
+	border-radius: theme(borderRadius.lg);
+	box-shadow: theme(boxShadow.sm);
 }
 .back-wrap {
 	max-width: 1020px;
@@ -144,7 +146,7 @@ p {
 	box-sizing: border-box;
 	margin: auto;
 	padding: 1em 1.5em 4em;
-	color: rgb(var(--gray-dark));
+	color: var(--c-text);
 }
 .post-title {
 	text-align: center;
@@ -153,7 +155,7 @@ p {
 .post-title h1 { margin: 0 0 0.5em; }
 .post-date {
 	margin-bottom: 0.5em;
-	color: rgb(var(--gray));
+	color: var(--c-text-muted);
 }
 .post-last-updated { font-style: italic; }
 textarea {
@@ -169,29 +171,30 @@ table {
 img {
 	max-width: 100%;
 	height: auto;
-	border-radius: 8px;
+	border-radius: theme(borderRadius.DEFAULT);
 }
 code {
 	padding: 2px 5px;
-	background-color: rgb(var(--gray-light));
-	border-radius: 2px;
+	background-color: var(--c-surface);
+	border-radius: theme(borderRadius.sm);
+	font-family: theme(fontFamily.mono);
 }
 pre {
 	padding: 1.5em;
-	border-radius: 8px;
+	border-radius: theme(borderRadius.DEFAULT);
 }
 pre > code {
 	all: unset;
 }
 blockquote {
-	border-left: 4px solid var(--accent);
+	border-left: 4px solid var(--c-accent);
 	padding: 0 0 0 20px;
 	margin: 0px;
 	font-size: 1.333em;
 }
 hr {
 	border: none;
-	border-top: 1px solid rgb(var(--border, var(--gray-light)));
+	border-top: 1px solid var(--c-border);
 }
 @media (max-width: 720px) {
 	body {
@@ -212,9 +215,9 @@ hr {
 
 /* Focus-visible outline for keyboard navigation */
 :focus-visible {
-	outline: 2px solid var(--accent);
+	outline: 2px solid var(--c-accent);
 	outline-offset: 3px;
-	border-radius: 3px;
+	border-radius: theme(borderRadius.sm);
 }
 /* Remove outline for mouse users */
 :focus:not(:focus-visible) {

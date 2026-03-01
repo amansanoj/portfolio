@@ -76,18 +76,18 @@ import { SITE_TITLE, GITHUB_URL, LINKEDIN_URL } from '../consts';
 		transform: translateX(-50%) translateY(calc(-100% - 2em));
 		z-index: 9999;
 		padding: 0.6em 1.4em;
-		background: var(--accent);
-		color: #fff;
+		background: var(--c-accent);
+		color: #ffffff;
 		border-radius: 6px;
 		font-weight: 600;
 		font-size: 0.9rem;
 		text-decoration: none;
-		box-shadow: 0 4px 16px rgba(0,0,0,0.18);
+		box-shadow: 0 4px 12px rgba(0,0,0,0.10);
 		transition: transform 0.15s ease;
 	}
 	.skip-link:focus {
 		transform: translateX(-50%) translateY(0);
-		outline: 2px solid #fff;
+		outline: 2px solid #ffffff;
 		outline-offset: 2px;
 	}
 
@@ -100,8 +100,8 @@ import { SITE_TITLE, GITHUB_URL, LINKEDIN_URL } from '../consts';
 		padding: 0 2em;
 		width: 100%;
 		box-sizing: border-box;
-		background: rgb(var(--header-bg));
-		border-bottom: 1px solid rgb(var(--gray-light));
+	background: var(--c-bg);
+	border-bottom: 1px solid var(--c-border);
 		transition: background-color 0.2s;
 	}
 	nav {
@@ -119,7 +119,7 @@ import { SITE_TITLE, GITHUB_URL, LINKEDIN_URL } from '../consts';
 		font-size: 1.2rem;
 		font-weight: 700;
 		letter-spacing: -0.01em;
-		color: rgb(var(--black));
+		color: var(--c-text-strong);
 		text-decoration: none;
 		white-space: nowrap;
 		flex-shrink: 0;
@@ -150,7 +150,7 @@ import { SITE_TITLE, GITHUB_URL, LINKEDIN_URL } from '../consts';
 		justify-content: center;
 		width: 40px;
 		height: 40px;
-		color: rgb(var(--gray));
+		color: var(--c-text-muted);
 		text-decoration: none;
 		transition: color 0.15s;
 	}
@@ -163,7 +163,7 @@ import { SITE_TITLE, GITHUB_URL, LINKEDIN_URL } from '../consts';
 		left: 6px;
 		right: 6px;
 		height: 2px;
-		background: rgb(var(--black));
+		background: var(--c-text-strong);
 		transform: scaleX(0);
 		transform-origin: left;
 		transition: transform 0.22s ease;
@@ -171,7 +171,7 @@ import { SITE_TITLE, GITHUB_URL, LINKEDIN_URL } from '../consts';
 	.social-links a:hover,
 	#theme-toggle:hover,
 	#accessibility-btn:hover {
-		color: rgb(var(--black));
+		color: var(--c-text-strong);
 	}
 	.social-links a:hover::after,
 	#theme-toggle:hover::after,
@@ -207,7 +207,7 @@ import { SITE_TITLE, GITHUB_URL, LINKEDIN_URL } from '../consts';
 		justify-content: center;
 		width: 40px;
 		height: 40px;
-		color: rgb(var(--gray));
+		color: var(--c-text-muted);
 		background: none;
 		border: none;
 		cursor: pointer;
@@ -223,7 +223,7 @@ import { SITE_TITLE, GITHUB_URL, LINKEDIN_URL } from '../consts';
 		left: 6px;
 		right: 6px;
 		height: 2px;
-		background: rgb(var(--black));
+		background: var(--c-text-strong);
 		transform: scaleX(0);
 		transform-origin: left;
 		transition: transform 0.22s ease;
@@ -231,7 +231,7 @@ import { SITE_TITLE, GITHUB_URL, LINKEDIN_URL } from '../consts';
 	#theme-toggle-mobile:hover,
 	#hamburger:hover,
 	#accessibility-btn-mobile:hover {
-		color: rgb(var(--black));
+		color: var(--c-text-strong);
 	}
 	#theme-toggle-mobile:hover::after,
 	#hamburger:hover::after,
@@ -250,7 +250,7 @@ import { SITE_TITLE, GITHUB_URL, LINKEDIN_URL } from '../consts';
 		flex-direction: column;
 		gap: 0;
 		padding: 0.5em 0 0.75em;
-		border-top: 1px solid rgb(var(--gray-light));
+		border-top: 1px solid var(--c-border);
 		max-width: 900px;
 		margin: 0 auto;
 	}
@@ -265,15 +265,15 @@ import { SITE_TITLE, GITHUB_URL, LINKEDIN_URL } from '../consts';
 		padding: 0.65em 0.25em;
 		font-size: 1rem;
 		font-weight: 500;
-		color: rgb(var(--gray-dark));
+		color: var(--c-text);
 		text-decoration: none;
 		border-radius: 6px;
 		transition: background 0.15s, color 0.15s;
 	}
 	.mobile-nav-links a:hover,
 	.mobile-nav-links a[aria-current="page"] {
-		color: rgb(var(--black));
-		background: rgb(var(--gray-light));
+		color: var(--c-text-strong);
+		background: var(--c-surface);
 		padding-left: 0.6em;
 	}
 	.mobile-social-links {
@@ -281,7 +281,7 @@ import { SITE_TITLE, GITHUB_URL, LINKEDIN_URL } from '../consts';
 		align-items: center;
 		gap: 0.1em;
 		padding-top: 0.5em;
-		border-top: 1px solid rgb(var(--gray-light));
+		border-top: 1px solid var(--c-border);
 		margin-top: 0.5em;
 	}
 	.mobile-social-links a {
@@ -291,7 +291,7 @@ import { SITE_TITLE, GITHUB_URL, LINKEDIN_URL } from '../consts';
 		justify-content: center;
 		width: 40px;
 		height: 40px;
-		color: rgb(var(--gray));
+		color: var(--c-text-muted);
 		text-decoration: none;
 		transition: color 0.15s;
 	}
@@ -302,13 +302,13 @@ import { SITE_TITLE, GITHUB_URL, LINKEDIN_URL } from '../consts';
 		left: 6px;
 		right: 6px;
 		height: 2px;
-		background: rgb(var(--black));
+		background: var(--c-text-strong);
 		transform: scaleX(0);
 		transform-origin: left;
 		transition: transform 0.22s ease;
 	}
 	.mobile-social-links a:hover {
-		color: rgb(var(--black));
+		color: var(--c-text-strong);
 	}
 	.mobile-social-links a:hover::after {
 		transform: scaleX(1);

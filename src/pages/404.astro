@@ -23,19 +23,19 @@ import Footer from '../components/Footer.astro';
 				font-size: 6rem;
 				font-weight: 700;
 				line-height: 1;
-				color: var(--accent);
+				color: var(--c-accent);
 				margin: 0;
 			}
 			.message {
 				font-size: 1.1rem;
-				color: rgb(var(--gray));
+				color: var(--c-text-muted);
 				margin: 0.4em 0 1em;
 			}
 			.home-link {
 				display: inline-block;
 				padding: 0.5em 1.4em;
-				background: var(--accent);
-				color: #fff;
+				background: var(--c-accent);
+				color: #ffffff;
 				text-decoration: none;
 				border-radius: 6px;
 				font-size: 0.95rem;
@@ -43,7 +43,7 @@ import Footer from '../components/Footer.astro';
 				transition: background 0.15s;
 				margin-bottom: 2.4em;
 			}
-			.home-link:hover { background: var(--accent-dark); }
+			.home-link:hover { background: var(--c-accent-dark); }
 
 			/* ── Arcade section ─────────────────── */
 			.arcade-section {
@@ -60,11 +60,11 @@ import Footer from '../components/Footer.astro';
 				width: 100%;
 			}
 			.arcade-card {
-				background: rgb(var(--bg));
+				background: var(--c-bg);
 				border-radius: 10px;
-				border: 1.5px solid rgb(var(--border));
+				border: 1.5px solid var(--c-border);
 				overflow: hidden;
-				box-shadow: var(--box-shadow);
+				box-shadow: 0 1px 3px rgba(0,0,0,0.08);
 				width: 100%;
 				max-width: 600px;
 			}
@@ -76,20 +76,20 @@ import Footer from '../components/Footer.astro';
 				justify-content: space-between;
 				align-items: center;
 				padding: 0.45em 1em;
-				border-bottom: 1px solid rgb(var(--border));
+				border-bottom: 1px solid var(--c-border);
 			}
 			.card-title {
-				font-family: monospace;
+				font-family: 'JetBrains Mono', monospace;
 				font-size: clamp(0.75rem, 3vw, 0.82rem);
 				font-weight: 700;
 				letter-spacing: 0.12em;
-				color: rgb(var(--gray));
+				color: var(--c-text-muted);
 				text-transform: uppercase;
 			}
 			.card-controls {
-				font-family: monospace;
+				font-family: 'JetBrains Mono', monospace;
 				font-size: clamp(0.65rem, 2.5vw, 0.72rem);
-				color: rgb(var(--gray));
+				color: var(--c-text-muted);
 				letter-spacing: 0.03em;
 				opacity: 0.7;
 			}
@@ -115,29 +115,29 @@ import Footer from '../components/Footer.astro';
 				width: 100%;
 				height: 100%;
 				border: none;
-				background: rgba(var(--bg), 0.88);
+				background: color-mix(in srgb, var(--c-bg) 88%, transparent);
 				cursor: pointer;
 				display: flex;
 				flex-direction: column;
 				align-items: center;
 				justify-content: center;
 				gap: 0.35em;
-				font-family: monospace;
+				font-family: 'JetBrains Mono', monospace;
 				padding: 0;
 			}
 			.game-focus-btn .btn-title {
 				font-size: clamp(0.85rem, 4vw, 1rem);
 				font-weight: 700;
 				letter-spacing: 0.08em;
-				color: rgb(var(--gray-dark));
+				color: var(--c-text);
 			}
 			.game-focus-btn .btn-sub {
 				font-size: clamp(0.7rem, 3vw, 0.78rem);
-				color: rgb(var(--gray));
+					color: var(--c-text-muted);
 				letter-spacing: 0.04em;
 			}
 			.game-focus-btn:focus-visible {
-				outline: 2px solid var(--accent);
+					outline: 2px solid var(--c-accent);
 				outline-offset: -3px;
 			}
 
@@ -152,10 +152,10 @@ import Footer from '../components/Footer.astro';
 				display: flex;
 				justify-content: space-between;
 				padding: 0.45em 1em;
-				border-top: 1px solid rgb(var(--border));
-				font-family: monospace;
+				border-top: 1px solid var(--c-border);
+				font-family: 'JetBrains Mono', monospace;
 				font-size: clamp(0.76rem, 3vw, 0.84rem);
-				color: rgb(var(--gray));
+				color: var(--c-text-muted);
 				letter-spacing: 0.05em;
 			}
 
@@ -173,15 +173,15 @@ import Footer from '../components/Footer.astro';
 				bottom: 1.5em;
 				left: 50%;
 				transform: translateX(-50%) translateY(4em);
-				background: var(--accent);
-				color: #fff;
-				font-family: monospace;
+				background: var(--c-accent);
+				color: #ffffff;
+				font-family: 'JetBrains Mono', monospace;
 				font-size: 0.78rem;
 				font-weight: 700;
 				letter-spacing: 0.1em;
 				padding: 0.5em 1.2em;
 				border-radius: 6px;
-				box-shadow: 0 4px 16px rgba(0,0,0,0.18);
+				box-shadow: 0 4px 12px rgba(0,0,0,0.10);
 				transition: transform 0.3s ease, opacity 0.3s ease;
 				opacity: 0;
 				pointer-events: none;
@@ -321,14 +321,14 @@ import Footer from '../components/Footer.astro';
 			const C = (() => {
 				const s = getComputedStyle(document.documentElement);
 				return {
-					bg:     `rgb(${s.getPropertyValue('--bg').trim()})`,
-					ground: `rgba(${s.getPropertyValue('--gray').trim()},0.2)`,
+					bg:     s.getPropertyValue('--c-bg').trim(),
+					ground: s.getPropertyValue('--c-text-muted').trim() + '33',
 					player: '#156bb3',
 					eye:    '#93c5fd',
-					obs:    `rgb(${s.getPropertyValue('--gray-dark').trim()})`,
-					text:   `rgb(${s.getPropertyValue('--gray-dark').trim()})`,
-					sub:    `rgb(${s.getPropertyValue('--gray').trim()})`,
-					over:   `rgba(${s.getPropertyValue('--bg').trim()},0.8)`,
+					obs:    s.getPropertyValue('--c-text').trim(),
+					text:   s.getPropertyValue('--c-text').trim(),
+					sub:    s.getPropertyValue('--c-text-muted').trim(),
+					over:   s.getPropertyValue('--c-bg').trim() + 'CC',
 				};
 			})();
 
@@ -463,15 +463,15 @@ import Footer from '../components/Footer.astro';
 			const C = (() => {
 				const s = getComputedStyle(document.documentElement);
 				return {
-					bg:     `rgb(${s.getPropertyValue('--bg').trim()})`,
-					grid:   `rgba(${s.getPropertyValue('--gray').trim()},0.1)`,
-					border: `rgb(${s.getPropertyValue('--border').trim()})`,
+					bg:     s.getPropertyValue('--c-bg').trim(),
+					grid:   s.getPropertyValue('--c-text-muted').trim() + '1A',
+					border: s.getPropertyValue('--c-border').trim(),
 					player: '#156bb3',
 					head:   '#93c5fd',
 					food:   '#f97316',
-					text:   `rgb(${s.getPropertyValue('--gray-dark').trim()})`,
-					sub:    `rgb(${s.getPropertyValue('--gray').trim()})`,
-					over:   `rgba(${s.getPropertyValue('--bg').trim()},0.8)`,
+					text:   s.getPropertyValue('--c-text').trim(),
+					sub:    s.getPropertyValue('--c-text-muted').trim(),
+					over:   s.getPropertyValue('--c-bg').trim() + 'CC',
 				};
 			})();
 
@@ -679,10 +679,10 @@ import Footer from '../components/Footer.astro';
 			const C = (() => {
 				const s = getComputedStyle(document.documentElement);
 				return {
-					bg:   `rgb(${s.getPropertyValue('--bg').trim()})`,
-					text: `rgb(${s.getPropertyValue('--gray-dark').trim()})`,
-					sub:  `rgb(${s.getPropertyValue('--gray').trim()})`,
-					over: `rgba(${s.getPropertyValue('--bg').trim()},0.85)`,
+					bg:   s.getPropertyValue('--c-bg').trim(),
+					text: s.getPropertyValue('--c-text').trim(),
+					sub:  s.getPropertyValue('--c-text-muted').trim(),
+					over: s.getPropertyValue('--c-bg').trim() + 'D9',
 				};
 			})();
 

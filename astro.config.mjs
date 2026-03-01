@@ -3,6 +3,7 @@ import { defineConfig } from "astro/config";
 import mdx from "@astrojs/mdx";
 import sitemap from "@astrojs/sitemap";
 import rehypeExternalLinks from "rehype-external-links";
+import tailwindcss from "@tailwindcss/vite";
 
 import cloudflare from "@astrojs/cloudflare";
 
@@ -15,6 +16,9 @@ export default defineConfig({
 		],
 	},
 	integrations: [mdx(), sitemap()],
+	vite: {
+		plugins: [tailwindcss()],
+	},
 	adapter: cloudflare({
 		platformProxy: {
 			enabled: true,

@@ -56,30 +56,30 @@ const projects = (await getCollection('projects')).sort(
 			}
 			.title {
 				margin: 0;
-				color: rgb(var(--black));
+				color: var(--c-text-strong);
 				line-height: 1;
 			}
 			.date {
 				margin: 0;
-				color: rgb(var(--gray));
+				color: var(--c-text-muted);
 			}
 			ul li a:hover h4,
 			ul li a:hover .date {
-				color: rgb(var(--accent));
+				color: var(--c-accent);
 			}
 			ul a:hover img {
-				box-shadow: var(--box-shadow);
+				box-shadow: 0 1px 3px rgba(0,0,0,0.08);
 			}
 			.placeholder {
 				width: 100%;
 				aspect-ratio: 2/1;
-				background: rgb(var(--gray-light));
+				background: var(--c-surface);
 				border-radius: 12px;
 				display: flex;
 				align-items: center;
 				justify-content: center;
 				font-size: 3rem;
-				color: var(--accent);
+				color: var(--c-accent);
 				margin-bottom: 0.5rem;
 			}
 			@media (max-width: 720px) {

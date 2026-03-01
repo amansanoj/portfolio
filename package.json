@@ -13,6 +13,9 @@
 		"typescript": "5.9.3"
 	},
 	"devDependencies": {
+		"@amansanoj/brand": "^1.0.1",
+		"@tailwindcss/vite": "^4.2.1",
+		"tailwindcss": "^4.2.1",
 		"wrangler": "4.59.1"
 	},
 	"private": true,
