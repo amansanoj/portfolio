@@ -32,15 +32,6 @@ const { title, description, period, tags, heroImage, live, github } = Astro.prop
 				gap: 0.6em;
 				margin-bottom: 0.5em;
 			}
-			.tag {
-				background: var(--c-surface);
-				color: var(--c-text);
-				padding: 0.35em 0.85em;
-				border-radius: 999px;
-				font-size: 0.88em;
-				font-weight: 500;
-				line-height: 1.7;
-			}
 			.hero-links {
 				display: flex;
 				justify-content: center;
@@ -53,7 +44,6 @@ const { title, description, period, tags, heroImage, live, github } = Astro.prop
 				align-items: center;
 				gap: 0.35em;
 				font-size: 0.88em;
-				font-weight: 600;
 				padding: 0.4em 1em;
 				border-radius: 6px;
 				text-decoration: none;
@@ -62,10 +52,9 @@ const { title, description, period, tags, heroImage, live, github } = Astro.prop
 			.hero-link.primary { background: var(--c-accent); color: #ffffff; }
 			.hero-link.primary:hover { background: var(--c-accent-dark); }
 			.hero-link.secondary { border: 1.5px solid var(--c-border); color: var(--c-text); }
-			.hero-link.secondary:hover { border-color: var(--c-accent); color: var(--c-accent); }
+			.hero-link.secondary:hover { border-color: var(--c-warm); color: var(--c-warm); }
 			.prose :global(h2) {
 				font-size: 1.15em;
-				font-weight: 700;
 				text-transform: uppercase;
 				letter-spacing: 0.06em;
 				color: var(--c-text-muted);

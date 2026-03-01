@@ -61,6 +61,7 @@ h6 {
 	margin: 0 0 0.5rem 0;
 	color: var(--c-text-strong);
 	line-height: 1.2;
+	font-weight: 400;
 }
 h1 {
 	font-size: 3.052em;
@@ -79,14 +80,14 @@ h5 {
 }
 strong,
 b {
-	font-weight: 700;
+	font-weight: 400;
 }
 a {
 	color: var(--c-accent);
 	text-decoration: none;
 }
 a:hover {
-	color: var(--c-accent);
+	color: var(--c-warm);
 }
 
 /* Bottom-to-top fill for prose/body content links only */
@@ -110,7 +111,6 @@ a:hover {
 }
 .back-link {
 	font-size: 0.88em;
-	font-weight: 600;
 }
 .prose a:hover,
 .exp-company a:hover,
@@ -119,7 +119,9 @@ a:hover {
 .view-all:hover,
 .back-link:hover {
 	background-size: 100% 100%;
-	color: var(--c-accent-dark);
+	background-image: linear-gradient(to top, color-mix(in srgb, var(--c-warm) 18%, transparent), color-mix(in srgb, var(--c-warm) 18%, transparent));
+	border-bottom-color: var(--c-warm);
+	color: var(--c-warm-dark);
 }
 p {
 	margin-bottom: 1em;
@@ -213,6 +215,84 @@ hr {
 		font-size: 16px;
 	}
 	.post-title h1 { font-size: 1.7em; }
+}
+
+/* ── Section headings (index + about) ───────────────── */
+.section {
+	padding: 2.5em 0;
+	border-bottom: 1px solid var(--c-border);
+}
+.section:last-child { border-bottom: none; }
+.section h2 {
+	font-size: 1.3em;
+	text-transform: uppercase;
+	letter-spacing: 0.06em;
+	color: var(--c-warm);
+	margin: 0 0 1.2em;
+}
+
+/* ── Buttons ─────────────────────────────────────────── */
+.btn {
+	display: inline-block;
+	padding: 0.55em 1.3em;
+	border-radius: 6px;
+	font-size: 0.9em;
+	text-decoration: none;
+	transition: opacity 0.15s;
+}
+.btn:hover { opacity: 0.8; }
+.btn.primary {
+	background: var(--c-accent);
+	color: #ffffff;
+}
+.btn.secondary {
+	border: 2px solid var(--c-accent);
+	color: var(--c-accent);
+}
+
+/* ── View-all link extras ────────────────────────────── */
+.view-all {
+	font-size: 0.9em;
+}
+
+/* ── Chip / tag pill ─────────────────────────────────── */
+.chip,
+.skill-tag,
+.tag {
+	background: var(--c-surface);
+	color: var(--c-text);
+	padding: 0.35em 0.85em;
+	border-radius: 999px;
+	font-size: 0.88em;
+	line-height: 1.7;
+}
+
+/* ── Post / Project index grid ───────────────────────── */
+.post-grid {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 2rem;
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+}
+.post-grid li { width: calc(50% - 1rem); }
+.post-grid li * { text-decoration: none; transition: 0.2s ease; }
+.post-grid li:first-child { width: 100%; margin-bottom: 1rem; text-align: center; }
+.post-grid li:first-child img { width: 100%; }
+.post-grid li:first-child .title { font-size: 2.369rem; }
+.post-grid li img { margin-bottom: 0.5rem; border-radius: 12px; }
+.post-grid li a { display: block; }
+.post-grid .title { margin: 0; color: var(--c-text-strong); line-height: 1; }
+.post-grid .date { margin: 0; color: var(--c-text-muted); }
+.post-grid li a:hover h4,
+.post-grid li a:hover .date { color: var(--c-warm); }
+.post-grid a:hover img { box-shadow: 0 1px 3px rgba(0,0,0,0.08); }
+@media (max-width: 720px) {
+	.post-grid { gap: 0.5em; }
+	.post-grid li { width: 100%; text-align: center; }
+	.post-grid li:first-child { margin-bottom: 0; }
+	.post-grid li:first-child .title { font-size: 1.563em; }
 }
 
 /* Focus-visible outline for keyboard navigation */
