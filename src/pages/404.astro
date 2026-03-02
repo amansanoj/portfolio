@@ -8,7 +8,7 @@ import Footer from '../components/Footer.astro';
 	<head>
 		<BaseHead title="404 - Aman Sanoj" description="This page doesn't exist." noindex image="/og-home.png" />
 		<style>
-			/* canvas — touch-action / user-select can't be Tailwind utilities */
+			/* canvas - touch-action / user-select can't be Tailwind utilities */
 			#runner-canvas,
 			#snake-canvas,
 			#breakout-canvas {
@@ -53,7 +53,7 @@ import Footer from '../components/Footer.astro';
 				outline-offset: -3px;
 			}
 
-			/* keyboard vs touch hints — pointer media query */
+			/* keyboard vs touch hints - pointer media query */
 			.ctrl-kbd  { display: inline; }
 			.ctrl-touch { display: none; }
 			@media (pointer: coarse) {
@@ -67,7 +67,7 @@ import Footer from '../components/Footer.astro';
 				.card-hud { padding: 0.5em 0.75em; }
 			}
 
-			/* god mode toast — JS-toggled .show state must stay in CSS */
+			/* god mode toast - JS-toggled .show state must stay in CSS */
 			#god-toast {
 				position: fixed;
 				bottom: 1.5em;
@@ -110,8 +110,8 @@ import Footer from '../components/Footer.astro';
 						<canvas id="runner-canvas"></canvas>
 						<button class="game-focus-btn" id="runner-focus-btn" aria-label="Play DASH">
 							<span class="btn-title">PRESS TO PLAY</span>
-							<span class="btn-sub ctrl-kbd">SPACE — jump</span>
-							<span class="btn-sub ctrl-touch">TAP — jump</span>
+							<span class="btn-sub ctrl-kbd">SPACE - jump</span>
+							<span class="btn-sub ctrl-touch">TAP - jump</span>
 						</button>
 					</div>
 						<div class="card-hud flex justify-between px-4 py-[0.45em] border-t border-[var(--c-border)] font-mono text-[clamp(0.76rem,3vw,0.84rem)] text-[var(--c-text-muted)] tracking-[0.05em]">
@@ -128,8 +128,8 @@ import Footer from '../components/Footer.astro';
 						<canvas id="snake-canvas"></canvas>
 						<button class="game-focus-btn" id="snake-focus-btn" aria-label="Play SNAKE">
 							<span class="btn-title">PRESS TO PLAY</span>
-							<span class="btn-sub ctrl-kbd">ARROWS / WASD — move</span>
-							<span class="btn-sub ctrl-touch">SWIPE — move</span>
+							<span class="btn-sub ctrl-kbd">ARROWS / WASD - move</span>
+							<span class="btn-sub ctrl-touch">SWIPE - move</span>
 						</button>
 					</div>
 						<div class="card-hud flex justify-between px-4 py-[0.45em] border-t border-[var(--c-border)] font-mono text-[clamp(0.76rem,3vw,0.84rem)] text-[var(--c-text-muted)] tracking-[0.05em]">
@@ -146,8 +146,8 @@ import Footer from '../components/Footer.astro';
 					<canvas id="breakout-canvas"></canvas>
 					<button class="game-focus-btn" id="breakout-focus-btn" aria-label="Play BREAKOUT">
 						<span class="btn-title">PRESS TO PLAY</span>
-						<span class="btn-sub ctrl-kbd">MOUSE / ARROWS — paddle</span>
-						<span class="btn-sub ctrl-touch">DRAG — paddle</span>
+						<span class="btn-sub ctrl-kbd">MOUSE / ARROWS - paddle</span>
+						<span class="btn-sub ctrl-touch">DRAG - paddle</span>
 					</button>
 				</div>
 					<div class="card-hud flex justify-between px-4 py-[0.45em] border-t border-[var(--c-border)] font-mono text-[clamp(0.76rem,3vw,0.84rem)] text-[var(--c-text-muted)] tracking-[0.05em]">
@@ -186,7 +186,7 @@ import Footer from '../components/Footer.astro';
 			}
 		});
 		// ════════════════════════════════════════════════════════
-		//  GAME 1 — DASH (endless runner)
+		//  GAME 1 - DASH (endless runner)
 		// ════════════════════════════════════════════════════════
 		(() => {
 			const canvas = document.getElementById('runner-canvas') as HTMLCanvasElement;
@@ -344,7 +344,7 @@ import Footer from '../components/Footer.astro';
 		})();
 
 		// ════════════════════════════════════════════════════════
-		//  GAME 2 — SNAKE
+		//  GAME 2 - SNAKE
 		// ════════════════════════════════════════════════════════
 		(() => {
 			const canvas = document.getElementById('snake-canvas') as HTMLCanvasElement;
@@ -352,7 +352,7 @@ import Footer from '../components/Footer.astro';
 			const elScore = document.getElementById('snake-score')!;
 			const elBest  = document.getElementById('snake-best')!;
 
-			// Fixed grid dimensions — CELL is computed from container width so the
+			// Fixed grid dimensions - CELL is computed from container width so the
 			// canvas always fills available space and font sizes scale like the runner.
 			const S_COLS = 25, S_ROWS = 12;
 			let CELL = 24, COLS = S_COLS, ROWS = S_ROWS;
@@ -467,7 +467,7 @@ import Footer from '../components/Footer.astro';
 					if (state !== 'running') return;
 				if (d !== OPP[dir]) nextDir = d;
 			});
-			// Mouse click to start (desktop only — touch uses swipe handler below)
+			// Mouse click to start (desktop only - touch uses swipe handler below)
 				canvas.addEventListener('pointerdown', e => { if (e.pointerType === 'touch') return; if (_gameFocus !== 'snake') return; if (state !== 'running') restart(state === 'won'); });
 
 				// Touch swipe: tap = start/restart, swipe = change direction
@@ -514,7 +514,7 @@ import Footer from '../components/Footer.astro';
 				ctx.arc(food.x*CELL+CELL/2, food.y*CELL+CELL/2, CELL/2-1.5, 0, Math.PI*2);
 				ctx.fill();
 
-				// Snake — gradient over first 5 segments (head→4 behind), rest stays darkest
+				// Snake - gradient over first 5 segments (head→4 behind), rest stays darkest
 				const sn = snake.length;
 				for (let i=sn-1;i>=0;i--) {
 					const s = snake[i];
@@ -532,14 +532,14 @@ import Footer from '../components/Footer.astro';
 				elScore.textContent = `SCORE ${String(score).padStart(5,'0')}`;
 				elBest.textContent  = `BEST  ${String(highScore).padStart(5,'0')}`;
 
-				// Game over overlay — handled by button
+				// Game over overlay - handled by button
 			}
 
 			draw(); // initial render
 		})();
 
 		// ════════════════════════════════════════════════════════
-		//  GAME 3 — BREAKOUT
+		//  GAME 3 - BREAKOUT
 		// ════════════════════════════════════════════════════════
 		(() => {
 			const canvas = document.getElementById('breakout-canvas') as HTMLCanvasElement;
@@ -682,7 +682,7 @@ import Footer from '../components/Footer.astro';
 					if (bx + BALL_R > W)  { bx = W - BALL_R; vx = -Math.abs(vx); }
 					if (by - BALL_R < 0)  { by = BALL_R;      vy =  Math.abs(vy); }
 
-					// Paddle bounce — spin based on contact point
+					// Paddle bounce - spin based on contact point
 					const pdL = pdx - PADDLE_W/2, pdR = pdx + PADDLE_W/2;
 					if (vy > 0 && by + BALL_R >= PADDLE_Y && by - BALL_R <= PADDLE_Y + PADDLE_H && bx >= pdL && bx <= pdR) {
 						const hit = (bx - pdx) / (PADDLE_W/2);

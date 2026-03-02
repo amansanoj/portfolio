@@ -133,7 +133,7 @@ const languages = [
 			<section class="bio-section pt-[4em] pb-[2.5em] border-b border-[var(--c-border)]">
 				<h1 class="text-5xl">About Me</h1>
 				<p class="text-[var(--c-text-muted)] max-w-[560px]">
-					Hey, I'm Aman — a developer and student who enjoys building things for the web.
+					Hey, I'm Aman - a developer and student who enjoys building things for the web.
 					I'm currently studying and working on personal projects that keep me learning.
 				</p>
 				<p class="text-[var(--c-text-muted)] max-w-[560px]">
@@ -141,10 +141,10 @@ const languages = [
 					When I'm not coding, I write about what I'm learning on my blog.
 				</p>
 				<div class="flex flex-wrap gap-4 mt-6">
-					<a href={GITHUB_URL} target="_blank" rel="noopener" class="flex items-center gap-[0.35em] text-[0.9em]"><i class="ph-fill ph-github-logo text-[1.1rem]"></i> GitHub</a>
-					<a href={LINKEDIN_URL} target="_blank" rel="noopener" class="flex items-center gap-[0.35em] text-[0.9em]"><i class="ph-fill ph-linkedin-logo text-[1.1rem]"></i> LinkedIn</a>
-					<a href={`mailto:${EMAIL}`} class="flex items-center gap-[0.35em] text-[0.9em]"><i class="ph-fill ph-envelope-simple text-[1.1rem]"></i> Email</a>
-					<a href={RESUME_URL} download class="flex items-center gap-[0.35em] text-[0.9em]"><i class="ph-fill ph-file-arrow-down text-[1.1rem]"></i> Resume</a>
+					<a href={GITHUB_URL} target="_blank" rel="noopener" class="no-underline flex items-center gap-[0.35em] text-[0.9em] text-[var(--c-text-muted)] hover:text-[var(--c-text)] transition-colors duration-150"><i class="ph-fill ph-github-logo text-[1.1rem]"></i> GitHub</a>
+					<a href={LINKEDIN_URL} target="_blank" rel="noopener" class="no-underline flex items-center gap-[0.35em] text-[0.9em] text-[var(--c-text-muted)] hover:text-[var(--c-text)] transition-colors duration-150"><i class="ph-fill ph-linkedin-logo text-[1.1rem]"></i> LinkedIn</a>
+					<a href={`mailto:${EMAIL}`} class="no-underline flex items-center gap-[0.35em] text-[0.9em] text-[var(--c-text-muted)] hover:text-[var(--c-text)] transition-colors duration-150"><i class="ph-fill ph-envelope-simple text-[1.1rem]"></i> Email</a>
+					<a href={RESUME_URL} download class="no-underline flex items-center gap-[0.35em] text-[0.9em] text-[var(--c-text-muted)] hover:text-[var(--c-text)] transition-colors duration-150"><i class="ph-fill ph-file-arrow-down text-[1.1rem]"></i> Resume</a>
 				</div>
 			</section>
 
@@ -166,7 +166,7 @@ const languages = [
 								<div>
 									<strong>{e.role}</strong>
 									<span class="exp-company">
-										&nbsp;—&nbsp;
+										&nbsp;-&nbsp;
 										{e.url && <a href={e.url} target="_blank" rel="noopener">{e.company} <i class="ph-fill ph-arrow-up-right"></i></a>}
 										{!e.url && e.company}
 									</span>
@@ -269,7 +269,7 @@ const languages = [
 </html>
 
 <style>
-	/* max-width responsive overrides — Tailwind is mobile-first */
+	/* max-width responsive overrides - Tailwind is mobile-first */
 	@media (max-width: 600px) {
 		main { padding: 1.5em 1em 3em; }
 		.bio-section { padding-top: 2.5em; padding-bottom: 2em; }

@@ -10,7 +10,7 @@ const posts = (await getCollection('blog'))
 	.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
 	.slice(0, 3);
 
-// ── nothing to configure here — see about.astro for profile data ──────────
+// ── nothing to configure here - see about.astro for profile data ──────────
 ---
 
 <!doctype html>
@@ -72,10 +72,10 @@ const posts = (await getCollection('blog'))
 </html>
 
 <style>
-	/* descendant hover — can't express as Tailwind utility */
+	/* descendant hover - can't express as Tailwind utility */
 	.post-entry:hover .post-title { color: var(--c-warm); }
 
-	/* max-width responsive — Tailwind is mobile-first so these must stay in CSS */
+	/* max-width responsive - Tailwind is mobile-first so these must stay in CSS */
 	@media (max-width: 600px) {
 		main { padding: 1.5em 1em 3em; }
 		.hero { padding-top: 2.5em; padding-bottom: 2em; }

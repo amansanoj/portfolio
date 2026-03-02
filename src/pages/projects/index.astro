@@ -4,15 +4,21 @@ import Header from '../../components/Header.astro';
 import Footer from '../../components/Footer.astro';
 import { getCollection } from 'astro:content';
 
+const MONTHS: Record<string, number> = { Jan:0, Feb:1, Mar:2, Apr:3, May:4, Jun:5, Jul:6, Aug:7, Sep:8, Oct:9, Nov:10, Dec:11 };
+function periodEnd(period: string): number {
+	const end = period.split('–').pop()!.trim();
+	const [mon, yr] = end.split(' ');
+	return new Date(parseInt(yr), MONTHS[mon]).getTime();
+}
 const projects = (await getCollection('projects')).sort(
-	(a, b) => a.data.title.localeCompare(b.data.title)
+	(a, b) => periodEnd(b.data.period) - periodEnd(a.data.period)
 );
 ---
 
 <!doctype html>
 <html lang="en">
 	<head>
-		<BaseHead title="Projects - Aman Sanoj" description="Things I've built — case studies and side projects." image="/og-home.png" />
+		<BaseHead title="Projects - Aman Sanoj" description="Things I've built - case studies and side projects." image="/og-home.png" />
 	</head>
 	<body>
 		<Header />
