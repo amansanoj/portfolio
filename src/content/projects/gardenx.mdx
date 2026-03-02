@@ -1,8 +1,8 @@
 ---
 title: GardenX
-description: Full-stack marketplace for a school farm that had grown from 2,500 kg to 100,000 kg of produce per year. Replaced 3–4 physical ledgers with a digital platform for ordering, payments, and inventory — processing 30,000+ AED in sales within 4 months.
+description: Full-stack marketplace for a school farm that had grown from 2,500 kg to 100,000 kg of produce per year. Replaced 3–4 physical ledgers with a digital platform for ordering, payments, and inventory - processing 30,000+ AED in sales within 4 months.
 period: Dec 2024 – Mar 2025
-tags: [Next.js, Supabase, Windsurf, AI]
+tags: [Sustainability, Next.js, Supabase, AI]
 heroImage: "/projects/gardenx.jpg"
 ---
 
@@ -10,7 +10,7 @@ import BarChart from '../../components/BarChart.astro';
 
 ## Overview
 
-My school had been running a student-operated farm for nearly a decade. What started as a small garden had grown into a serious agricultural operation — but the systems managing it hadn't kept up.
+My school had been running a student-operated farm for nearly a decade. What started as a small garden had grown into a serious agricultural operation - but the systems managing it hadn't kept up.
 
 My co-founder and I saw the gap, sat down with the school to understand their workflows, and built GardenX: a full-stack platform to replace manual processes with a clean, digital experience for everyone involved.
 
@@ -23,36 +23,40 @@ Produce volume had been doubling almost every year:
 	values: [2500, 4200, 6000, 10600, 15000, 20000, 50000, 100000]
 }} />
 
-By 2024, the school was managing all of this with **3–4 physical ledgers**. Tracking stock levels, recording transactions, generating reports, and organizing cash flow had become a logistical nightmare — and the volume was only going up.
+*Source: [Dubai school grows 100,000kg of fruits and vegetables in a year - Gulf News](https://gulfnews.com/uae/dubai-school-grows-100000kg-of-fruits-and-vegetables-in-a-year-1.500153182)*
+
+By 2024, the school was managing all of this with **3–4 physical ledgers**. Tracking stock levels, recording transactions, generating reports, and organizing cash flow had become a logistical nightmare - and the volume was only going up.
 
 ## The Solution
 
 We built a platform that connected every stakeholder in the process:
 
-- **Multi-role ordering** — parents, students, teachers, and local residents could all browse available produce and place orders from their phones.
-- **Two pickup counters** — orders were routed to one of two physical pickup points on campus to distribute load and reduce crowding.
-- **Flexible payments** — buyers could pay by card at checkout or settle on pickup, whichever worked for them.
-- **AI checkout recommendations** — an AI layer analyzed order patterns and surfaced relevant upsells at checkout, boosting average order value.
-- **POS mode** — when it became clear most people weren't placing orders in advance, we built a counter-facing POS mode so staff could take orders and process payments on the spot at dispersal.
-- **Admin dashboard** — school staff got real-time visibility into stock, pending orders, and transaction history — no ledger required.
+- **Multi-role ordering** - parents, students, teachers, and local residents could all browse available produce and place orders from their phones.
+- **Two pickup counters** - orders were routed to one of two physical pickup points on campus to distribute load and reduce crowding.
+- **Flexible payments** - buyers could pay by card at checkout or settle on pickup, whichever worked for them.
+- **AI checkout recommendations** - an AI layer analyzed order patterns and surfaced relevant upsells at checkout, boosting average order value.
+- **POS mode** - when it became clear most people weren't placing orders in advance, we built a counter-facing POS mode so staff could take orders and process payments on the spot at dispersal.
+- **Admin dashboard** - school staff got real-time visibility into stock, pending orders, and transaction history - no ledger required.
 
 ## Impact
 
-Processed **30,000+ AED** in produce sales across **4 months** — one of which was winter break and another exam season.
+Processed **30,000+ AED** in produce sales across **4 months** - one of which was winter break and another exam season.
 
 ## What I Learned
 
 More went wrong than I expected, and most of it wasn't technical.
 
-Getting parents and local residents to place orders in advance was harder than building the app. Most people just showed up at dispersal and wanted to buy on the spot — so we ended up building a POS mode for the counter staff to handle walk-up orders. That ended up being used more than the self-ordering flow.
+Getting parents and local residents to place orders in advance was harder than building the app. Most people just showed up at dispersal and wanted to buy on the spot - so we ended up building a POS mode for the counter staff to handle walk-up orders. That ended up being used more than the self-ordering flow.
 
 A few other things:
 
 - The AI recommendations only felt useful because we put them at checkout, when someone already had buying intent. Anywhere else it would've just been annoying.
-- Reporting ended up being more important than the ordering flow. The school needed to know what was paid by card, what was paid on pickup, and what was still pending — that's what replaced the ledgers day-to-day.
+- Reporting ended up being more important than the ordering flow. The school needed to know what was paid by card, what was paid on pickup, and what was still pending - that's what replaced the ledgers day-to-day.
 - We cut a bunch of features mid-build (subscription boxes, delivery routing, a leaderboard). Probably the right call but at the time it was painful.
 - Pickup counters got chaotic during dispersal. Two locations helped but we were basically doing crowd management by the end.
 
 ## What's Next
 
-The school is still using the platform. The infrastructure is stable but there's room to grow — better reporting for the school, a public storefront, and potentially expanding the model to other schools with similar programs.
+The school is still using the platform. The infrastructure is stable but there's room to grow - better reporting for the school, a public storefront, and potentially expanding the model to other schools with similar programs.
+
+
