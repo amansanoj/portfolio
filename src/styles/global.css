@@ -1,6 +1,6 @@
 /*
- * Design tokens via @amansanoj/brand — imported through tailwind.config.ts.
- * All colors, fonts, spacing, shadows reference theme() — no hardcoded values.
+ * Design tokens via @amansanoj/brand - imported through tailwind.config.ts.
+ * All colors, fonts, spacing, shadows reference theme() - no hardcoded values.
  */
 @import "tailwindcss";
 @config "../../tailwind.config.ts";
@@ -9,7 +9,7 @@
 :root {
 	--c-accent:       theme(colors.primary.DEFAULT);
 	--c-accent-dark:  theme(colors.primary.dark);
-	--c-warm:         theme(colors.accent.DEFAULT);
+	--c-warm:         theme(colors.accent.dark);
 	--c-warm-dark:    theme(colors.accent.dark);
 	--c-text:         theme(colors.neutral.900);
 	--c-text-muted:   theme(colors.neutral.600);
@@ -20,6 +20,8 @@
 }
 
 [data-theme="dark"] {
+	--c-accent:       theme(colors.primary.light);
+	--c-warm:         theme(colors.accent.DEFAULT);
 	--c-text:         theme(colors.neutral.50);
 	--c-text-muted:   theme(colors.neutral.400);
 	--c-text-strong:  theme(colors.neutral.50);
@@ -43,7 +45,7 @@ body {
 	color: var(--c-text);
 	font-size: 20px;
 	line-height: 1.7;
-	transition: background-color 0.2s, color 0.2s;
+	transition: background-color theme(transitionDuration.normal), color theme(transitionDuration.normal);
 }
 main {
 	width: 100%;
@@ -92,10 +94,27 @@ a:hover {
 	background-repeat: no-repeat;
 	border-bottom: 1px solid var(--c-accent);
 	padding: 1px 3px;
-	transition: background-size 0.22s ease, color 0.15s;
+	transition: background-size theme(transitionDuration.normal) ease, color theme(transitionDuration.fast);
 }
 .back-link {
 	font-size: 0.88em;
+}
+/* Arrow icons on prose links via Phosphor Fill pseudo-elements */
+.prose a:not([target="_blank"])::after {
+	font-family: "Phosphor-Fill" !important;
+	content: "\e06c";
+	font-size: 0.8em;
+	margin-left: 0.2em;
+	vertical-align: middle;
+	line-height: 1;
+}
+.prose a[target="_blank"]::after {
+	font-family: "Phosphor-Fill" !important;
+	content: "\e092";
+	font-size: 0.8em;
+	margin-left: 0.2em;
+	vertical-align: middle;
+	line-height: 1;
 }
 .prose a:hover,
 .exp-company a:hover,
@@ -220,7 +239,7 @@ hr {
 	border-radius: 6px;
 	font-size: 0.9em;
 	text-decoration: none;
-	transition: opacity 0.15s;
+	transition: opacity theme(transitionDuration.fast);
 }
 .btn:hover { opacity: 0.8; }
 .btn.primary {
@@ -259,7 +278,7 @@ hr {
 	padding: 0;
 }
 .post-grid li { width: calc(50% - 1rem); }
-.post-grid li * { text-decoration: none; transition: 0.2s ease; }
+.post-grid li * { text-decoration: none; transition: theme(transitionDuration.normal) ease; }
 .post-grid li:first-child { width: 100%; margin-bottom: 1rem; text-align: center; }
 .post-grid li:first-child img { width: 100%; }
 .post-grid li:first-child .title { font-size: 2.369rem; }

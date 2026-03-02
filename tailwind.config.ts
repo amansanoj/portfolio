@@ -3,7 +3,7 @@ import type { Config } from 'tailwindcss'
 
 // Extend the brand config with project-specific content paths.
 // All design tokens (colors, fonts, spacing, shadows, radii, etc.)
-// come from @amansanoj/brand — do not hardcode values here.
+// come from @amansanoj/brand - do not hardcode values here.
 const config: Config = {
 	...brandConfig,
 	// Override dark mode to match the existing JS-driven [data-theme="dark"] toggle
