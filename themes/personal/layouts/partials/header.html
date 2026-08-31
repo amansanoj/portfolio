@@ -1,0 +1,15 @@
+<div style="display: flex; align-items: center; justify-content: space-between;">
+  <h1>{{ site.Title }}</h1>
+
+  <button
+    id="theme-toggle"
+    type="button"
+    aria-label="Toggle dark mode"
+    style="background: none; border: none; cursor: pointer; padding: 0; color: var(--muted-foreground); display: flex; align-items: center;"
+  >
+    <i id="icon-sun" class="ph-duotone ph-sun" style="display: none; font-size: 1.5rem;"></i>
+    <i id="icon-moon" class="ph-duotone ph-moon" style="display: none; font-size: 1.5rem;"></i>
+  </button>
+</div>
+
+{{ partial "menu.html" (dict "menuID" "main" "page" .) }}

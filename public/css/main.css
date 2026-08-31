@@ -1,0 +1,115 @@
+@import url('https://unpkg.com/@amansanoj/brand/globals.css');
+
+/* ── Base ──────────────────────────────────────────────────── */
+html {
+  color-scheme: light dark;
+}
+
+body {
+  color: var(--foreground);
+  background-color: var(--background);
+  font-family: var(--font-body);
+  line-height: 1.5;
+  margin: 1rem auto;
+  max-width: 48rem;
+  padding: 0 1rem;
+}
+
+/* ── Headings ──────────────────────────────────────────────── */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-display);
+  color: var(--foreground);
+}
+
+/* ── Header / Footer ───────────────────────────────────────── */
+header {
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 1rem;
+  padding-bottom: 1rem;
+}
+
+footer {
+  border-top: 1px solid var(--border);
+  margin-top: 1rem;
+  padding-top: 1rem;
+  color: var(--muted-foreground);
+  font-size: 0.875rem;
+}
+
+/* ── Links ─────────────────────────────────────────────────── */
+a {
+  color: var(--primary);
+  text-decoration: none;
+}
+
+a:hover {
+  color: var(--primary-dark);
+  text-decoration: underline;
+}
+
+.dark a:hover {
+  color: var(--primary-light);
+}
+
+/* ── Code ──────────────────────────────────────────────────── */
+code, pre {
+  font-family: var(--font-mono);
+  background-color: var(--muted);
+  color: var(--foreground);
+  border-radius: var(--radius);
+}
+
+code {
+  padding: 0.15em 0.4em;
+}
+
+pre {
+  padding: 1rem;
+  overflow-x: auto;
+}
+
+pre code {
+  padding: 0;
+  background: none;
+}
+
+/* ── Tags / Terms ──────────────────────────────────────────── */
+.terms a {
+  display: inline-block;
+  background-color: var(--secondary);
+  color: var(--secondary-foreground);
+  border-radius: var(--radius);
+  padding: 0.15em 0.6em;
+  margin-right: 0.4em;
+  font-size: 0.875rem;
+}
+
+.terms a:hover {
+  background-color: var(--accent);
+  color: var(--accent-foreground);
+  text-decoration: none;
+}
+
+/* ── Time / Meta ───────────────────────────────────────────── */
+time {
+  color: var(--muted-foreground);
+  font-size: 0.875rem;
+}
+
+/* ── Cards (post list items) ─────────────────────────────────*/
+.card {
+  background-color: var(--card);
+  color: var(--card-foreground);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1rem;
+  margin-bottom: 1rem;
+}
+
+/* ── Blockquote ────────────────────────────────────────────── */
+blockquote {
+  border-left: 3px solid var(--border);
+  padding-left: 1rem;
+  color: var(--muted-foreground);
+  margin-left: 0;
+}
