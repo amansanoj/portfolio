@@ -62,8 +62,10 @@ main() {
   fi
 
   # Build the project
+  # Note: Hugo v0.123.7 predates the "hugo build" subcommand (added later);
+  # the bare "hugo" command with flags is the build command on this version.
   echo "Building the project..."
-  hugo build --gc --minify
+  hugo --gc --minify
 }
 
 main "$@"
