@@ -1,0 +1,69 @@
+#!/usr/bin/env bash
+
+#------------------------------------------------------------------------------
+# @file
+# Builds the amansanoj/portfolio Hugo project hosted on a Cloudflare Worker.
+#------------------------------------------------------------------------------
+
+# Exit on error, undefined variables, or pipe failures
+set -euo pipefail
+
+# Define tool versions
+HUGO_VERSION=0.123.7
+
+# Set the build cache directory
+HUGO_CACHEDIR="${PWD}/.cache/hugo"
+
+# Perform cleanup
+cleanup() {
+  if [[ -n "${build_temp_dir:-}" && -d "${build_temp_dir}" ]]; then
+    rm -rf "${build_temp_dir}"
+  fi
+}
+
+# Register the cleanup trap
+trap cleanup EXIT SIGINT SIGTERM
+
+main() {
+  # Export the build cache directory
+  export HUGO_CACHEDIR
+
+  # Create a temporary directory for downloads
+  build_temp_dir=$(mktemp -d)
+
+  # Create a local tools directory
+  mkdir -p "${HOME}/.local"
+
+  # Install Hugo (extended edition, in case Sass/SCSS pipelines are added later)
+  echo "Installing Hugo ${HUGO_VERSION}..."
+  curl -sfL --output-dir "${build_temp_dir}" -O "https://github.com/gohugoio/hugo/releases/download/v${HUGO_VERSION}/hugo_extended_${HUGO_VERSION}_linux-amd64.tar.gz"
+  mkdir -p "${HOME}/.local/hugo"
+  tar -C "${HOME}/.local/hugo" -xf "${build_temp_dir}/hugo_extended_${HUGO_VERSION}_linux-amd64.tar.gz"
+  export PATH="${HOME}/.local/hugo:${PATH}"
+
+  # Log tool versions
+  echo "Logging tool versions..."
+  command -v hugo &> /dev/null && echo "Hugo: $(hugo version)" || echo "Hugo: not installed"
+
+  # Configure Git
+  echo "Configuring Git..."
+  git config --global core.quotepath false
+
+  # Fetch full Git history
+  if [[ $(git rev-parse --is-shallow-repository) == true ]]; then
+    echo "Fetching full Git history..."
+    git fetch --unshallow
+  fi
+
+  # Initialize Git submodules (only relevant if the theme is ever vendored as a submodule)
+  if [[ -f .gitmodules ]]; then
+    echo "Initializing Git submodules..."
+    git submodule update --init --recursive
+  fi
+
+  # Build the project
+  echo "Building the project..."
+  hugo build --gc --minify
+}
+
+main "$@"
