@@ -2,3 +2,8 @@ baseURL = 'https://amansanoj.com/'
 languageCode = 'en-us'
 title = 'Aman Sanoj'
 theme = 'personal'
+
+[markup]
+  [markup.goldmark]
+    [markup.goldmark.renderer]
+      unsafe = true
