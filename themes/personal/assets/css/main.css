@@ -9,46 +9,113 @@ body {
   color: var(--foreground);
   background-color: var(--background);
   font-family: var(--font-body);
-  line-height: 1.5;
-  margin: 1rem auto;
+  line-height: 1.6;
+  margin: 0 auto;
   max-width: 48rem;
-  padding: 0 1rem;
+  padding: 2rem 1rem;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
 }
 
 /* ── Headings ──────────────────────────────────────────────── */
 h1, h2, h3, h4, h5, h6 {
   font-family: var(--font-display);
   color: var(--foreground);
+  line-height: 1.2;
+  margin-top: 2rem;
+  margin-bottom: 1rem;
 }
+
+h1 { font-size: 2.5rem; }
+h2 { font-size: 2rem; }
+h3 { font-size: 1.75rem; }
+h4 { font-size: 1.5rem; }
+h5 { font-size: 1.25rem; }
+h6 { font-size: 1rem; }
 
 /* ── Header / Footer ───────────────────────────────────────── */
 header {
   border-bottom: 1px solid var(--border);
-  margin-bottom: 1rem;
-  padding-bottom: 1rem;
+  margin-bottom: 2rem;
+  padding-bottom: 1.5rem;
+}
+
+header h1 {
+  margin: 0;
+  font-size: 2rem;
 }
 
 footer {
   border-top: 1px solid var(--border);
-  margin-top: 1rem;
-  padding-top: 1rem;
+  margin-top: auto;
+  padding-top: 1.5rem;
   color: var(--muted-foreground);
   font-size: 0.875rem;
+  text-align: center;
 }
 
 /* ── Links ─────────────────────────────────────────────────── */
 a {
   color: var(--primary);
   text-decoration: none;
+  transition: color 0.2s ease;
 }
 
 a:hover {
   color: var(--primary-dark);
-  text-decoration: underline;
 }
 
 .dark a:hover {
   color: var(--primary-light);
+}
+
+/* ── Buttons ───────────────────────────────────────────────── */
+.btn {
+  display: inline-block;
+  background-color: var(--primary);
+  color: var(--primary-foreground);
+  padding: 0.75rem 1.5rem;
+  border-radius: var(--radius);
+  font-weight: 500;
+  text-decoration: none;
+  transition: all 0.2s ease;
+  border: none;
+  cursor: pointer;
+}
+
+.btn:hover {
+  background-color: var(--primary-dark);
+  color: var(--primary-foreground);
+  transform: translateY(-2px);
+}
+
+.dark .btn:hover {
+  background-color: var(--primary-light);
+}
+
+.btn-secondary {
+  background-color: var(--secondary);
+  color: var(--secondary-foreground);
+}
+
+.btn-secondary:hover {
+  background-color: var(--accent);
+  color: var(--accent-foreground);
+}
+
+/* ── Accent Elements (10% rule) ────────────────────────────── */
+.accent {
+  color: var(--accent);
+}
+
+.accent-bg {
+  background-color: var(--accent);
+  color: var(--accent-foreground);
+}
+
+.border-accent {
+  border-color: var(--accent);
 }
 
 /* ── Code ──────────────────────────────────────────────────── */
@@ -60,17 +127,20 @@ code, pre {
 }
 
 code {
-  padding: 0.15em 0.4em;
+  padding: 0.2em 0.4em;
+  font-size: 0.9em;
 }
 
 pre {
-  padding: 1rem;
+  padding: 1.5rem;
   overflow-x: auto;
+  margin: 1.5rem 0;
 }
 
 pre code {
   padding: 0;
   background: none;
+  font-size: 0.9em;
 }
 
 /* ── Tags / Terms ──────────────────────────────────────────── */
@@ -79,15 +149,19 @@ pre code {
   background-color: var(--secondary);
   color: var(--secondary-foreground);
   border-radius: var(--radius);
-  padding: 0.15em 0.6em;
-  margin-right: 0.4em;
+  padding: 0.25em 0.75em;
+  margin-right: 0.5em;
+  margin-bottom: 0.5em;
   font-size: 0.875rem;
+  font-weight: 500;
+  transition: all 0.2s ease;
 }
 
 .terms a:hover {
   background-color: var(--accent);
   color: var(--accent-foreground);
   text-decoration: none;
+  transform: translateY(-2px);
 }
 
 /* ── Time / Meta ───────────────────────────────────────────── */
@@ -102,14 +176,157 @@ time {
   color: var(--card-foreground);
   border: 1px solid var(--border);
   border-radius: var(--radius);
-  padding: 1rem;
-  margin-bottom: 1rem;
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+  transition: all 0.3s ease;
+}
+
+.card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-md);
+  border-color: var(--primary);
+}
+
+/* ── Images ────────────────────────────────────────────────── */
+img {
+  max-width: 100%;
+  height: auto;
+  border-radius: var(--radius);
+  margin: 1rem 0;
 }
 
 /* ── Blockquote ────────────────────────────────────────────── */
 blockquote {
-  border-left: 3px solid var(--border);
-  padding-left: 1rem;
+  border-left: 4px solid var(--primary);
+  padding-left: 1.5rem;
+  color: var(--foreground);
+  margin: 2rem 0;
+  font-style: italic;
+  background-color: var(--muted);
+  padding: 1rem 1.5rem;
+  border-radius: 0 var(--radius) var(--radius) 0;
+}
+
+/* ── Horizontal Rule ───────────────────────────────────────── */
+hr {
+  border: 0;
+  height: 1px;
+  background-color: var(--border);
+  margin: 2.5rem 0;
+}
+
+/* ── Lists ─────────────────────────────────────────────────── */
+ul, ol {
+  padding-left: 2rem;
+  margin: 1.5rem 0;
+}
+
+li {
+  margin: 0.5rem 0;
+}
+
+/* ── Tables ────────────────────────────────────────────────── */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1.5rem 0;
+}
+
+th, td {
+  padding: 0.75rem;
+  text-align: left;
+  border-bottom: 1px solid var(--border);
+}
+
+th {
+  background-color: var(--muted);
+  font-weight: 600;
+}
+
+tr:hover {
+  background-color: var(--muted);
+}
+
+/* ── Form Elements ─────────────────────────────────────────── */
+input, select, textarea {
+  width: 100%;
+  padding: 0.75rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background-color: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-body);
+  font-size: 1rem;
+}
+
+input:focus, select:focus, textarea:focus {
+  outline: 2px solid var(--primary-ring);
+  outline-offset: 2px;
+  border-color: var(--primary);
+}
+
+input::placeholder, textarea::placeholder {
   color: var(--muted-foreground);
-  margin-left: 0;
+}
+
+/* ── Layout Utilities ──────────────────────────────────────── */
+.container {
+  width: 100%;
+  max-width: 48rem;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+.grid {
+  display: grid;
+  gap: 1.5rem;
+}
+
+.grid-2 {
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+}
+
+.grid-3 {
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+}
+
+.flex {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.flex-center {
+  justify-content: center;
+  align-items: center;
+}
+
+.space-y-4 > * + * {
+  margin-top: 1rem;
+}
+
+.space-y-6 > * + * {
+  margin-top: 1.5rem;
+}
+
+/* ── Dark Mode Specific ────────────────────────────────────── */
+.dark {
+  /* Override specific elements for better dark mode contrast */
+}
+
+.dark header {
+  border-bottom-color: var(--border);
+}
+
+.dark footer {
+  border-top-color: var(--border);
+}
+
+.dark blockquote {
+  border-left-color: var(--primary);
+  background-color: var(--muted);
+}
+
+.dark hr {
+  background-color: var(--border);
 }

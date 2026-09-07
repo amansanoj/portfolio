@@ -17,5 +17,8 @@
   "bugs": {
     "url": "https://github.com/amansanoj/portfolio/issues"
   },
-  "homepage": "https://github.com/amansanoj/portfolio#readme"
+  "homepage": "https://github.com/amansanoj/portfolio#readme",
+  "dependencies": {
+    "@amansanoj/brand": "^3.0.8"
+  }
 }

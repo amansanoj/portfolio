@@ -8,9 +8,6 @@
 # Exit on error, undefined variables, or pipe failures
 set -euo pipefail
 
-# Define tool versions
-HUGO_VERSION=0.123.7
-
 # Set the build cache directory
 HUGO_CACHEDIR="${PWD}/.cache/hugo"
 
@@ -28,23 +25,6 @@ main() {
   # Export the build cache directory
   export HUGO_CACHEDIR
 
-  # Create a temporary directory for downloads
-  build_temp_dir=$(mktemp -d)
-
-  # Create a local tools directory
-  mkdir -p "${HOME}/.local"
-
-  # Install Hugo (extended edition, in case Sass/SCSS pipelines are added later)
-  echo "Installing Hugo ${HUGO_VERSION}..."
-  curl -sfL --output-dir "${build_temp_dir}" -O "https://github.com/gohugoio/hugo/releases/download/v${HUGO_VERSION}/hugo_extended_${HUGO_VERSION}_linux-amd64.tar.gz"
-  mkdir -p "${HOME}/.local/hugo"
-  tar -C "${HOME}/.local/hugo" -xf "${build_temp_dir}/hugo_extended_${HUGO_VERSION}_linux-amd64.tar.gz"
-  export PATH="${HOME}/.local/hugo:${PATH}"
-
-  # Log tool versions
-  echo "Logging tool versions..."
-  command -v hugo &> /dev/null && echo "Hugo: $(hugo version)" || echo "Hugo: not installed"
-
   # Configure Git
   echo "Configuring Git..."
   git config --global core.quotepath false
@@ -61,9 +41,11 @@ main() {
     git submodule update --init --recursive
   fi
 
+  # Log tool versions
+  echo "Logging tool versions..."
+  command -v hugo &> /dev/null && echo "Hugo: $(hugo version)" || echo "Hugo: not installed"
+
   # Build the project
-  # Note: Hugo v0.123.7 predates the "hugo build" subcommand (added later);
-  # the bare "hugo" command with flags is the build command on this version.
   echo "Building the project..."
   hugo --gc --minify
 }
