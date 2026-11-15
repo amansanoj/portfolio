@@ -1,13 +1,54 @@
-export function About() { return <article className="about-page">
-    <div className="blog-intro"><h1>About</h1></div>
-    <div className="post-body">
-    <p>I’m from Kerala and live in the UAE. I started programming at 12, initially with web development. Since then I’ve been working with Go, Swift, and C++ alongside JavaScript.</p>
-    <p>I’m studying for a Bachelor of Computer Science in Cyber Security at the University of Wollongong in Dubai. I write about my projects and technical work on my blog.</p>
-    <p>At school, I co-built GardenX for the farm’s produce sales and Falak Academy for student-led courses. Outside programming, I play chess and listen to music.</p>
-    <h2>Education</h2>
-    <div className="education-list">
-      <article><h3>University of Wollongong in Dubai</h3><p>Bachelor of Computer Science, Cyber Security</p><p className="education-period">September 2026 - 2029</p></article>
-      <article><h3>GEMS Our Own Indian School</h3><p>Senior Secondary (CBSE)</p><p>Physics, Chemistry, Mathematics, Computer Science, and English</p><p className="education-period">2024 - 2026</p></article>
+export function About() {
+  return <article className="about-page">
+    <header className="about-intro">
+      <p className="about-kicker">About</p>
+      <h1>I build software that connects to the physical world.</h1>
+      <p className="about-lead">I’m Aman, a Computer Science student in Dubai. I work across native apps, web services, and embedded systems, with most of my current projects sitting somewhere between software and hardware.</p>
+    </header>
+
+    <div className="about-content">
+      <section aria-labelledby="about-now">
+        <h2 id="about-now">Right Now</h2>
+        <div>
+          <p>I’m studying Cyber Security at the University of Wollongong in Dubai. Outside class, I’m working across Swift, Go, TypeScript, C++, and the ESP32 platform.</p>
+          <p>Recent projects include <a href="/projects/macro-pad/">Macro Pad</a>, a Bluetooth controller with a native macOS app; <a href="/projects/tether/">Tether</a>, a synchronized watch-party server; and <a href="/projects/neon-os/">NeonOS</a>, firmware that connects a Bluetooth light to Apple Home.</p>
+          <p>I also use the <a href="/blog/">blog</a> to document security issues, experiments, and the parts of a build that are worth explaining properly.</p>
+        </div>
+      </section>
+
+      <section aria-labelledby="about-background">
+        <h2 id="about-background">Background</h2>
+        <div>
+          <p>I’m from Kerala and grew up in the UAE. I started programming at 12 through web development, then moved into backend systems, native apps, and electronics as the projects became more ambitious.</p>
+          <p>At school, AbdulRahman Maniar and I built <a href="/projects/gardenx/">GardenX</a> to replace the farm’s paper-based sales records, and I built <a href="/projects/falak-academy/">Falak Academy</a> for student-led courses. They taught me to understand the actual workflow before deciding what the software should look like.</p>
+          <p>Away from a screen, I play chess and listen to music.</p>
+        </div>
+      </section>
+
+      <section aria-labelledby="about-education">
+        <h2 id="about-education">Education</h2>
+        <div className="education-list">
+          <article>
+            <p className="education-period"><time dateTime="2026-09">September 2026</time> - 2029</p>
+            <h3>University of Wollongong in Dubai</h3>
+            <p>Bachelor of Computer Science, Cyber Security</p>
+          </article>
+          <article>
+            <p className="education-period"><time dateTime="2024">2024</time> - 2026</p>
+            <h3>GEMS Our Own Indian School</h3>
+            <p>Senior Secondary (CBSE) - Physics, Chemistry, Mathematics, Computer Science, and English</p>
+          </article>
+        </div>
+      </section>
+
+      <section aria-labelledby="about-links">
+        <h2 id="about-links">Elsewhere</h2>
+        <div className="about-links">
+          <a href="https://github.com/amansanoj">GitHub</a>
+          <a href="https://www.linkedin.com/in/amansanoj">LinkedIn</a>
+          <a href="mailto:me@amansanoj.com">me@amansanoj.com</a>
+        </div>
+      </section>
     </div>
-    </div>
-  </article>; }
+  </article>;
+}

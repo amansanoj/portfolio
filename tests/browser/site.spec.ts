@@ -269,10 +269,10 @@ test('About navigation and homepage project thumbnails work at every layout size
   }
   await previews.first().getByRole('button').click();await expect(page.getByRole('dialog')).toBeVisible();await expect(page.getByRole('dialog').locator('img').first()).toHaveAttribute('src',/\/projects\/macro-pad\/cover\.png$/);await page.keyboard.press('Escape');
   await page.getByRole('navigation',{name:'Main navigation'}).getByRole('link',{name:'About',exact:true}).click();
-  await expect(page).toHaveURL(/\/about\/$/);await expect(page.locator('h1')).toHaveText('About');
+  await expect(page).toHaveURL(/\/about\/$/);await expect(page.locator('h1')).toHaveText('I build software that connects to the physical world.');
   await expect(page.getByRole('heading',{name:'University of Wollongong in Dubai'})).toBeVisible();
   await expect(page.locator('header a[href="/about/"]')).toHaveAttribute('aria-current','page');
   expect(await page.evaluate(()=>document.documentElement.scrollWidth>innerWidth)).toBe(false);
-  await page.reload();await expect(page.locator('h1')).toHaveText('About');
+  await page.reload();await expect(page.locator('h1')).toHaveText('I build software that connects to the physical world.');
  }
 });

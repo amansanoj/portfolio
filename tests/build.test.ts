@@ -72,14 +72,14 @@ test('homepage shows three thumbnail previews and About has its own page',async(
  expect(html).not.toContain('assets/projects/macro-pad.png');
  expect(html).not.toContain('id="about"');
  const about=await readFile('dist/about/index.html','utf8');
- expect(about).toContain('<h1>About</h1>');
+ expect(about).toContain('<h1>I build software that connects to the physical world.</h1>');
  expect(about).toContain('href="/about/" aria-current="page"');
  expect(selection).not.toContain('Other Projects');
  for(const name of ['Terminal Portfolio','NanoLink','UI Components','Cardputer Now Playing'])expect(selection).not.toContain(name);
  expect(selection).toContain('All Projects');
  expect(about).toContain('University of Wollongong in Dubai');
  expect(about).toContain('Bachelor of Computer Science, Cyber Security');
- expect(about).toContain('September 2026 - 2029');
+ expect(about).toContain('>September 2026</time> - 2029');
  expect(about).toContain('GEMS Our Own Indian School');
  const navigation=html.split('aria-label="Main navigation"')[1].split('</nav>')[0];
  expect(navigation.indexOf('>About<')).toBeLessThan(navigation.indexOf('>Projects<'));
