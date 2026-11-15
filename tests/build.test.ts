@@ -48,7 +48,7 @@ test('all projects have readable static pages, navigation, resources and sharing
   const html=await readFile(`dist${url}index.html`,'utf8');
   expect(html).toContain(`<h1>${project.title}</h1>`);
   expect(html).toContain('class="post-body project-body"');
-  expect(html).toContain(`<link rel="canonical" href="https://amansanoj.is-a.dev${url}">`);
+  expect(html).toContain(`<link rel="canonical" href="https://amansanoj.com${url}">`);
   expect(html).toContain('href="/projects/" aria-current="page"');
   for(const link of project.links)expect(html).toContain(link.url.replace(/&/g,'&amp;'));
   if(project.cover){
@@ -57,7 +57,7 @@ test('all projects have readable static pages, navigation, resources and sharing
    expect(thumbnail.height).toBe(project.dimensions!.thumbnailHeight);
    const og=await sharp(`dist${url}og.jpg`).metadata();
    expect([og.width,og.height]).toEqual([1200,630]);
-   expect(html).toContain(`https://amansanoj.is-a.dev${url}og.jpg`);
+   expect(html).toContain(`https://amansanoj.com${url}og.jpg`);
   }
  }
  expect(home).toContain('href="/projects/macro-pad/"');
@@ -139,13 +139,13 @@ test('every prerendered page links to existing local routes, images and anchors'
 test('all pages use the shared OG image unless they have a cover',async()=>{
  const {default:projects}=await import('../src/generated/projects.json');
  const pages=[...['','about/','blog/','projects/','404.html'].map(path=>({path,cover:false})),...posts.map(post=>({path:`blog/${post.slug}/`,cover:Boolean(post.cover)})),...projects.map(project=>({path:`projects/${project.slug}/`,cover:Boolean(project.cover)}))];
- const fallback='https://amansanoj.is-a.dev/assets/og/site.jpg';
+ const fallback='https://amansanoj.com/assets/og/site.jpg';
  const size=await sharp('dist/assets/og/site.jpg').metadata();
  expect([size.width,size.height]).toEqual([1200,630]);
  for(const page of pages){
   const file=page.path.endsWith('.html')?page.path:`${page.path}index.html`;
   const html=await readFile(`dist/${file}`,'utf8');
-  const expected=page.cover?`https://amansanoj.is-a.dev/${page.path}og.jpg`:fallback;
+  const expected=page.cover?`https://amansanoj.com/${page.path}og.jpg`:fallback;
   expect(html.match(/property="og:image"/g)?.length).toBe(1);
   expect(html).toContain(`<meta property="og:image" content="${expected}">`);
   expect(html).toContain(`<meta name="twitter:image" content="${expected}">`);
