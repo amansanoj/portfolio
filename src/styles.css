@@ -34,17 +34,8 @@ p { margin: 14px 0; color: var(--muted-foreground); }
 .intro .lead { font-size: 23px; color: var(--foreground); margin: 0 0 14px; }
 .intro>p { max-width: 650px; }
 .links { display: flex; flex-wrap: wrap; gap: 12px 24px; margin-top: 26px; font-size: 15px; }
-#projects, #about, #contact { border-top: 1px solid var(--border); padding: 42px 0; }
-.project-heading { display: flex; justify-content: space-between; align-items: baseline; gap: 16px; }
-.project-heading h3 a { text-decoration: none; }
-.project-heading h3 a:hover { text-decoration: underline; }
-.project-heading span { color: var(--muted-foreground); font-size: 13px; flex-shrink: 0; }
-.featured { padding-bottom: 30px; }
-.screenshot { display: block; margin-top: 24px; background: var(--muted); padding: 18px; border-radius: var(--radius); }
-.screenshot img { width: 100%; height: auto; display: block; }
-.project { border-top: 1px solid var(--border); padding: 25px 0 12px; }
-.project p, .featured p { font-size: 16px; }
-#about p, #contact p { font-size: 16px; }
+#projects, #contact { border-top: 1px solid var(--border); padding: 42px 0; }
+#contact p { font-size: 16px; }
 footer { display: flex; justify-content: space-between; gap: 20px; padding-top: 22px; padding-bottom: 30px; color: var(--muted-foreground); font-size: 12px; }
 @media (max-width: 550px) {
   header, main, footer { padding-left: 22px; padding-right: 22px; }
@@ -52,9 +43,7 @@ footer { display: flex; justify-content: space-between; gap: 20px; padding-top: 
   nav { gap: 16px; }
   .intro { padding-top: 35px; padding-bottom: 42px; }
   .intro .lead { font-size: 21px; }
-  .project-heading { flex-direction: column; gap: 5px; }
-  .screenshot { padding: 8px; }
-  #projects, #about, #contact { padding-top: 30px; padding-bottom: 30px; }
+  #projects, #contact { padding-top: 30px; padding-bottom: 30px; }
 }
 @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
 
@@ -70,7 +59,6 @@ footer { flex-wrap: wrap; align-items: center; }
 .intro h1, main h2 { color: var(--primary); }
 .links .icon, .theme-icon { color: var(--primary); }
 .links a:hover .icon, .home:hover, .theme-toggle:hover { color: var(--accent); }
-.screenshot:hover { outline: 2px solid var(--accent); outline-offset: 3px; }
 
 @media (prefers-reduced-motion: no-preference) {
   a, .icon { transition: color 160ms ease; }
@@ -195,7 +183,6 @@ body:has(:focus-visible) .bottom-blur, body:has(.lost-game[open]) .bottom-blur {
 .dark .post-body .rough-annotation { opacity: .6; }
 
 .image-view-trigger { display: block; border: 0; padding: 0; background: transparent; color: inherit; cursor: zoom-in; border-radius: var(--radius); max-width: 100%; }
-.image-view-trigger.screenshot { padding: 18px; background: var(--muted); width: 100%; }
 .image-view-trigger.is-cover { width: fit-content; max-width: 100%; margin: 0 auto 36px; }
 .image-view-trigger .post-cover { margin: 0; }
 .image-view-trigger:focus-visible, .image-viewer button:focus-visible, .viewer-viewport:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; }
@@ -209,7 +196,7 @@ body:has(:focus-visible) .bottom-blur, body:has(.lost-game[open]) .bottom-blur {
 .viewer-caption { font-size: 13px; margin: 12px 0 0; }
 html:has(.image-viewer[open]) { overflow: hidden; }
 body:has(.image-viewer[open]) .bottom-blur { opacity: 0; }
-@media (max-width: 550px) { .image-view-trigger.screenshot { padding: 8px; } .image-viewer { padding: 12px; } }
+@media (max-width: 550px) { .image-viewer { padding: 12px; } }
 
 .image-entrance { display: block; }
 

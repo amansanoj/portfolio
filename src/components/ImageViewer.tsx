@@ -23,8 +23,8 @@ export function SafeBlurFade({children}:{children:ReactNode}) {
   useEffect(()=>{if(matchMedia('(hover: hover) and (pointer: fine)').matches&&!matchMedia('(prefers-reduced-motion: reduce)').matches&&(ref.current?.getBoundingClientRect().top??0)>innerHeight+40)setEnabled(true);},[]);
   return <span ref={ref} className="image-entrance">{enabled&&!reduce?<BlurFade className="block" inView inViewMargin="40px" duration={.5} blur="4px" offset={4} direction="up">{children}</BlurFade>:children}</span>;
 }
-export function ViewableImage({screenshot=false,thumbnail=false,fullSrc,...props}:ImgHTMLAttributes<HTMLImageElement>&{screenshot?:boolean;thumbnail?:boolean;fullSrc?:string}) {
+export function ViewableImage({thumbnail=false,fullSrc,...props}:ImgHTMLAttributes<HTMLImageElement>&{thumbnail?:boolean;fullSrc?:string}) {
   const open=useContext(Context); const isCover=props.className?.split(' ').includes('post-cover');
   if(thumbnail)return <button className="image-view-trigger post-cover-link" type="button" aria-haspopup="dialog" aria-label={`Enlarge image: ${props.alt||'Image'}`} onClick={event=>open(fullSrc||String(props.src||''),props.alt||'',event.currentTarget)}><img {...props}/></button>;
-  return <SafeBlurFade><button className={`image-view-trigger${screenshot?' screenshot':''}${isCover?' is-cover':''}`} type="button" aria-haspopup="dialog" aria-label={`Enlarge image: ${props.alt||'Image'}`} onClick={e=>open(fullSrc||String(props.src||''),props.alt||'',e.currentTarget)}><Backlight><img {...props}/></Backlight></button></SafeBlurFade>;
+  return <SafeBlurFade><button className={`image-view-trigger${isCover?' is-cover':''}`} type="button" aria-haspopup="dialog" aria-label={`Enlarge image: ${props.alt||'Image'}`} onClick={e=>open(fullSrc||String(props.src||''),props.alt||'',e.currentTarget)}><Backlight><img {...props}/></Backlight></button></SafeBlurFade>;
 }

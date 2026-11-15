@@ -11,7 +11,7 @@ for(const path of ['/','/about/','/blog/','/projects/','/404.html',...projects.m
  let meta=`<title>${escape(title)}</title><meta name="description" content="${escape(description)}"><meta property="og:title" content="${escape(title)}"><meta property="og:description" content="${escape(description)}"><meta property="og:type" content="${post?'article':'website'}"><meta property="og:url" content="${origin}${path}">`;
  if(path==='/404.html')meta+='<meta name="robots" content="noindex">';else meta+=`<link rel="canonical" href="${origin}${path}">`;
  const image=entry?.cover?`${origin}${path}og.jpg`:`${origin}/assets/og/site.jpg`;
- const imageAlt=entry?.cover?`${entry.title} - cover image`:'Aman Sanoj. Software, electronics, and the work behind them. amansanoj.com';
+ const imageAlt=entry?.cover?`${entry.title} - cover image`:'Aman Sanoj. Software & Embedded Systems. amansanoj.com';
  meta+=`<meta property="og:image" content="${image}"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta property="og:image:type" content="image/jpeg"><meta property="og:image:alt" content="${escape(imageAlt)}"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:image" content="${image}"><meta name="twitter:image:alt" content="${escape(imageAlt)}">`;
  const html=template.replace('<!--page-meta-->',meta).replace('<div id="root"></div>',`<div id="root">${renderToString(<App path={path}/>)}</div>`);
  const target=path.endsWith('.html')?`dist${path}`:`dist${path}index.html`;

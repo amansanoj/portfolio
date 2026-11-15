@@ -12,8 +12,8 @@ const finePointer = matchMedia('(hover: hover) and (pointer: fine)');
 // parent so their movement never compounds.
 const motionSelector = [
   '.home', 'nav a', '.theme-toggle', 'main h1', 'main h2', 'main h3', 'main p',
-  '.links', '.about-links', '.project-heading', '.screenshot', 'main li',
-  '.project-directory-links', '.education-list h4', '.blog-intro > *',
+  '.links', '.about-links', 'main li',
+  '.project-directory-links', '.blog-intro > *',
   '.post-cover', '.post-body > *', 'footer > *'
 ].join(', ');
 // Keep one motion layer per content unit, including future Markdown elements.
