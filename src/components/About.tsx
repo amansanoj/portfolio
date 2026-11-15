@@ -19,7 +19,7 @@ export function About() {
       <section aria-labelledby="about-background">
         <h2 id="about-background">Background</h2>
         <div>
-          <p>I’m from Kerala and grew up in the UAE. I started programming at 12 through web development, then moved into backend systems, native apps, and electronics as the projects became more ambitious.</p>
+          <p>I’m from Kerala and now live in the UAE. I started programming at 12 through web development, then moved into backend systems, native apps, and electronics as the projects became more ambitious.</p>
           <p>At school, a classmate and I built <a href="/projects/gardenx/">GardenX</a> to replace the farm’s paper-based sales records, and I built <a href="/projects/falak-academy/">Falak Academy</a> for student-led courses. They taught me to understand the actual workflow before deciding what the software should look like.</p>
           <p>Away from a screen, I play chess and listen to music.</p>
         </div>
@@ -29,7 +29,7 @@ export function About() {
         <h2 id="about-education">Education</h2>
         <div className="education-list">
           <article>
-            <p className="education-period"><time dateTime="2026-09">September 2026</time> - 2029</p>
+            <p className="education-period"><time dateTime="2026-09">September</time> - 2029</p>
             <h3>University of Wollongong in Dubai</h3>
             <p>Bachelor of Computer Science, Cyber Security</p>
           </article>
