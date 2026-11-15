@@ -71,20 +71,30 @@ if ('IntersectionObserver' in window && finePointer.matches && !reducedMotion.ma
 
 // Separate CSS translate from entrance transforms. Measure the resting bounds
 // so moving an element never moves its own attraction point.
-const magnets = [...revealElements].map(element => ({ element, x: 0, y: 0, tx: 0, ty: 0 }));
+const magnets = [...revealElements].map(element => ({ element, x: 0, y: 0, vx: 0, vy: 0, tx: 0, ty: 0 }));
 let frame = 0;
 let lastTime = 0;
 const enabled = () => finePointer.matches && !reducedMotion.matches;
 function tick(time) {
-  const blend = 1 - Math.exp(-Math.min(time - lastTime || 16, 40) / 85);
+  const dt = Math.min((time - lastTime || 16) / 1000, 0.04);
+  const frequency = 18;
+  const decay = Math.exp(-frequency * dt);
   lastTime = time;
   let moving = false;
   for (const item of magnets) {
-    item.x += (item.tx - item.x) * blend;
-    item.y += (item.ty - item.y) * blend;
-    if (Math.abs(item.tx - item.x) + Math.abs(item.ty - item.y) < 0.03) {
+    // Exact critically damped spring: continuous velocity with no overshoot,
+    // independent of refresh rate, including when the cursor changes direction.
+    for (const axis of ['x', 'y']) {
+      const offset = item[axis] - item[`t${axis}`];
+      const velocity = item[`v${axis}`];
+      const impulse = velocity + frequency * offset;
+      item[axis] = item[`t${axis}`] + (offset + impulse * dt) * decay;
+      item[`v${axis}`] = (velocity - frequency * impulse * dt) * decay;
+    }
+    if (Math.abs(item.tx - item.x) + Math.abs(item.ty - item.y) < 0.005 && Math.abs(item.vx) + Math.abs(item.vy) < 0.05) {
       item.x = item.tx;
       item.y = item.ty;
+      item.vx = item.vy = 0;
     } else moving = true;
     item.element.style.translate = item.x || item.y ? `${item.x}px ${item.y}px` : '';
   }
@@ -106,7 +116,8 @@ on(document, 'pointermove', event => {
     const dx = event.clientX - (left + rect.width / 2);
     const dy = event.clientY - (top + rect.height / 2);
     const distance = Math.hypot(Math.max(0, Math.abs(dx) - rect.width / 2), Math.max(0, Math.abs(dy) - rect.height / 2));
-    const pull = Math.max(0, 1 - distance / 100);
+    const proximity = Math.max(0, 1 - distance / 120);
+    const pull = proximity * proximity * (3 - 2 * proximity);
     const focused = item.element.matches(':focus-within');
     const chrome = Boolean(item.element.closest('header, footer'));
     // Large text blocks should drift as little as a compact navigation link.
@@ -128,7 +139,7 @@ function resetMotion() {
   cancelAnimationFrame(frame);
   frame = 0;
   magnets.forEach(item => {
-    item.x = item.y = item.tx = item.ty = 0;
+    item.x = item.y = item.vx = item.vy = item.tx = item.ty = 0;
     item.element.style.translate = '';
   });
   if (reducedMotion.matches || !finePointer.matches) {
