@@ -16,6 +16,7 @@ export function DialogLens({src,alt}:{src:string;alt:string}) {
     if(event.pointerType!=='mouse')setTouch(true);
     setPosition({x:Math.max(0,Math.min(r.width,event.clientX-r.left)),y:Math.max(0,Math.min(r.height,event.clientY-r.top))});
   };
+  if(touch)return <img src={src} alt={alt}/>;
   return <div ref={surface} className="viewer-lens-surface" onPointerDown={event=>{if(event.pointerType!=='mouse'){event.currentTarget.setPointerCapture(event.pointerId);move(event);}}} onPointerMove={event=>{if(event.pointerType==='mouse'){setKeyboard(false);setMouseActive(true);move(event);}else if(event.currentTarget.hasPointerCapture(event.pointerId))move(event);}} onKeyDown={event=>{
     if(!event.key.startsWith('Arrow'))return;
     event.preventDefault();

@@ -97,19 +97,13 @@ test('bottom blur fades continuously toward the footer and reverses on scroll up
  await page.evaluate(()=>scrollTo({top:document.documentElement.scrollHeight,behavior:'instant'}));await page.waitForTimeout(80);expect(await strength()).toBe(0);
 });
 
-test('thumbnail opens the original image and supports touch lens dragging',async({browser})=>{
+test('thumbnail opens the original image without a lens on mobile',async({browser})=>{
  const context=await browser.newContext({viewport:{width:390,height:844},isMobile:true,hasTouch:true});const page=await context.newPage();
  await page.goto('http://127.0.0.1:4173/blog/');await page.locator('.post-cover-link').first().tap();
  const dialog=page.getByRole('dialog');await expect(dialog).toBeVisible();
- const lens=dialog.getByRole('region',{name:/Magnify:/});await expect(lens).toBeVisible();await expect(lens.locator('img')).toHaveCount(2);
- await expect(lens.locator('img').first()).toHaveAttribute('src',/\/cover\.(jpg|png|webp)$/);
- const mask=lens.locator('[style*="mask-image"]').first();const before=await mask.evaluate(e=>getComputedStyle(e).maskImage);
- const rect=await lens.boundingBox();const x=rect!.x+rect!.width*.5,y=rect!.y+rect!.height*.5;
- const cdp=await context.newCDPSession(page);
- await cdp.send('Input.dispatchTouchEvent',{type:'touchStart',touchPoints:[{x,y}]});
- await cdp.send('Input.dispatchTouchEvent',{type:'touchMove',touchPoints:[{x:x+30,y:y+20}]});
- await cdp.send('Input.dispatchTouchEvent',{type:'touchEnd',touchPoints:[]});
- await expect.poll(()=>mask.evaluate(e=>getComputedStyle(e).maskImage)).not.toBe(before);
+ await expect(dialog.getByRole('region',{name:/Magnify:/})).toHaveCount(0);
+ await expect(dialog.locator('img')).toHaveCount(1);
+ await expect(dialog.locator('img')).toHaveAttribute('src',/\/cover\.(jpg|png|webp)$/);
  expect(await page.evaluate(()=>document.documentElement.scrollWidth>innerWidth)).toBe(false);
  await expect(page.locator('.magnify-pointer')).toHaveCount(0);
  await page.getByRole('button',{name:'Close',exact:true}).tap();await expect(dialog).toHaveCount(0);await context.close();
