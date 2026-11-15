@@ -12,8 +12,8 @@ const finePointer = matchMedia('(hover: hover) and (pointer: fine)');
 // parent so their movement never compounds.
 const motionSelector = [
   '.home', 'nav a', '.theme-toggle', 'main h1', 'main h2', 'main h3', 'main p',
-  '.links a', '.project-heading', '.screenshot', 'main li',
-  '.project-directory-links > a', '.education-list h4', '.blog-intro > *',
+  '.links', '.about-links', '.project-heading', '.screenshot', 'main li',
+  '.project-directory-links', '.education-list h4', '.blog-intro > *',
   '.post-cover', '.post-body > *', 'footer > *'
 ].join(', ');
 // Keep one motion layer per content unit, including future Markdown elements.
@@ -119,12 +119,13 @@ on(document, 'pointermove', event => {
     const proximity = Math.max(0, 1 - distance / 120);
     const pull = proximity * proximity * (3 - 2 * proximity);
     const focused = item.element.matches(':focus-within');
-    const chrome = Boolean(item.element.closest('header, footer'));
-    // Large text blocks should drift as little as a compact navigation link.
-    const x = chrome ? dx * 0.035 : dx / Math.max(rect.width / 2, 80) * 2.5;
-    const y = chrome ? dy * 0.045 : dy / Math.max(rect.height / 2, 60) * 1.8;
-    const maxX = chrome ? 7 : 2.5;
-    const maxY = chrome ? 5 : 1.8;
+    // Compact controls need a stable click target. Related icon/link rows
+    // move together, and movement scales gently with the unit's size.
+    const compact = item.element.matches('a, button') || rect.width < 120;
+    const maxX = compact ? 0.65 : 1.8;
+    const maxY = compact ? 0.45 : 1.2;
+    const x = Math.tanh(dx / Math.max(rect.width / 2, 100)) * maxX;
+    const y = Math.tanh(dy / Math.max(rect.height / 2, 80)) * maxY;
     item.tx = focused ? 0 : Math.max(-maxX, Math.min(maxX, x)) * pull;
     item.ty = focused ? 0 : Math.max(-maxY, Math.min(maxY, y)) * pull;
   }
