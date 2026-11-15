@@ -80,7 +80,7 @@ test('homepage shows three thumbnail previews and About has its own page',async(
  expect(about).toContain('University of Wollongong in Dubai');
  expect(about).toContain('Bachelor of Computer Science, Cyber Security');
  expect(about).toContain('>September 2026</time> - 2029');
- expect(about).toContain('GEMS Our Own Indian School');
+ expect(about).not.toContain('GEMS Our Own Indian School');
  const navigation=html.split('aria-label="Main navigation"')[1].split('</nav>')[0];
  expect(navigation.indexOf('>About<')).toBeLessThan(navigation.indexOf('>Projects<'));
  expect(navigation.indexOf('>Projects<')).toBeLessThan(navigation.indexOf('>Blog<'));
