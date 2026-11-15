@@ -29,7 +29,7 @@ export function About() {
         <h2 id="about-education">Education</h2>
         <div className="education-list">
           <article>
-            <p className="education-period"><time dateTime="2026-09">September</time> - 2029</p>
+            <p className="education-period"><time dateTime="2026">2026</time> - 2029</p>
             <h3>University of Wollongong in Dubai</h3>
             <p>Bachelor of Computer Science, Cyber Security</p>
           </article>
