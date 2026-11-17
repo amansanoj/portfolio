@@ -1,7 +1,17 @@
-import {useEffect,useRef} from 'react';
+import {useEffect,useRef,useState} from 'react';
 
 // React Bits DotGrid adapted as a shared, content-aware viewport background.
 export function DotGrid(){
+ const [enabled,setEnabled]=useState(false);
+ useEffect(()=>{
+  const media=matchMedia('(min-width: 768px) and (hover: hover) and (pointer: fine)');
+  const update=()=>setEnabled(media.matches);
+  update();media.addEventListener('change',update);
+  return()=>media.removeEventListener('change',update);
+ },[]);
+ return enabled?<DotGridCanvas/>:null;
+}
+function DotGridCanvas(){
  const ref=useRef<HTMLCanvasElement>(null);
  useEffect(()=>{
   const canvas=ref.current!,ctx=canvas.getContext('2d');if(!ctx)return;
