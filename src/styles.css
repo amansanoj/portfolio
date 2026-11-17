@@ -154,9 +154,17 @@ article > .blog-intro h1 { font-size: clamp(30px, 4.5vw, 44px); margin-top: 20px
 #game-help { font-size: 14px; }
 #game-court { display: block; width: 100%; height: auto; border: 1px solid var(--border); border-radius: var(--radius); touch-action: none; }
 .court-background { fill: var(--muted); }
-.court-line { stroke: var(--border); stroke-dasharray: 5 7; }
-#game-ball { fill: var(--secondary); }
-#game-paddle { fill: var(--primary); }
+#game-court { max-width: 480px; margin-inline: auto; }
+#snake-food { fill: var(--secondary); }
+#snake-body { fill: var(--primary); }
+#snake-body rect { transition: transform 95ms linear; }
+.snake-directions { display: grid; grid-template-columns: repeat(3,48px); justify-content: center; gap: 8px; margin-top: 20px; }
+.snake-directions button { min-height: 48px; border: 1px solid var(--border); border-radius: var(--radius); color: var(--foreground); background: var(--muted); font: inherit; cursor: pointer; touch-action: manipulation; }
+.snake-directions button:first-child { grid-column: 2; }
+.snake-directions button:nth-child(2) { grid-column: 1; }
+.snake-directions button:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+.snake-directions button:active { background: var(--primary); color: var(--primary-foreground); }
+@media (prefers-reduced-motion: reduce) { #snake-body rect { transition: none; } }
 .game-controls { display: flex; align-items: center; justify-content: space-between; gap: 16px; margin-top: 16px; font-size: 14px; }
 #game-start { min-height: 44px; padding: 8px 18px; border: 1px solid var(--border); border-radius: var(--radius); color: var(--foreground); background: var(--muted); font: inherit; cursor: pointer; }
 #game-start:hover { color: var(--accent); }
