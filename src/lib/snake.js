@@ -20,7 +20,7 @@ export function initGame(root) {
    points=[mix(old[0],snake[0]),...old.slice(0,-1),tail];
   }
   trail.setAttribute('d',points.map((p,i)=>`${i?'L':'M'}${p.x*20+10},${p.y*20+10}`).join(' '));
-  if(apple){food.setAttribute('cx',apple.x*20+10);food.setAttribute('cy',apple.y*20+10);}
+  if(apple){food.setAttribute('x',apple.x*20+4);food.setAttribute('y',apple.y*20+4);}
  }
  function reset(){snake=[{x:5,y:10},{x:4,y:10},{x:3,y:10}];previousSnake=null;elapsed=0;stepDuration=160;dir='right';queue=[];score=0;over=false;spawn();draw();}
  function pause(){if(!running)return;running=false;cancelAnimationFrame(frame);lastTime=0;button.textContent='Resume';status.textContent=`Paused. Score: ${score}`;}

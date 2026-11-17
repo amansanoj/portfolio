@@ -156,7 +156,7 @@ article > .blog-intro h1 { font-size: clamp(30px, 4.5vw, 44px); margin-top: 20px
 .court-background { fill: var(--muted); }
 #game-court { max-width: 480px; margin-inline: auto; }
 #snake-food { fill: var(--secondary); }
-#snake-body { fill: none; stroke: var(--primary); stroke-width: 16; stroke-linecap: round; stroke-linejoin: round; }
+#snake-body { fill: none; stroke: var(--primary); stroke-width: 16; stroke-linecap: square; stroke-linejoin: miter; stroke-dasharray: 0 20; }
 .snake-directions { display: grid; grid-template-columns: repeat(3,48px); justify-content: center; gap: 8px; margin-top: 20px; }
 .snake-directions button { min-height: 48px; border: 1px solid var(--border); border-radius: var(--radius); color: var(--foreground); background: var(--muted); font: inherit; cursor: pointer; touch-action: manipulation; }
 .snake-directions button:first-child { grid-column: 2; }
