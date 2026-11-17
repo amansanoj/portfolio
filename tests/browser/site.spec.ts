@@ -11,7 +11,7 @@ for(const width of [390,1440])test(`theme, hydration, dialog, blog and 404 at ${
  await page.goto('/blog/');const links=page.locator('.post-entry h2 a');expect(await links.count()).toBeGreaterThan(0);await links.first().click();await expect(page.locator('.post-body')).toBeVisible();await expect(page.locator('.reading-progress')).toHaveCount(1);
  await page.emulateMedia({reducedMotion:'reduce'});await page.reload();await expect(page.locator('.rough-annotation').first()).toBeAttached();
  expect(await page.evaluate(()=>document.documentElement.scrollWidth>innerWidth)).toBe(false);
- await page.goto('/404.html');await page.locator('summary').click();await page.getByRole('button',{name:'Play',exact:true}).click();await expect(page.getByRole('button',{name:'Pause',exact:true})).toBeVisible();await page.keyboard.press('Escape');await expect(page.getByRole('button',{name:'Resume',exact:true})).toBeVisible();
+ await page.goto('/404.html');await expect(page.getByRole('heading',{name:'Page Not Found'})).toBeVisible();await expect(page.locator('#main').getByRole('link',{name:'Home',exact:true})).toHaveAttribute('href','/');
  expect(errors).toEqual([]);
 });
 

@@ -1,5 +1,0 @@
-export const gameHtml = `<details class="lost-game" id="lost-game"><summary>Play a Game</summary>
-<p id="game-help">Snake. Collect food and avoid the walls and your tail. Use arrow keys or WASD, swipe, or use the buttons below.</p>
-<svg id="game-court" viewBox="0 0 400 400" role="img" tabindex="0" aria-label="Snake game board" aria-describedby="game-help"><rect class="court-background" width="400" height="400"/><rect id="snake-food" width="12" height="12"/><g id="snake-body"></g></svg>
-<div class="game-controls"><button id="game-start" type="button">Play</button><span id="game-status" role="status" aria-live="polite">Score: 0</span></div>
-<div class="snake-directions" aria-label="Snake controls"><button type="button" data-direction="up" aria-label="Move up">↑</button><button type="button" data-direction="left" aria-label="Move left">←</button><button type="button" data-direction="down" aria-label="Move down">↓</button><button type="button" data-direction="right" aria-label="Move right">→</button></div></details>`;

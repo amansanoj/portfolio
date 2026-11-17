@@ -54,7 +54,7 @@ paragraphs remain valid HTML. The image dialog uses the supplied Magic UI Lens c
 
 Touch and reduced-motion users get immediate image display. Visible content
 never disappears to start an entrance. The subtle cursor motion, image dialog,
-reading-progress bar, bottom blur, and 404 paddle game are retained.
+reading-progress bar and bottom blur are retained.
 
 ## Deployment
 
@@ -65,7 +65,7 @@ Posts remain readable without JavaScript, and social crawlers receive per-page
 metadata. Public files include `CNAME`, `.nojekyll`, `.well-known/`, and the Google
 verification file. Preserve these when changing domains or deployment settings.
 
-Browser regression tests: run `bunx playwright install chromium`, then `bun run test:e2e` against a production build. Tests cover theme persistence, hydration, image zoom, post routes, highlights, and the 404 game.
+Browser regression tests: run `bunx playwright install chromium`, then `bun run test:e2e` against a production build. Tests cover theme persistence, hydration, image zoom, post routes, highlights, and the 404 page.
 
 The theme control uses a top-to-bottom View Transition only when the resolved theme changes. Reduced motion and unsupported browsers switch instantly; First load follows the operating system; the control then switches between Light and Dark.
 
