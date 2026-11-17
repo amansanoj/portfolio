@@ -17,7 +17,7 @@ const motionSelector = [
   '.post-cover', '.post-body > *', 'footer > *'
 ].join(', ');
 // Keep one motion layer per content unit, including future Markdown elements.
-const candidates = [...root.querySelectorAll(motionSelector)];
+const candidates = [...root.querySelectorAll(motionSelector)].filter(element => !element.closest('.lost-game'));
 const revealElements = candidates.filter(element =>
   !candidates.some(parent => parent !== element && parent.contains(element))
 );
