@@ -1,8 +1,6 @@
 import type { Project } from '../types';
 import { HtmlContent } from './HtmlContent';
 import { ViewableImage } from './ImageViewer';
-import { Spotlight } from './reactbits/Spotlight';
-import { TiltedPreview } from './reactbits/TiltedPreview';
 
 export function ProjectDirectory({projects}:{projects:Project[]}) {
   return <>
@@ -27,8 +25,7 @@ export function ProjectPage({project}:{project:Project}) {
 export function ProjectPreview({project,headingLevel=2}:{project:Project;headingLevel?:2|3}) {
   const Heading=headingLevel===3?'h3':'h2';
   return <li className={`post-entry${project.cover?' has-cover':''}`}>
-      <Spotlight/>
-      {project.cover&&<TiltedPreview><ViewableImage thumbnail className="post-cover-preview" src={`/projects/${project.slug}/thumbnail.webp`} fullSrc={`/projects/${project.slug}/${project.cover}`} width={project.dimensions?.thumbnailWidth} height={project.dimensions?.thumbnailHeight} alt={`${project.title} - cover image`} loading="lazy"/></TiltedPreview>}
+      {project.cover&&<ViewableImage thumbnail className="post-cover-preview" src={`/projects/${project.slug}/thumbnail.webp`} fullSrc={`/projects/${project.slug}/${project.cover}`} width={project.dimensions?.thumbnailWidth} height={project.dimensions?.thumbnailHeight} alt={`${project.title} - cover image`} loading="lazy"/>}
       <div className="post-entry-text"><div className="post-entry-heading">
         {project.kind&&<p className="project-kind">{project.kind}</p>}
         <Heading><a href={`/projects/${project.slug}/`}>{project.title}</a></Heading>

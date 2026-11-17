@@ -6,6 +6,7 @@ import { ThemeControl } from './components/ThemeControl';
 import { ImageViewerProvider, ViewableImage } from './components/ImageViewer';
 import { BottomBlur, ReadingProgress } from './components/ReadingEffects';
 import { HtmlContent } from './components/HtmlContent';
+import { DotGrid } from './components/reactbits/DotGrid';
 import { Home } from './components/Home';
 import { About } from './components/About';
 import { usePageMotion } from './lib/usePageMotion';
@@ -15,7 +16,7 @@ export const dateLabel=(date:string)=>new Intl.DateTimeFormat('en-GB',{day:'2-di
 export function route(path:string){const clean=path.replace(/index\.html$/,'').replace(/\/$/,'')||'/';return {home:clean==='/',about:clean==='/about',list:clean==='/blog',projectList:clean==='/projects',project:projects.find(p=>clean===`/projects/${p.slug}`),post:posts.find(p=>clean===`/blog/${p.slug}`)};}
 export function App({path}:{path:string}) {
  const page=route(path);usePageMotion();
- return <ImageViewerProvider><div className="site-shell"><a className="skip" href="#main">Skip to Content</a><header id="top"><a className="home" href={page.home?'#':'/'}>Aman Sanoj</a><nav aria-label="Main navigation"><a href="/about/" aria-current={page.about?'page':undefined}>About</a><a href="/projects/" aria-current={page.projectList||page.project?'page':undefined}>Projects</a><a href="/blog/" aria-current={page.list||page.post?'page':undefined}>Blog</a><ThemeControl/></nav></header>
+ return <ImageViewerProvider><DotGrid/><div className="site-shell"><a className="skip" href="#main">Skip to Content</a><header id="top"><a className="home" href={page.home?'#':'/'}>Aman Sanoj</a><nav aria-label="Main navigation"><a href="/about/" aria-current={page.about?'page':undefined}>About</a><a href="/projects/" aria-current={page.projectList||page.project?'page':undefined}>Projects</a><a href="/blog/" aria-current={page.list||page.post?'page':undefined}>Blog</a><ThemeControl/></nav></header>
  <main id="main">
  {page.home?<Home projects={projects}/>:page.about?<About/>:page.projectList?<ProjectDirectory projects={projects}/>:page.project?<ProjectPage project={page.project}/>:page.list?<><div className="blog-intro"><h1>Blog</h1></div>{posts.length?<ul className="post-list">{posts.map(post=><li key={post.slug} className={`post-entry${post.cover?' has-cover':''}`}>
  {post.cover&&<ViewableImage thumbnail className="post-cover-preview" src={`/blog/${post.slug}/thumbnail.webp`} fullSrc={`/blog/${post.slug}/${post.cover}`} width={post.dimensions?.thumbnailWidth} height={post.dimensions?.thumbnailHeight} alt={`${post.title} - cover image`} loading="lazy"/>}
