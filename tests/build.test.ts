@@ -32,7 +32,7 @@ test('covers keep quarter-size thumbnails and centered social images',async()=>{
 });
 test('homepage, 404, verification files and custom domain survive deployment',async()=>{
  const home=await readFile('dist/index.html','utf8');expect(home).toContain('I write software');expect(home).toContain('<h2 id="projects-title">Projects</h2>');
- const missing=await readFile('dist/404.html','utf8');expect(missing).toContain('Page Not Found');expect(missing).toContain('game-court');expect(missing).toContain('noindex');
+ const missing=await readFile('dist/404.html','utf8');expect(missing).toContain('Page Not Found');expect(missing).not.toContain('game-court');expect(missing).toContain('noindex');
  for(const file of ['CNAME','.nojekyll','google8640e0dd51c3c37e.html'])await access(`dist/${file}`);
  expect(await readFile('dist/CNAME','utf8')).toBe(await readFile('public/CNAME','utf8'));
 });

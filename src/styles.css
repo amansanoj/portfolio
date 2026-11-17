@@ -241,3 +241,15 @@ html[data-magicui-theme-vt="active"]::view-transition-new(root) {
 .home-project-list li { border-top: 0; }
 .home-project-list .post-entry { padding-block: 20px; }
 .home-project-list .post-entry:first-child { padding-top: 10px; }
+
+/* React Bits surfaces keep their effects behind the existing content. */
+.project-list .post-entry, .home-project-list .post-entry { position: relative; isolation: isolate; }
+.project-spotlight { position: absolute; inset: 0 -16px; border-radius: var(--radius); z-index: -1; pointer-events: none; opacity: 0; background: radial-gradient(220px circle at var(--spot-x,50%) var(--spot-y,50%), color-mix(in srgb,var(--primary) 10%,transparent),transparent 80%); transition: opacity 240ms ease; }
+@media (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
+ .post-entry:hover > .project-spotlight { opacity: 1; }
+}
+.decrypted-name { display: inline-block; border-radius: var(--radius); }
+.decrypted-name:focus-visible { outline: 2px solid var(--accent); outline-offset: 8px; }
+.decode-cell { display: inline-block; position: relative; }
+.decode-measure { visibility: hidden; }
+[data-glyph] { position: absolute; inset: 0; text-align: center; }
