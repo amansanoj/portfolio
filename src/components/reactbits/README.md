@@ -10,7 +10,7 @@ The canvas is decorative and ignores pointer events. It mounts only at widths of
 ## Text Effects
 
 - FuzzyText.jsx uses the full JavaScript component pasted from React Bits. The only source adjustment marks the canvas ready after drawing, so the static fallback stays visible until the font and canvas are ready. NotFound.tsx loads it only on the 404 route, uses current brand ink, disables RGB splitting and the intro flash, and unmounts the animation for reduced motion or a hidden tab.
-- TextEffects.tsx adapts ShinyText into one CSS ink sweep when page and section headings enter view. Existing semantic headings and their text stay intact; no opacity entrance is added.
+- ShinyText.tsx and ShinyText.css are the original upstream React Bits component and stylesheet. HeadingShine supplies theme-resolved brand primary/secondary colors, a repeating sweep, and a plain text fallback for SSR and reduced motion.
 - SplitText adapts the word lift to navigation and project/post title links. It preserves natural wrapping and the accessible text, and runs only on hover/focus with a fine pointer and no reduced-motion preference.
 
 Sources: TextAnimations/FuzzyText, TextAnimations/ShinyText, and TextAnimations/SplitText in the React Bits repository. All licensing remains in the shared React Bits license file.

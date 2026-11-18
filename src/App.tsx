@@ -1,3 +1,4 @@
+import { HeadingShine } from './components/reactbits/HeadingShine';
 import rawPosts from './generated/posts.json';
 import rawProjects from './generated/projects.json';
 import { ProjectDirectory, ProjectPage } from './components/Projects';
@@ -8,7 +9,7 @@ import { BottomBlur, ReadingProgress } from './components/ReadingEffects';
 import { HtmlContent } from './components/HtmlContent';
 import { DotGrid } from './components/reactbits/DotGrid';
 import { NotFound } from './components/NotFound';
-import { SplitText,useHeadingShine } from './components/reactbits/TextEffects';
+import { SplitText } from './components/reactbits/TextEffects';
 import { Home } from './components/Home';
 import { About } from './components/About';
 import { usePageMotion } from './lib/usePageMotion';
@@ -17,12 +18,12 @@ export const projects=rawProjects as Project[];
 export const dateLabel=(date:string)=>new Intl.DateTimeFormat('en-GB',{day:'2-digit',month:'long',year:'numeric',timeZone:'UTC'}).format(new Date(date));
 export function route(path:string){const clean=path.replace(/index\.html$/,'').replace(/\/$/,'')||'/';return {home:clean==='/',about:clean==='/about',list:clean==='/blog',projectList:clean==='/projects',project:projects.find(p=>clean===`/projects/${p.slug}`),post:posts.find(p=>clean===`/blog/${p.slug}`)};}
 export function App({path}:{path:string}) {
- const page=route(path);usePageMotion();useHeadingShine();
+ const page=route(path);usePageMotion();
  return <ImageViewerProvider><DotGrid/><div className="site-shell"><a className="skip" href="#main">Skip to Content</a><header id="top"><a className="home" href={page.home?'#':'/'}>Aman Sanoj</a><nav aria-label="Main navigation"><a href="/about/" aria-current={page.about?'page':undefined}><SplitText>About</SplitText></a><a href="/projects/" aria-current={page.projectList||page.project?'page':undefined}><SplitText>Projects</SplitText></a><a href="/blog/" aria-current={page.list||page.post?'page':undefined}><SplitText>Blog</SplitText></a><ThemeControl/></nav></header>
  <main id="main">
- {page.home?<Home projects={projects}/>:page.about?<About/>:page.projectList?<ProjectDirectory projects={projects}/>:page.project?<ProjectPage project={page.project}/>:page.list?<><div className="blog-intro"><h1>Blog</h1></div>{posts.length?<ul className="post-list">{posts.map(post=><li key={post.slug} className={`post-entry${post.cover?' has-cover':''}`}>
+ {page.home?<Home projects={projects}/>:page.about?<About/>:page.projectList?<ProjectDirectory projects={projects}/>:page.project?<ProjectPage project={page.project}/>:page.list?<><div className="blog-intro"><h1><HeadingShine>Blog</HeadingShine></h1></div>{posts.length?<ul className="post-list">{posts.map(post=><li key={post.slug} className={`post-entry${post.cover?' has-cover':''}`}>
  {post.cover&&<ViewableImage thumbnail className="post-cover-preview" src={`/blog/${post.slug}/thumbnail.webp`} fullSrc={`/blog/${post.slug}/${post.cover}`} width={post.dimensions?.thumbnailWidth} height={post.dimensions?.thumbnailHeight} alt={`${post.title} - cover image`} loading="lazy"/>}
- <div className="post-entry-text"><div className="post-entry-heading"><time className="post-date" dateTime={post.date}>{dateLabel(post.date)}</time><h2><a href={`/blog/${post.slug}/`}><SplitText>{post.title}</SplitText></a></h2></div><p className="post-summary">{post.summary}</p></div></li>)}</ul>:<p>No posts yet.</p>}</>:page.post?<PostPage post={page.post}/>:<NotFound/>}
+ <div className="post-entry-text"><div className="post-entry-heading"><time className="post-date" dateTime={post.date}>{dateLabel(post.date)}</time><h2><HeadingShine><a href={`/blog/${post.slug}/`}><SplitText>{post.title}</SplitText></a></HeadingShine></h2></div><p className="post-summary">{post.summary}</p></div></li>)}</ul>:<p>No posts yet.</p>}</>:page.post?<PostPage post={page.post}/>:<NotFound/>}
  </main><footer><span>© <span id="year">{new Date().getUTCFullYear()}</span> Aman Sanoj</span><a href="#top">Back to Top</a></footer></div><BottomBlur/>{(page.post||page.project)&&<ReadingProgress/>}</ImageViewerProvider>;
 }
-function PostPage({post}:{post:Post}){return <article><div className="blog-intro"><a href="/blog/">All Posts</a><h1>{post.title}</h1><time className="post-date" dateTime={post.date}>{dateLabel(post.date)}</time></div>{post.cover&&<ViewableImage className="post-cover" src={`/blog/${post.slug}/${post.cover}`} width={post.dimensions?.width} height={post.dimensions?.height} alt={`${post.title} - cover image`} fetchPriority="high"/>}<div className="post-body"><HtmlContent html={post.content} blog/></div><nav className="post-navigation" aria-label="Post navigation"><a href="/blog/">All Posts</a></nav></article>;}
+function PostPage({post}:{post:Post}){return <article><div className="blog-intro"><a href="/blog/">All Posts</a><h1><HeadingShine>{post.title}</HeadingShine></h1><time className="post-date" dateTime={post.date}>{dateLabel(post.date)}</time></div>{post.cover&&<ViewableImage className="post-cover" src={`/blog/${post.slug}/${post.cover}`} width={post.dimensions?.width} height={post.dimensions?.height} alt={`${post.title} - cover image`} fetchPriority="high"/>}<div className="post-body"><HtmlContent html={post.content} blog/></div><nav className="post-navigation" aria-label="Post navigation"><a href="/blog/">All Posts</a></nav></article>;}
