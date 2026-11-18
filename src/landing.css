@@ -33,7 +33,7 @@ body:has(.landing) #top, body:has(.landing) > #root footer, main:has(.landing) {
 .language-static { display: flex; flex-wrap: nowrap; gap: 44px; list-style: none; margin: 0; padding: 22px 4px; overflow-x: auto; overscroll-behavior-x: contain; touch-action: pan-x pan-y; }
 .language-static li { display: inline-flex; flex: none; align-items: center; }
 .language-static:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
-.language-static svg { font-size: 24px; }
+.language-static svg { font-size: 30px; }
 @media (max-width: 700px) { .hero-project-deck { height: 370px; } .landing-languages { padding: 28px 0; } }
 .hero-bottom { position: absolute; bottom: 15px; inset-inline: 0; display: flex; justify-content: flex-end; gap: 20px; color: var(--muted-foreground); font-size: 12px; }
 .hero-bottom > span { align-self: center; }
