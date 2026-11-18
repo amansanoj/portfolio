@@ -21,6 +21,7 @@ body:has(.landing) #top, body:has(.landing) > #root footer, main:has(.landing) {
 .hero-swap-card { padding: 14px; display: flex; flex-direction: column; gap: 12px; background: var(--deck-primary); color: var(--deck-ink); cursor: pointer; }
 .hero-swap-label { display: flex; align-items: center; justify-content: space-between; color: var(--deck-ink); font-size: 13px; line-height: 20px; gap: 10px; }
 .hero-swap-image { width: 100%; height: auto; aspect-ratio: 4 / 3; min-height: 0; object-fit: contain; border-radius: 6px; cursor: pointer; }
+@media (prefers-reduced-motion: no-preference) { .project-card-swap .card-swap-slot { touch-action: none; } .hero-swap-card, .hero-swap-image { cursor: inherit; } }
 .deck-controls { display: flex; justify-content: center; align-items: center; gap: 10px; margin-top: 8px; }
 .deck-controls button { display: inline-flex; align-items: center; justify-content: center; gap: 10px; min-width: 44px; min-height: 44px; border: 0; border-radius: var(--radius); background: none; color: var(--secondary); font: inherit; font-size: 13px; cursor: pointer; }
 .deck-controls .deck-view { min-width: 150px; }

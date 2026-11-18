@@ -67,3 +67,15 @@ test('hero card exits right and settles behind without widening the page',async(
  const returned=await position();expect(returned.z).toBeLessThan(-100);expect(returned.x).toBeLessThan(exiting.x);
  await expect(page.locator('.card-swap-slot[data-front]')).toHaveAttribute('data-swap-index','1');
 });
+
+test('cards drag in every direction without navigating after release',async({page})=>{
+ await page.setViewportSize({width:1440,height:1000});
+ for(const [dx,dy] of [[200,0],[-200,0],[0,-200],[0,200]]){
+  await page.goto('/');await page.waitForTimeout(150);
+  const card=page.locator('.card-swap-slot[data-front]');await expect(card).toBeVisible();
+  const r=(await card.boundingBox())!;const x=r.x+r.width/2,y=r.y+r.height/2;
+  await page.mouse.move(x,y);await page.mouse.down();await page.mouse.move(x+dx,y+dy,{steps:12});await page.mouse.up();
+  await expect(page.getByRole('button',{name:'View Tether',exact:true})).toBeVisible();
+  await page.waitForTimeout(200);await expect(page).toHaveURL(/\/$/);
+ }
+});
