@@ -132,7 +132,7 @@ appears. Browser tests check stroke counts, alignment, and AA text contrast.
 
 About lives in `src/components/About.tsx` at `/about/`. The homepage has a wider
 project-led layout in `src/components/Home.tsx` and `src/landing.css`. Its hero
-uses generated quarter-size thumbnails; large project presentations use responsive
+uses a static image grid. Hero and large project presentations use responsive
 image sources so small screens load the thumbnail and larger displays can use the
 original cover. Images preserve their proportions and open the existing viewer.
 Directory pages retain the shared `ProjectPreview` layout.

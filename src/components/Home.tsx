@@ -1,7 +1,7 @@
 import {ArrowDown,ArrowUpRight,ArrowRight,GithubLogo,LinkedinLogo,Cpu,AppWindow,Browser} from '@phosphor-icons/react';
 import { HeadingShine } from './reactbits/HeadingShine';
 import {ViewableImage} from './ImageViewer';
-import {HeroTilt,ProjectSurface,TechnologyBand} from './LandingEffects';
+import {ProjectSurface,TechnologyBand} from './LandingEffects';
 import type { Project,Post } from '../types';
 
 const stories=[
@@ -10,25 +10,24 @@ const stories=[
  {slug:'neon-os',number:'03',label:'Firmware, With an Interface',headline:'A Bluetooth light, connected to Apple Home.',body:'NeonOS bridges Wi-Fi and BLE on an ESP32. An OLED and a single button provide local controls; persistent settings and a signed updater handle the work behind the interface.',details:['Apple Home through HomeSpan','OLED status and local controls','Signed OTA design with rollback'],Icon:Cpu},
 ];
 
-function Cover({project,large=false}:{project:Project;large?:boolean}){
+function Cover({project,large=false,eager=false}:{project:Project;large?:boolean;eager?:boolean}){
  const thumbnail=`/projects/${project.slug}/thumbnail.webp`,original=`/projects/${project.slug}/${project.cover}`;
- return <ViewableImage thumbnail className="landing-cover" src={thumbnail} srcSet={large?`${thumbnail} ${project.dimensions?.thumbnailWidth}w, ${original} ${project.dimensions?.width}w`:undefined} sizes={large?'(max-width: 700px) 90vw, 650px':undefined} fullSrc={original} width={project.dimensions?.thumbnailWidth} height={project.dimensions?.thumbnailHeight} alt={`${project.title} - cover image`} loading={large?'lazy':'eager'}/>;
+ return <ViewableImage thumbnail className="landing-cover" src={thumbnail} srcSet={large?`${thumbnail} ${project.dimensions?.thumbnailWidth}w, ${original} ${project.dimensions?.width}w`:undefined} sizes={large?'(max-width: 700px) 90vw, 650px':undefined} fullSrc={original} width={project.dimensions?.thumbnailWidth} height={project.dimensions?.thumbnailHeight} alt={`${project.title} - cover image`} loading={eager?'eager':large?'lazy':'eager'}/>;
 }
 export function Home({projects,posts}:{projects:Project[];posts:Post[]}){
  const featured=stories.map(story=>({...story,project:projects.find(p=>p.slug===story.slug)!})).filter(s=>s.project);
  return <div className="landing">
   <section className="landing-hero" aria-labelledby="name">
    <div className="landing-hero-copy">
-    <p className="section-eyebrow"><span className="location-mark"/>Software & Embedded Systems · Dubai</p>
     <h1 id="name"><HeadingShine>Aman Sanoj</HeadingShine></h1>
     <p className="landing-lead">I write software and build things with electronics.</p>
     <p className="landing-introduction">Native apps, web services, and the hardware they connect to. Here’s what I’ve been building.</p>
     <div className="landing-actions"><a className="landing-action" href="#projects">Explore Projects <ArrowDown weight="duotone" aria-hidden="true"/></a><a href="/about/">About Me <ArrowUpRight weight="duotone" aria-hidden="true"/></a></div>
     <div className="landing-socials"><a href="https://github.com/amansanoj" aria-label="GitHub"><GithubLogo weight="duotone"/>GitHub</a><a href="https://www.linkedin.com/in/amansanoj" aria-label="LinkedIn"><LinkedinLogo weight="duotone"/>LinkedIn</a></div>
    </div>
-   <div className="hero-art"><HeroTilt><div className="hero-composition">
-    {featured.map(({project,number},i)=><figure className={`hero-piece hero-piece-${i}`} key={project.slug}><div className="hero-piece-label"><span>{number} / {project.title}</span><ArrowUpRight weight="duotone" aria-hidden="true"/></div><Cover project={project}/></figure>)}
-   </div></HeroTilt></div>
+   <div className="hero-art"><div className="hero-composition">
+    {featured.map(({project,number},i)=><figure className={`hero-piece hero-piece-${i}`} key={project.slug}><div className="hero-piece-label"><span>{number} / {project.title}</span><ArrowUpRight weight="duotone" aria-hidden="true"/></div><Cover project={project} large eager/></figure>)}
+   </div></div>
    <div className="hero-bottom"><span>Apps. Web. Firmware.</span><a href="#projects">Scroll to the Work <ArrowDown weight="duotone" aria-hidden="true"/></a></div>
   </section>
   <TechnologyBand/>

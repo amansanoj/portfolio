@@ -1,5 +1,4 @@
 import {useEffect,useState,type CSSProperties,type ReactNode} from 'react';
-import TiltedCard from './reactbits/TiltedCard';
 import ScrollVelocity from './reactbits/ScrollVelocity';
 import SpotlightCard from './reactbits/SpotlightCard';
 import tokens from '../../public/assets/vendor/brand-tokens.json';
@@ -8,10 +7,6 @@ export function useLandingMotion(){
  const [enabled,setEnabled]=useState(false);
  useEffect(()=>{const media=matchMedia('(min-width: 900px) and (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference)');const update=()=>setEnabled(media.matches);update();media.addEventListener('change',update);return()=>media.removeEventListener('change',update);},[]);
  return enabled;
-}
-export function HeroTilt({children}:{children:ReactNode}){
- const enabled=useLandingMotion();
- return enabled?<TiltedCard containerHeight="100%" containerWidth="100%" imageHeight="100%" imageWidth="100%" rotateAmplitude={5} scaleOnHover={1} showTooltip={false} flipOnClick={false} gyroscope={false} intro={false} parallax={0} shadow={0} glare={0}>{children}</TiltedCard>:<div className="hero-static">{children}</div>;
 }
 export function ProjectSurface({children,className=''}:{children:ReactNode;className?:string}){
  const enabled=useLandingMotion();

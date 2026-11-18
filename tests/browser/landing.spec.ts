@@ -21,7 +21,7 @@ test('landing page has complete project stories, working image controls and stat
 
 test('landing effects follow the reduced motion media query without a toggle',async({page})=>{
  await page.setViewportSize({width:1440,height:1000});await page.goto('/');
- await expect(page.locator('.tilted-card')).toBeVisible();
+ await expect(page.locator('.tilted-card')).toHaveCount(0);
  await expect(page.locator('.spotlight-card')).toHaveCount(3);
  await expect(page.getByRole('button',{name:/Pause Motion|Resume Motion/})).toHaveCount(0);
  await expect(page.locator('.landing-technologies .scroller')).toBeVisible();
@@ -29,7 +29,7 @@ test('landing effects follow the reduced motion media query without a toggle',as
  await expect(page.locator('.tilted-card,.spotlight-card,.landing-technologies .scroller')).toHaveCount(0);
  await expect(page.locator('.technology-static')).toBeVisible();
  await page.emulateMedia({reducedMotion:'no-preference'});
- await expect(page.locator('.tilted-card')).toBeVisible();
+ await expect(page.locator('.tilted-card')).toHaveCount(0);
  await expect(page.locator('.landing-technologies .scroller')).toBeAttached();
  await page.locator('.hero-piece').first().getByRole('button').click();
  await expect(page.getByRole('dialog')).toBeVisible();

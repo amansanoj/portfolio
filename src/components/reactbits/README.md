@@ -10,6 +10,6 @@ Sources: TextAnimations/FuzzyText, TextAnimations/ShinyText, and TextAnimations/
 
 ## Landing Page
 
-TiltedCard.tsx/css, ScrollVelocity.tsx/css, and SpotlightCard.tsx/css are unmodified TypeScript + CSS sources from https://github.com/DavidHDev/react-bits/tree/main/src/ts-default (Components/TiltedCard, TextAnimations/ScrollVelocity, Components/SpotlightCard).
+ScrollVelocity.tsx/css and SpotlightCard.tsx/css are unmodified TypeScript + CSS sources from https://github.com/DavidHDev/react-bits/tree/main/src/ts-default (TextAnimations/ScrollVelocity, Components/SpotlightCard).
 
-LandingEffects.tsx configures these original components with brand colors and motion preferences. TiltedCard uses the existing image buttons as children, with flipping, tooltips, gyroscope, and intro disabled. ScrollVelocity automatically uses a static mobile/reduced-motion presentation, with no manual motion toggle. SpotlightCard uses token-backed surfaces and borders. Scoped landing.css rules provide typography and palette overrides while leaving upstream source intact. All three are replaced by static markup on touch/small screens or with reduced motion.
+LandingEffects.tsx configures these original components with brand colors and motion preferences. ScrollVelocity automatically uses a static mobile/reduced-motion presentation, with no manual motion toggle. SpotlightCard uses token-backed surfaces and borders. Scoped landing.css rules provide typography and palette overrides while leaving upstream source intact. Both are replaced by static markup on touch/small screens or with reduced motion.
