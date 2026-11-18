@@ -10,11 +10,11 @@ export function Home({projects}:{projects:Project[]}) { return <>
   </section>
 
   <section id="projects" aria-labelledby="projects-title">
-    <h2 id="projects-title"><HeadingShine>Projects</HeadingShine></h2>
+    <h2 id="projects-title">Projects</h2>
     <ul className="post-list home-project-list">{['macro-pad','tether','neon-os'].map(slug=>projects.find(project=>project.slug===slug)).filter((project):project is Project=>Boolean(project)).map(project=><ProjectPreview key={project.slug} project={project} headingLevel={3}/>)}</ul>
     <div className="project-directory-links"><a href="/projects/">All Projects</a></div>
   </section>
 
 
-  <section id="contact"><h2><HeadingShine>Contact</HeadingShine></h2><p>You can reach me at <a href="mailto:me@amansanoj.com">me@amansanoj.com</a>.</p></section>
+  <section id="contact"><h2>Contact</h2><p>You can reach me at <a href="mailto:me@amansanoj.com">me@amansanoj.com</a>.</p></section>
 </>; }
