@@ -729,6 +729,10 @@ const createEngine = (root, track, config, setLayout) => {
 
   const onUp = e => endDrag(e, false);
   const onCancel = e => endDrag(e, true);
+  // Touch starts with implicit capture on the child icon. Transferring that
+  // capture to the loop bubbles a child lostpointercapture event; it must not
+  // cancel the drag that just began.
+  const onLostCapture = e => { if (e.target === root) onCancel(e); };
 
   const onClick = e => {
     if (performance.now() < st.suppressUntil) {
@@ -794,7 +798,7 @@ const createEngine = (root, track, config, setLayout) => {
   root.addEventListener('pointermove', onMove);
   root.addEventListener('pointerup', onUp);
   root.addEventListener('pointercancel', onCancel);
-  root.addEventListener('lostpointercapture', onCancel);
+  root.addEventListener('lostpointercapture', onLostCapture);
   root.addEventListener('click', onClick, true);
   root.addEventListener('dragstart', onDragStart);
   root.addEventListener('focusin', onFocusIn);
@@ -860,7 +864,7 @@ const createEngine = (root, track, config, setLayout) => {
     root.removeEventListener('pointermove', onMove);
     root.removeEventListener('pointerup', onUp);
     root.removeEventListener('pointercancel', onCancel);
-    root.removeEventListener('lostpointercapture', onCancel);
+    root.removeEventListener('lostpointercapture', onLostCapture);
     root.removeEventListener('click', onClick, true);
     root.removeEventListener('dragstart', onDragStart);
     root.removeEventListener('focusin', onFocusIn);

@@ -79,3 +79,24 @@ test('cards drag in every direction without navigating after release',async({pag
   await page.waitForTimeout(200);await expect(page).toHaveURL(/\/$/);
  }
 });
+
+test('language icons swipe on mobile and remain scrollable with reduced motion',async({browser})=>{
+ const context=await browser.newContext({viewport:{width:390,height:844},hasTouch:true,isMobile:true});
+ const page=await context.newPage();await page.goto('/');
+ const loop=page.locator('.logoloop');await loop.scrollIntoViewIfNeeded();
+ await expect(loop.locator('.logoloop__label')).toHaveCount(0);
+ await expect(loop.getByRole('img',{name:'TypeScript',exact:true})).toHaveCount(1);
+ const box=(await loop.boundingBox())!,x=box.x+box.width*.8,y=box.y+box.height/2;
+ const session=await context.newCDPSession(page);
+ await session.send('Input.dispatchTouchEvent',{type:'touchStart',touchPoints:[{x,y}]});
+ for(let i=1;i<=8;i++)await session.send('Input.dispatchTouchEvent',{type:'touchMove',touchPoints:[{x:x-i*20,y}]});
+ await expect(loop).toHaveAttribute('data-dragging','');
+ await session.send('Input.dispatchTouchEvent',{type:'touchEnd',touchPoints:[]});
+ await expect(loop).not.toHaveAttribute('data-dragging','');
+ await page.emulateMedia({reducedMotion:'reduce'});
+ const list=page.locator('.language-static');await expect(list.locator('li')).toHaveCount(14);
+ expect(await list.evaluate(el=>el.scrollWidth>el.clientWidth)).toBe(true);
+ await list.evaluate(el=>el.scrollLeft=150);expect(await list.evaluate(el=>el.scrollLeft)).toBeGreaterThan(100);
+ expect(await page.evaluate(()=>document.documentElement.scrollWidth>innerWidth)).toBe(false);
+ await context.close();
+});
