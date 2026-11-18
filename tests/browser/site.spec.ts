@@ -65,7 +65,7 @@ test('bottom blur remains unchanged while the theme wipe is in flight',async({pa
   };
  });
  await page.goto('/');await page.evaluate(()=>document.fonts.ready);
- await page.locator('.home-project-list img').first().evaluate(async(image:HTMLImageElement)=>image.decode());
+ await page.locator('.hero-piece img').first().evaluate(async(image:HTMLImageElement)=>image.decode());
  await expect(page.locator('.bottom-blur')).toHaveClass(/is-visible/);
  const clip={x:0,y:744,width:1000,height:56};
  const before=await page.screenshot({clip});
@@ -255,11 +255,12 @@ test('emphasis draws one bright marker stroke per line and keeps text readable',
 test('About navigation and homepage project thumbnails work at every layout size',async({page})=>{
  for(const width of [320,390,768,1440]){
   await page.setViewportSize({width,height:900});await page.goto('/');
-  const previews=page.locator('.home-project-list .post-entry');await expect(previews).toHaveCount(3);
+  const previews=page.locator('.landing-feature');await expect(previews).toHaveCount(3);
   for(const preview of await previews.all()){
    const image=preview.locator('img');await expect(image).toHaveAttribute('src',/\/projects\/[^/]+\/thumbnail\.webp$/);
+   await image.scrollIntoViewIfNeeded();
    await image.evaluate(async(image:HTMLImageElement)=>image.decode());
-   const bounds=await image.boundingBox();expect(bounds!.width).toBeLessThanOrEqual(144);expect(bounds!.height).toBeLessThanOrEqual(180);
+   const bounds=await image.boundingBox();expect(bounds!.width).toBeLessThanOrEqual(width);expect(bounds!.height).toBeLessThanOrEqual(480);
   }
   await previews.first().getByRole('button').click();await expect(page.getByRole('dialog')).toBeVisible();await expect(page.getByRole('dialog').locator('img').first()).toHaveAttribute('src',/\/projects\/macro-pad\/cover\.png$/);await page.keyboard.press('Escape');
   await page.getByRole('navigation',{name:'Main navigation'}).getByRole('link',{name:'About',exact:true}).click();

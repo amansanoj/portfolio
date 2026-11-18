@@ -64,10 +64,10 @@ test('all projects have readable static pages, navigation, resources and sharing
  expect(home).toContain('All Projects');
 });
 
-test('homepage shows three thumbnail previews and About has its own page',async()=>{
+test('homepage presents three project stories and About has its own page',async()=>{
  const html=await readFile('dist/index.html','utf8');
  const selection=html.split('id="projects"')[1].split('id="contact"')[0];
- expect(selection.match(/class="post-entry(?: has-cover)?"/g)?.length).toBe(3);
+ expect(selection.match(/class="landing-feature feature-/g)?.length).toBe(3);
  expect(selection.match(/src="\/projects\/[^"]+\/thumbnail\.webp"/g)?.length).toBe(3);
  expect(html).not.toContain('assets/projects/macro-pad.png');
  expect(html).not.toContain('id="about"');

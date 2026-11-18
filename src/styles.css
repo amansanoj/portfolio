@@ -239,11 +239,6 @@ html[data-magicui-theme-vt="active"]::view-transition-new(root) {
   .about-content h2 { font-size: 18px; }
 }
 
-.home-project-list { margin-bottom: 24px; }
-.home-project-list li { border-top: 0; }
-.home-project-list .post-entry { padding-block: 20px; }
-.home-project-list .post-entry:first-child { padding-top: 10px; }
-
 .site-dot-grid { position: fixed; inset: 0; width: 100%; height: 100dvh; pointer-events: none; z-index: 0; }
 .site-shell { position: relative; z-index: 1; }
 @media print, (forced-colors: active) { .site-dot-grid { display: none; } }

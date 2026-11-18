@@ -14,3 +14,9 @@ The canvas is decorative and ignores pointer events. It mounts only at widths of
 - SplitText adapts the word lift to navigation and project/post title links. It preserves natural wrapping and the accessible text, and runs only on hover/focus with a fine pointer and no reduced-motion preference.
 
 Sources: TextAnimations/FuzzyText, TextAnimations/ShinyText, and TextAnimations/SplitText in the React Bits repository. All licensing remains in the shared React Bits license file.
+
+## Landing Page
+
+TiltedCard.tsx/css, ScrollVelocity.tsx/css, and SpotlightCard.tsx/css are unmodified TypeScript + CSS sources from https://github.com/DavidHDev/react-bits/tree/main/src/ts-default (Components/TiltedCard, TextAnimations/ScrollVelocity, Components/SpotlightCard).
+
+LandingEffects.tsx configures these original components with brand colors and motion preferences. TiltedCard uses the existing image buttons as children, with flipping, tooltips, gyroscope, and intro disabled. ScrollVelocity has a pause control and static mobile/reduced-motion presentation. SpotlightCard uses token-backed surfaces and borders. Scoped landing.css rules provide typography and palette overrides while leaving upstream source intact. All three are replaced by static markup on touch/small screens or with reduced motion.
