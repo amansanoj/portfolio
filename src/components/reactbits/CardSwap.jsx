@@ -67,7 +67,7 @@ const TAU = Math.PI * 2;
 const STEP = 1 / 240;
 const PAD = 32;
 const AXES = ['x', 'y', 'z', 'r', 'p'];
-const DOWN = { x: 0, y: 1 };
+const RIGHT = { x: 1, y: 0 };
 
 const clamp = (value, min, max) => Math.min(max, Math.max(min, value));
 
@@ -237,7 +237,7 @@ const CardSwap = forwardRef(
         hold: 0,
         nudge: 0,
         phase: 'rest',
-        dir: { x: 0, y: 1 },
+        dir: RIGHT,
         tilt: 0,
         top: 0,
         under: false,
@@ -289,7 +289,7 @@ const CardSwap = forwardRef(
         }
         if (card.phase === 'enter') {
           const base = slot(0, s);
-          return { x: base.x, y: base.y + clearance(s, DOWN) * 1.3, z: base.z, r: 0, p: card.p };
+          return { x: base.x + clearance(s, RIGHT) * 1.3, y: base.y, z: base.z, r: 0, p: card.p };
         }
         const position = (time < card.hold ? card.from : card.pos) + card.nudge;
         return slot(Math.max(0, position), s);
@@ -397,7 +397,7 @@ const CardSwap = forwardRef(
             }
           } else if (card.phase === 'enter') {
             const base = slot(0, s);
-            if (card.y - base.y >= clearance(s, DOWN)) {
+            if (card.x - base.x >= clearance(s, RIGHT)) {
               card.phase = 'rest';
               card.under = false;
               card.hold = 0;
@@ -470,7 +470,7 @@ const CardSwap = forwardRef(
           state.order = [...state.order.slice(1), front.index];
           settleOrder(time, stagger * 1000);
           front.phase = 'exit';
-          front.dir = options.dir ?? DOWN;
+          front.dir = options.dir ?? RIGHT;
           front.tilt = options.tilt ?? 0;
           front.top = ++state.layers;
           front.under = false;

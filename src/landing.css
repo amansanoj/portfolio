@@ -15,12 +15,12 @@ body:has(.landing) #top, body:has(.landing) > #root footer, main:has(.landing) {
 .landing-actions a, .landing-socials a, .hero-bottom a, .feature-read, .all-projects-link, .landing-writing > .landing-section-heading > a, .landing-background a { display: inline-flex; align-items: center; gap: 10px; min-height: 44px; }
 .landing-action { border: 1px solid var(--secondary); border-radius: var(--radius); padding: 10px 18px; }
 .landing-socials { display: flex; flex-wrap: wrap; gap: 24px; font-size: 14px; }
-.hero-art { min-width: 0; position: relative; }
+.hero-art { min-width: 0; position: relative; overflow: clip; }
 .hero-project-deck { height: 520px; display: flex; flex-direction: column; min-width: 0; }
 .project-card-swap { flex: 1; min-height: 0; --swap-tile: var(--card) !important; --swap-tile-edge: var(--border) !important; --swap-tile-highlight: var(--border) !important; --swap-shadow: none !important; --swap-media-edge: var(--border) !important; --swap-ink: var(--foreground) !important; --swap-badge: var(--muted) !important; --swap-shade: var(--background) !important; }
-.hero-swap-card { padding: 14px; display: flex; flex-direction: column; gap: 12px; }
-.hero-swap-label { display: flex; align-items: center; justify-content: space-between; color: var(--muted-foreground); font-size: 13px; gap: 10px; }
-.hero-swap-image { width: 100%; height: calc(100% - 32px); min-height: 0; object-fit: contain; border-radius: 6px; cursor: zoom-in; }
+.hero-swap-card { padding: 14px; display: flex; flex-direction: column; gap: 12px; background: var(--deck-primary); color: var(--deck-ink); cursor: pointer; }
+.hero-swap-label { display: flex; align-items: center; justify-content: space-between; color: var(--deck-ink); font-size: 13px; line-height: 20px; gap: 10px; }
+.hero-swap-image { width: 100%; height: auto; aspect-ratio: 4 / 3; min-height: 0; object-fit: contain; border-radius: 6px; cursor: pointer; }
 .deck-controls { display: flex; justify-content: center; align-items: center; gap: 10px; margin-top: 8px; }
 .deck-controls button { display: inline-flex; align-items: center; justify-content: center; gap: 10px; min-width: 44px; min-height: 44px; border: 0; border-radius: var(--radius); background: none; color: var(--secondary); font: inherit; font-size: 13px; cursor: pointer; }
 .deck-controls .deck-view { min-width: 150px; }

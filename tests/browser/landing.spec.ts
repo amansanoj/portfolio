@@ -37,6 +37,33 @@ test('landing effects follow the reduced motion media query without a toggle',as
  await expect(page.locator('.tilted-card')).toHaveCount(0);
  await expect(page.locator('.landing-languages .logoloop')).toBeAttached();
  await page.getByRole('button',{name:'View Macro Pad',exact:true}).click();
- await expect(page.getByRole('dialog')).toBeVisible();
- await page.keyboard.press('Escape');
+ await expect(page).toHaveURL(/\/projects\/macro-pad\/$/);
+});
+
+test('hero cards navigate from their padding and their images',async({page})=>{
+ await page.emulateMedia({reducedMotion:'reduce'});
+ for(const target of ['.hero-swap-label','.hero-swap-image','.hero-swap-card']){
+  await page.goto('/');
+  const card=page.locator('.card-swap-slot[data-front]');
+  await expect(card).toBeVisible();
+  const image=card.locator('img');await image.evaluate(async(i:HTMLImageElement)=>i.decode());
+  const ratio=await image.evaluate(i=>{const r=i.getBoundingClientRect();return r.width/r.height;});
+  expect(ratio).toBeCloseTo(4/3,2);
+  await card.locator(target).click(target==='.hero-swap-card'?{position:{x:5,y:5}}:{});
+  await expect(page).toHaveURL(/\/projects\/macro-pad\/$/);
+ }
+});
+
+test('hero card exits right and settles behind without widening the page',async({page})=>{
+ await page.setViewportSize({width:1440,height:1000});await page.clock.install();await page.goto('/');
+ await page.clock.runFor(100);
+ const leaving=page.locator('.card-swap-slot[data-swap-index="0"]');
+ await page.getByRole('button',{name:'Next project preview'}).click();
+ await page.clock.runFor(100);
+ const position=()=>leaving.evaluate(el=>{const t=new DOMMatrix(getComputedStyle(el).transform);return {x:t.m41,y:t.m42,z:t.m43};});
+ const exiting=await position();expect(exiting.x).toBeGreaterThan(10);expect(Math.abs(exiting.y)).toBeLessThan(1);
+ expect(await page.evaluate(()=>document.documentElement.scrollWidth>innerWidth)).toBe(false);
+ await page.clock.runFor(1500);
+ const returned=await position();expect(returned.z).toBeLessThan(-100);expect(returned.x).toBeLessThan(exiting.x);
+ await expect(page.locator('.card-swap-slot[data-front]')).toHaveAttribute('data-swap-index','1');
 });
