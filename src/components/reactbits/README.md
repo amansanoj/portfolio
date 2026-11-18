@@ -10,6 +10,6 @@ Sources: TextAnimations/FuzzyText, TextAnimations/ShinyText, and TextAnimations/
 
 ## Landing Page
 
-ScrollVelocity.tsx/css and SpotlightCard.tsx/css are unmodified TypeScript + CSS sources from https://github.com/DavidHDev/react-bits/tree/main/src/ts-default (TextAnimations/ScrollVelocity, Components/SpotlightCard).
+CardSwap.jsx/css and LogoLoop.jsx/css are the original JavaScript + CSS sources pasted by the user. SpotlightCard.tsx/css is the original TypeScript + CSS source from https://github.com/DavidHDev/react-bits/tree/main/src/ts-default/Components/SpotlightCard.
 
-LandingEffects.tsx configures these original components with brand colors and motion preferences. ScrollVelocity automatically uses a static mobile/reduced-motion presentation, with no manual motion toggle. SpotlightCard uses token-backed surfaces and borders. Scoped landing.css rules provide typography and palette overrides while leaving upstream source intact. Both are replaced by static markup on touch/small screens or with reduced motion.
+LandingEffects.tsx configures these original components with brand colors and motion preferences. CardSwap and LogoLoop are the original JavaScript + CSS components pasted by the user. CardSwap displays project covers with manual controls, image viewing, and reduced-motion autoplay disabled. LogoLoop displays Simple Icons language marks with inline labels; reduced motion replaces the loop with a wrapping list. SpotlightCard uses token-backed surfaces and borders. Scoped landing.css rules provide typography and palette overrides while leaving upstream source intact. SpotlightCard is replaced by a static surface on touch/small screens or with reduced motion.

@@ -16,18 +16,25 @@ body:has(.landing) #top, body:has(.landing) > #root footer, main:has(.landing) {
 .landing-action { border: 1px solid var(--secondary); border-radius: var(--radius); padding: 10px 18px; }
 .landing-socials { display: flex; flex-wrap: wrap; gap: 24px; font-size: 14px; }
 .hero-art { min-width: 0; position: relative; }
-.hero-composition { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; align-items: start; }
-.hero-piece { min-width: 0; margin: 0; background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 12px; }
-.hero-piece-0 { grid-column: 1 / -1; }
-.hero-piece-label { display: flex; justify-content: space-between; align-items: center; font-size: 11px; color: var(--muted-foreground); margin-bottom: 10px; gap: 8px; }
-.hero-piece .landing-cover { width: 100%; height: auto; display: block; border-radius: 5px; }
-.hero-piece .image-view-trigger { width: 100%; }
+.hero-project-deck { height: 520px; display: flex; flex-direction: column; min-width: 0; }
+.project-card-swap { flex: 1; min-height: 0; --swap-tile: var(--card) !important; --swap-tile-edge: var(--border) !important; --swap-tile-highlight: var(--border) !important; --swap-shadow: none !important; --swap-media-edge: var(--border) !important; --swap-ink: var(--foreground) !important; --swap-badge: var(--muted) !important; --swap-shade: var(--background) !important; }
+.hero-swap-card { padding: 14px; display: flex; flex-direction: column; gap: 12px; }
+.hero-swap-label { display: flex; align-items: center; justify-content: space-between; color: var(--muted-foreground); font-size: 13px; gap: 10px; }
+.hero-swap-image { width: 100%; height: calc(100% - 32px); min-height: 0; object-fit: contain; border-radius: 6px; cursor: zoom-in; }
+.deck-controls { display: flex; justify-content: center; align-items: center; gap: 10px; margin-top: 8px; }
+.deck-controls button { display: inline-flex; align-items: center; justify-content: center; gap: 10px; min-width: 44px; min-height: 44px; border: 0; border-radius: var(--radius); background: none; color: var(--secondary); font: inherit; font-size: 13px; cursor: pointer; }
+.deck-controls .deck-view { min-width: 150px; }
+.deck-controls button:hover { color: var(--accent); }
+.deck-controls button:focus-visible, .project-card-swap:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+.landing-languages { margin: 30px 0 var(--landing-space); padding: 40px 0; border-block: 1px solid var(--border); color: var(--primary); min-width: 0; }
+.landing-languages svg { width: 1em; height: 1em; }
+.landing-languages .logoloop__label { font-family: var(--font-body); font-size: 17px; font-weight: 500; letter-spacing: normal; }
+.language-static { display: flex; flex-wrap: wrap; justify-content: center; gap: 20px 30px; list-style: none; margin: 0; padding: 0; font-size: 16px; }
+.language-static li { display: inline-flex; align-items: center; gap: 10px; }
+.language-static svg { font-size: 24px; }
+@media (max-width: 700px) { .hero-project-deck { height: 370px; } .landing-languages { padding: 28px 0; } }
 .hero-bottom { position: absolute; bottom: 15px; inset-inline: 0; display: flex; justify-content: space-between; gap: 20px; color: var(--muted-foreground); font-size: 12px; }
 .hero-bottom > span { align-self: center; }
-.landing-technologies { position: relative; margin: 30px 0 var(--landing-space); padding: 38px 0; border-block: 1px solid var(--border); overflow: hidden; }
-.landing-technologies .section-eyebrow { text-align: center; margin-bottom: 28px; }
-.landing-technologies .scroller { font-family: var(--font-display); letter-spacing: normal; filter: none; }
-.technology-static { color: var(--primary); font-family: var(--font-display); font-size: clamp(24px,3.5vw,44px); text-align: center; text-wrap: balance; line-height: 1.5; }
 .visually-hidden { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
 .landing #projects, .landing #contact { border-top: 0; padding: 0; }
 .landing-section-heading { display: flex; justify-content: space-between; align-items: flex-end; gap: 30px; margin-bottom: 70px; }
@@ -90,10 +97,7 @@ body:has(.landing) #top, body:has(.landing) > #root footer, main:has(.landing) {
  .landing-introduction { font-size: 15px; }
  .landing-actions { gap: 20px; }
  .hero-art { margin-top: 10px; }
- .hero-piece { padding: 9px; border-radius: 9px; }
- .hero-piece-label { font-size: 10px; }
  .hero-bottom { bottom: 0; }
- .landing-technologies { margin-top: 25px; padding: 28px 0; }
  .landing-section-heading { display: block; margin-bottom: 35px; }
  .landing-section-heading > p { margin-top: 18px; }
  .landing-section-heading > a { margin-top: 20px; }

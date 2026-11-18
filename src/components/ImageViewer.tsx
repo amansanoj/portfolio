@@ -5,6 +5,7 @@ import { BlurFade } from './magicui/blur-fade';
 import { Backlight } from './magicui/backlight';
 const DialogLens = lazy(() => import('./DialogLens').then(module => ({ default: module.DialogLens })));
 const Context = createContext<(src:string,alt:string,opener:HTMLElement)=>void>(()=>{});
+export function useImageViewer(){return useContext(Context);}
 export function ImageViewerProvider({children}:{children:ReactNode}) {
   const [image,setImage]=useState<{src:string;alt:string}|null>(null);
   const dialog=useRef<HTMLDialogElement>(null),opener=useRef<HTMLElement|null>(null);

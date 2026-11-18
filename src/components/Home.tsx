@@ -1,3 +1,4 @@
+import {ProjectDeck} from './ProjectDeck';
 import {ArrowDown,ArrowUpRight,ArrowRight,GithubLogo,LinkedinLogo,Cpu,AppWindow,Browser} from '@phosphor-icons/react';
 import { HeadingShine } from './reactbits/HeadingShine';
 import {ViewableImage} from './ImageViewer';
@@ -25,9 +26,7 @@ export function Home({projects,posts}:{projects:Project[];posts:Post[]}){
     <div className="landing-actions"><a className="landing-action" href="#projects">Explore Projects <ArrowDown weight="duotone" aria-hidden="true"/></a><a href="/about/">About Me <ArrowUpRight weight="duotone" aria-hidden="true"/></a></div>
     <div className="landing-socials"><a href="https://github.com/amansanoj" aria-label="GitHub"><GithubLogo weight="duotone"/>GitHub</a><a href="https://www.linkedin.com/in/amansanoj" aria-label="LinkedIn"><LinkedinLogo weight="duotone"/>LinkedIn</a></div>
    </div>
-   <div className="hero-art"><div className="hero-composition">
-    {featured.map(({project,number},i)=><figure className={`hero-piece hero-piece-${i}`} key={project.slug}><div className="hero-piece-label"><span>{number} / {project.title}</span><ArrowUpRight weight="duotone" aria-hidden="true"/></div><Cover project={project} large eager/></figure>)}
-   </div></div>
+   <div className="hero-art"><ProjectDeck projects={featured.map(item=>item.project)}/></div>
    <div className="hero-bottom"><span>Apps. Web. Firmware.</span><a href="#projects">Scroll to the Work <ArrowDown weight="duotone" aria-hidden="true"/></a></div>
   </section>
   <TechnologyBand/>

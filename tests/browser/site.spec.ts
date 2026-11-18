@@ -65,7 +65,7 @@ test('bottom blur remains unchanged while the theme wipe is in flight',async({pa
   };
  });
  await page.goto('/');await page.evaluate(()=>document.fonts.ready);
- await page.locator('.hero-piece img').first().evaluate(async(image:HTMLImageElement)=>image.decode());
+ await page.locator('.hero-swap-image').first().evaluate(async(image:HTMLImageElement)=>image.decode());
  await expect(page.locator('.bottom-blur')).toHaveClass(/is-visible/);
  const clip={x:0,y:744,width:1000,height:56};
  const before=await page.screenshot({clip});
