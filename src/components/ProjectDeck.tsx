@@ -1,5 +1,5 @@
 import {useRef,useState,useEffect,type ComponentType} from 'react';
-import {ArrowLeft,ArrowRight,ArrowUpRight} from '@phosphor-icons/react';
+import {CaretLeft,CaretRight} from '@phosphor-icons/react';
 import OriginalCardSwap,{Card as OriginalCard} from './reactbits/CardSwap';
 import tokens from '../../public/assets/vendor/brand-tokens.json';
 import type {Project} from '../types';
@@ -14,10 +14,10 @@ export function ProjectDeck({projects}:{projects:Project[]}){
  return <div className="hero-project-deck" style={{'--deck-primary':tokens.color.hex.dark.base.primary,'--deck-ink':tokens.color.hex.dark.base.background} as React.CSSProperties}>
   <CardSwap key={String(reduce)} ref={api} width={480} height={400} cardDistance={30} verticalDistance={34} depth={60} skewAmount={0} visibleCards={3} delay={2000} autoplay={!reduce} pauseOnHover draggable={!reduce} bounce={.12} parallax={0} hoverSpread={0} intro={false} cardRadius={12} onChange={setActive} onCardClick={view} className="project-card-swap">
    {projects.map(project=><Card key={project.slug} className="hero-swap-card">
-    <div className="hero-swap-label"><span>{project.title}</span><ArrowUpRight weight="duotone" aria-hidden="true"/></div>
+    <div className="hero-swap-label"><span>{project.title}</span></div>
     <img className="hero-swap-image" src={`/projects/${project.slug}/thumbnail.webp`} srcSet={`/projects/${project.slug}/thumbnail.webp ${project.dimensions?.thumbnailWidth}w, /projects/${project.slug}/${project.cover} ${project.dimensions?.width}w`} sizes="(max-width: 700px) 80vw, 480px" width={project.dimensions?.width} height={project.dimensions?.height} alt={`${project.title} - cover image`} draggable={false}/>
    </Card>)}
   </CardSwap>
-  <div className="deck-controls"><button type="button" aria-label="Previous project preview" onClick={()=>api.current?.prev()}><ArrowLeft weight="duotone"/></button><button type="button" className="deck-view" onClick={()=>view(active)}>View {projects[active]?.title}<ArrowUpRight weight="duotone" aria-hidden="true"/></button><button type="button" aria-label="Next project preview" onClick={()=>api.current?.next()}><ArrowRight weight="duotone"/></button></div>
+  <div className="deck-controls"><button type="button" aria-label="Previous project preview" onClick={()=>api.current?.prev()}><CaretLeft weight="duotone" aria-hidden="true"/></button><button type="button" className="deck-view" onClick={()=>view(active)}>View {projects[active]?.title}</button><button type="button" aria-label="Next project preview" onClick={()=>api.current?.next()}><CaretRight weight="duotone" aria-hidden="true"/></button></div>
  </div>;
 }
