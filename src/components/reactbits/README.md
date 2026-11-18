@@ -1,11 +1,4 @@
-# DotGrid
-
-Adapted from React Bits Backgrounds/DotGrid:
-https://github.com/DavidHDev/react-bits
-
-A shared viewport canvas uses brand primary and secondary colors. Dots fade smoothly near text, images, and controls. Content measurements refresh on scroll, resize, font readiness, image loads, and shell layout changes. Pointer displacement is scaled down by the same content mask.
-
-The canvas is decorative and ignores pointer events. It mounts only at widths of at least 768px with a fine hover-capable pointer, and unmounts when that changes. Mobile and touch devices have no grid or rendering work. Reduced-motion desktop users get a static field. Rendering stops when settled or the tab is hidden. The license is retained in public/assets/vendor/reactbits-LICENSE.md.
+# React Bits Components
 
 ## Text Effects
 
@@ -19,4 +12,4 @@ Sources: TextAnimations/FuzzyText, TextAnimations/ShinyText, and TextAnimations/
 
 TiltedCard.tsx/css, ScrollVelocity.tsx/css, and SpotlightCard.tsx/css are unmodified TypeScript + CSS sources from https://github.com/DavidHDev/react-bits/tree/main/src/ts-default (Components/TiltedCard, TextAnimations/ScrollVelocity, Components/SpotlightCard).
 
-LandingEffects.tsx configures these original components with brand colors and motion preferences. TiltedCard uses the existing image buttons as children, with flipping, tooltips, gyroscope, and intro disabled. ScrollVelocity has a pause control and static mobile/reduced-motion presentation. SpotlightCard uses token-backed surfaces and borders. Scoped landing.css rules provide typography and palette overrides while leaving upstream source intact. All three are replaced by static markup on touch/small screens or with reduced motion.
+LandingEffects.tsx configures these original components with brand colors and motion preferences. TiltedCard uses the existing image buttons as children, with flipping, tooltips, gyroscope, and intro disabled. ScrollVelocity automatically uses a static mobile/reduced-motion presentation, with no manual motion toggle. SpotlightCard uses token-backed surfaces and borders. Scoped landing.css rules provide typography and palette overrides while leaving upstream source intact. All three are replaced by static markup on touch/small screens or with reduced motion.
