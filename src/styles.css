@@ -5,6 +5,8 @@
 :root { color-scheme: light; --supporting-color: var(--secondary); }
 :root.dark { color-scheme: dark; --supporting-color: var(--secondary); }
 * { box-sizing: border-box; }
+::selection { background-color: var(--secondary); color: var(--secondary-foreground); -webkit-text-fill-color: var(--secondary-foreground); text-shadow: none; }
+.shiny-text::selection, .shiny-text *::selection { background-color: var(--secondary); color: var(--secondary-foreground); -webkit-text-fill-color: var(--secondary-foreground); }
 html { scroll-behavior: smooth; scroll-padding-top: 28px; }
 body {
   margin: 0;
