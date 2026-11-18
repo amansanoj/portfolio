@@ -1,4 +1,5 @@
 import type { Project } from '../types';
+import { SplitText } from './reactbits/TextEffects';
 import { HtmlContent } from './HtmlContent';
 import { ViewableImage } from './ImageViewer';
 
@@ -28,7 +29,7 @@ export function ProjectPreview({project,headingLevel=2}:{project:Project;heading
       {project.cover&&<ViewableImage thumbnail className="post-cover-preview" src={`/projects/${project.slug}/thumbnail.webp`} fullSrc={`/projects/${project.slug}/${project.cover}`} width={project.dimensions?.thumbnailWidth} height={project.dimensions?.thumbnailHeight} alt={`${project.title} - cover image`} loading="lazy"/>}
       <div className="post-entry-text"><div className="post-entry-heading">
         {project.kind&&<p className="project-kind">{project.kind}</p>}
-        <Heading><a href={`/projects/${project.slug}/`}>{project.title}</a></Heading>
+        <Heading><a href={`/projects/${project.slug}/`}><SplitText>{project.title}</SplitText></a></Heading>
       </div><p className="post-summary">{project.summary}</p></div>
     </li>;
 }

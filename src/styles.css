@@ -246,3 +246,25 @@ html[data-magicui-theme-vt="active"]::view-transition-new(root) {
 .site-shell { position: relative; z-index: 1; }
 @media print, (forced-colors: active) { .site-dot-grid { display: none; } }
 @media (max-width: 767px), (hover: none), (pointer: coarse) { .site-dot-grid { display: none; } }
+
+.fuzzy-error { display: grid; place-items: center; margin: 0 0 38px; color: var(--primary); min-height: clamp(100px,22vw,220px); }
+.fuzzy-error > * { grid-area: 1 / 1; }
+.fuzzy-fallback { font-family: var(--font-display); font-size: clamp(100px,22vw,220px); font-weight: 600; line-height: 1; }
+.fuzzy-canvas { font-family: var(--font-display); max-width: 100%; height: auto !important; opacity: 0; }
+.fuzzy-canvas[data-ready="true"] { opacity: 1; }
+.fuzzy-error:has(.fuzzy-canvas[data-ready="true"]) .fuzzy-fallback { visibility: hidden; }
+.not-found { text-align: center; }
+.not-found .links { justify-content: center; }
+.not-found > p { margin-inline: auto; }
+.split-word { display: inline-block; transition: transform 240ms cubic-bezier(.2,.8,.2,1); transition-delay: var(--word-delay); }
+@media (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
+ a:hover .split-word, a:focus-visible .split-word { transform: translateY(-2px); }
+}
+@supports (background-clip: text) {
+ .heading-shine { background-image: linear-gradient(110deg,currentColor 35%,var(--foreground) 49%,currentColor 63%); background-size: 250% 100%; background-position: 100% 0; background-clip: text; -webkit-background-clip: text; -webkit-text-fill-color: transparent; animation: heading-sweep 1.5s ease-out 1 both; }
+}
+@keyframes heading-sweep { from { background-position: 100% 0; } to { background-position: 0% 0; } }
+@media (prefers-reduced-motion: reduce), (forced-colors: active), print {
+ .heading-shine { animation: none; background: none; -webkit-text-fill-color: currentColor; }
+ .split-word { transition: none; transform: none; }
+}
